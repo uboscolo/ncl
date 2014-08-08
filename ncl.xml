@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<league name="The New Champions' League">
+    <conference name="Northern Europe">
+        <division name="Atlantic">
+            <team name="Chelsea" strength="77">
+            </team>
+            <team name="Manchester Utd" strength="68">
+            </team>
+            <team name="Manchester City" strength="4">
+            </team>
+            <team name="Arsenal" strength="45">
+            </team>
+            <team name="Liverpool" strength="45">
+            </team>
+            <team name="Copenhagen" strength="4">
+            </team>
+            <team name="Anderlecht" strength="6">
+            </team>
+            <team name="Ajax" strength="8">
+            </team>
+            <team name="PSV Eindhoven" strength="16">
+            </team>
+            <team name="Celtic Glasgow" strength="9">
+            </team>
+            <team name="Rangers Glasgow" strength="6">
+            </team>
+            <team name="Rosenborg" strength="3">
+            </team>
+            <team name="Tottenham Hotspur" strength="3">
+            </team>
+            <team name="Standard Liege" strength="1">
+            </team>
+            <team name="Nordsjaelland" strength="1">
+            </team>
+            <team name="Aalborg BK" strength="1">
+            </team>
+        </division>
+        <division name="Continental">
+            <team name="Bayern Munich" strength="70">
+            </team>
+            <team name="Borussia Dortmund" strength="20">
+            </team>
+            <team name="Bayer Leverkusen" strength="6">
+            </team>
+            <team name="Schalke 04" strength="16">
+            </team>
+            <team name="Zenit St.Petersburg" strength="6">
+            </team>
+            <team name="Shakhtar Donetsk" strength="11">
+            </team>
+            <team name="Viktoria Plzen" strength="2">
+            </team>
+            <team name="CSKA Moscow" strength="9">
+            </team>
+            <team name="Werder Bremen" strength="8">
+            </team>
+            <team name="Rapid Wien" strength="1">
+            </team>
+            <team name="Dynamo Kyiv" strength="7">
+            </team>
+            <team name="Basel" strength="5">
+            </team>
+            <team name="BATE Borisov" strength="3">
+            </team>
+            <team name="Steaua Bucuresti" strength="4">
+            </team>
+            <team name="Artmedia" strength="1">
+            </team>
+            <team name="Levski Sofia" strength="1">
+            </team>
+        </division>
+    </conference>
+    <conference name="Southern Europe">
+        <division name="South-West">
+            <team name="Atletico Madrid" strength="18">
+            </team>
+            <team name="Real Madrid" strength="53">
+            </team>
+            <team name="Lille" strength="5">
+            </team>
+            <team name="Braga" strength="2">
+            </team>
+            <team name="Barcelona" strength="83">
+            </team>
+            <team name="Paris St.Germain" strength="9">
+            </team>
+            <team name="Monaco" strength="17">
+            </team>
+            <team name="Real Sociedad" strength="3">
+            </team>
+            <team name="Villareal" strength="12">
+            </team>
+            <team name="Valencia" strength="10">
+            </team>
+            <team name="Benfica" strength="12">
+            </team>
+            <team name="Marseille" strength="10">
+            </team>
+            <team name="Lyon" strength="28">
+            </team>
+            <team name="Porto" strength="31">
+            </team>
+            <team name="Sporting" strength="4">
+            </team>
+            <team name="La Coruna" strength="9">
+            </team>
+        </division>
+        <division name="South-East">
+            <team name="Oympiacos" strength="11">
+            </team>
+            <team name="AC Milan" strength="55">
+            </team>
+            <team name="Galatasaray" strength="8">
+            </team>
+            <team name="Fenerbahce" strength="7">
+            </team>
+            <team name="Juventus" strength="17">
+            </team>
+            <team name="Steaua Bucuresti" strength="4">
+            </team>
+            <team name="Napoli" strength="3">
+            </team>
+            <team name="Dinamo Zagreb" strength="2">
+            </team>
+            <team name="CFR Cluj" strength="3">
+            </team>
+            <team name="Panathinaikos" strength="5">
+            </team>
+            <team name="Internazionale" strength="35">
+            </team>
+            <team name="Roma" strength="12">
+            </team>
+            <team name="Sparta Prague" strength="4">
+            </team>
+            <team name="Partizan Belgrade" strength="2">
+            </team>
+            <team name="Besiktas" strength="3">
+            </team>
+            <team name="Maccabi Tel Aviv" strength="1">
+            </team>
+        </division>
+    </conference>
+</league>
