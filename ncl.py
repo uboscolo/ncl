@@ -1,7 +1,16 @@
+#!/usr/bin/env python
 import xml.etree.ElementTree as ET
 from ncl_lib import *
+from sys import argv
 
-tree = ET.parse('ncl.xml')
+if len(argv) != 2:
+    print "Usage: ncl.py xml_file"
+    exit(1)
+
+script, xml_file = argv
+
+#tree = ET.parse('ncl.xml')
+tree = ET.parse(xml_file)
 
 league_tag = tree.getroot()
 league_name = league_tag.attrib['name']

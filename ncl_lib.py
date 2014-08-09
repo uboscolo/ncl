@@ -4,6 +4,8 @@ import math
 import re
 
 class DistributionTables(object):
+    """These Tables are used to simulate results and
+       scores"""
 
     def __init__(self, name):
         self.name = name
@@ -118,6 +120,8 @@ class League(object):
                     div.play_regular_season()
                     play_on = play_on and not div.schedule_completed
         for conf in self.conferences:
+            for div in conf.divisions:
+                div.display_stats()
             conf.setup_playoff_schedule()
         play_on = True
         print "\n Conference Playoffs start..."
@@ -243,8 +247,9 @@ class Division(Conference):
     def __init__(self, name):
         super(Division, self).__init__(name)
         self.teams = [ ]
-        self.sorted_teams = [ ]
         self.playoff_teams = [ ]
+        self.table = Table()
+        self.stats = Statistics("Division Statistics")
 
     def add_team(self, name, strength):
         print "Adding team %s with strength: %d ..." % (name, strength)
@@ -261,16 +266,50 @@ class Division(Conference):
         self.schedule = Schedule(tables)
         self.schedule.round_robin(self.teams)
         self.schedule.swap_home_away()
+        self.stats.add("home")
+        self.stats.add("away")
+        self.stats.add("draw")
 
-    def display_table(self, day):
-        print "\nDay %d Table\n" % day.number
-        print "--- {:15s} ---".format(self.name) 
-        for team in self.sorted_teams:
-            print "{:20s} {:2d}".format(team.name, team.points)
+    def display_schedule(self):
+        print "\nSchedule\n"
+        print "----------- Division %s ----------------" % self.name
+        self.schedule.display()
 
-    def sort_table(self):
+    def display_stats(self):
+        print "\nStatistics\n"
+        print "----------- Division %s ----------------" % self.name
+        self.stats.display()
+
+    def play_regular_season(self):
+        if self.current_day < len(self.schedule.days):
+            day = self.schedule.days[self.current_day]
+            print "\nDay: %d - Division: %s\n" % (day.number, self.name)
+            for match in day.matches:
+                print "Starting regular season game ..."
+                match.play(90)
+                match.update_points()
+                self.stats.update(match.result.result, 1)
+                print "Game over ...\n"
+            self.table.sort(self.teams)
+            self.table.display(day, self.name)
+            self.current_day += 1
+        else:
+            print "\n Division %s - Regular Season is over\n" % self.name
+            teams = self.table.sorted_teams
+            self.playoff_teams = teams[0:len(teams)/2]
+            for team in self.playoff_teams:
+                print "Team %s made the playoffs" % team.name
+            self.schedule_completed = True
+
+
+class Table(object):
+
+    def __init__(self):
+        self.sorted_teams = [ ]
+
+    def sort(self, teams):
         sorted_teams = [ ]
-        for team in self.teams:
+        for team in teams:
             if len(sorted_teams) > 0:
                 found = 0
                 for pos in range(len(sorted_teams)):
@@ -284,29 +323,11 @@ class Division(Conference):
                 sorted_teams.append(team)
         self.sorted_teams = sorted_teams[:]
 
-    def display_schedule(self):
-        print "\nSchedule\n"
-        print "----------- Division %s ----------------" % self.name
-        self.schedule.display_schedule()
-
-    def play_regular_season(self):
-        if self.current_day < len(self.schedule.days):
-            day = self.schedule.days[self.current_day]
-            print "\nDay: %d - Division: %s\n" % (day.number, self.name)
-            for match in day.matches:
-                print "Starting regular season game ..."
-                match.play(90)
-                match.update_table()
-                print "Game over ...\n"
-            self.sort_table()
-            self.display_table(day)
-            self.current_day += 1
-        else:
-            print "\n Division %s - Regular Season is over\n" % self.name
-            self.playoff_teams = self.sorted_teams[0:len(self.sorted_teams)/2]
-            for team in self.playoff_teams:
-                print "Team %s made the playoffs" % team.name
-            self.schedule_completed = True
+    def display(self, day, name):
+        print "\nDay %d Table\n" % day.number
+        print "--- {:15s} ---".format(name) 
+        for team in self.sorted_teams:
+            print "{:20s} {:2d}".format(team.name, team.points)
 
 
 class Team(object):
@@ -318,6 +339,24 @@ class Team(object):
         self.series_wins = 0
 
 
+class Statistics(object):
+
+    def __init__(self, name):
+        self.name = name
+        self.table = { }
+
+    def add(self, tag):
+        self.table[tag] = 0
+        
+    def update(self, tag, value):
+        self.table[tag] += value
+
+    def display(self):
+        for t in self.table.keys():
+            print "%s: %s" % (t, self.table[t])
+       
+
+
 class Schedule(object):
 
     def __init__(self, tables):
@@ -325,7 +364,7 @@ class Schedule(object):
         self.days = []
         self.tables = tables
  
-    def display_schedule(self):
+    def display(self):
         for day in self.days:
             for match in day.matches:
                 home = match.home_team.name
@@ -440,7 +479,7 @@ class Match(object):
             self.winner = self.away_team
             self.loser = self.home_team
 
-    def update_table(self):
+    def update_points(self):
         if self.result.score.home > self.result.score.away:
             self.home_team.points +=3
         elif self.result.score.home == self.result.score.away:
@@ -500,8 +539,6 @@ class Result(object):
         self.distribution = tables.result_distr
 
     def roll(self, strength1, strength2):
-        #m1 = randint(0, strength1)
-        #m2 = strength2 - (randint(0, strength2))
         m1 = uniform(0, strength1)
         m2 = strength2 - (uniform(0, strength2))
         mmax = strength1 + strength2
@@ -525,12 +562,10 @@ class Score(object):
 
     def generate(self, result, minutes):
         table = self.distributions[result]
-        #m = random() * table.total
         m = uniform(0, table.total)
         for k in sorted(table.cumulative_distribution.keys()):
            res = table.cumulative_distribution[k]
            if m <= k:
-               #print "M: %s, K: %s, Total %s" % (m, k, table.total)
                self.score = res
                res_obj = re.search(r'(\d)-(\d)', res)
                self.home += int(res_obj.group(1))
