@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<league name="Serie A">
+    <table name="Top 6">
+        <year name="2000-2001">
+            <team name="A.S. Roma" position="1"/>
+            <team name="Juventus" position="2"/>
+            <team name="Lazio" position="3"/>
+            <team name="Parma" position="4"/>
+            <team name="Internazionale" position="5"/>
+            <team name="A.C. Milan" position="6"/>
+        </year>
+        <year name="2001-2002">
+            <team name="Juventus" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="Internazionale" position="3"/>
+            <team name="A.C. Milan" position="4"/>
+            <team name="Chievo" position="4"/>
+            <team name="Lazio" position="6"/>
+        </year>
+        <year name="2002-2003">
+            <team name="Juventus" position="1"/>
+            <team name="Internazionale" position="2"/>
+            <team name="A.C. Milan" position="3"/>
+            <team name="Lazio" position="4"/>
+            <team name="Parma" position="5"/>
+            <team name="Udinese" position="6"/>
+        </year>
+        <year name="2003-2004">
+            <team name="A.C. Milan" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="Juventus" position="3"/>
+            <team name="Internazionale" position="4"/>
+            <team name="Parma" position="5"/>
+            <team name="Lazio" position="6"/>
+        </year>
+        <year name="2004-2005">
+            <team name="Juventus" position="1"/>
+            <team name="A.C. Milan" position="2"/>
+            <team name="Internazionale" position="3"/>
+            <team name="Udinese" position="4"/>
+            <team name="Sampdoria" position="5"/>
+            <team name="Palermo" position="6"/>
+        </year>
+        <year name="2005-2006">
+            <team name="Internazionale" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="A.C. Milan" position="3"/>
+            <team name="Chievo" position="4"/>
+            <team name="Palermo" position="5"/>
+            <team name="Livorno" position="6"/>
+        </year>
+        <year name="2006-2007">
+            <team name="Internazionale" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="Lazio" position="3"/>
+            <team name="A.C. Milan" position="4"/>
+            <team name="Palermo" position="5"/>
+            <team name="Fiorentina" position="6"/>
+        </year>
+        <year name="2007-2008">
+            <team name="Internazionale" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="Juventus" position="3"/>
+            <team name="Fiorentina" position="4"/>
+            <team name="A.C. Milan" position="5"/>
+            <team name="Sampdoria" position="6"/>
+        </year>
+        <year name="2008-2009">
+            <team name="Internazionale" position="1"/>
+            <team name="Juventus" position="2"/>
+            <team name="A.C. Milan" position="3"/>
+            <team name="Fiorentina" position="4"/>
+            <team name="Genoa" position="5"/>
+            <team name="A.S. Roma" position="6"/>
+        </year>
+        <year name="2009-2010">
+            <team name="Internazionale" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="A.C. Milan" position="3"/>
+            <team name="Sampdoria" position="4"/>
+            <team name="Palermo" position="5"/>
+            <team name="Napoli" position="6"/>
+        </year>
+        <year name="2010-2011">
+            <team name="A.C. Milan" position="1"/>
+            <team name="Internazionale" position="2"/>
+            <team name="Napoli" position="3"/>
+            <team name="Udinese" position="4"/>
+            <team name="Lazio" position="5"/>
+            <team name="Parma" position="6"/>
+        </year>
+        <year name="2011-2012">
+            <team name="Juventus" position="1"/>
+            <team name="A.C. Milan" position="2"/>
+            <team name="Udinese" position="3"/>
+            <team name="Lazio" position="4"/>
+            <team name="Napoli" position="5"/>
+            <team name="Internazionale" position="6"/>
+        </year>
+        <year name="2012-2013">
+            <team name="Juventus" position="1"/>
+            <team name="Napoli" position="2"/>
+            <team name="A.C. Milan" position="3"/>
+            <team name="Fiorentina" position="4"/>
+            <team name="Udinese" position="5"/>
+            <team name="A.S. Roma" position="6"/>
+        </year>
+        <year name="2013-2014">
+            <team name="Juventus" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="Napoli" position="3"/>
+            <team name="Fiorentina" position="4"/>
+            <team name="Internazionale" position="5"/>
+            <team name="Parma" position="6"/>
+        </year>
+    </table>
+</league>

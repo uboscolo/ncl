@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<league name="Serie A">
+    <table name="Top 6">
+        <year name="2000-2001">
+            <team name="Dynamo Kyiv" position="1"/>
+            <team name="Shakhtar Donetsk" position="2"/>
+            <team name="Dnipro Dnipropetrovsk" position="3"/>
+            <team name="Metalurh Mariupol" position="4"/>
+            <team name="Metalurh Donetsk" position="5"/>
+            <team name="CSKA Kyiv" position="6"/>
+        </year>
+        <year name="2001-2002">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Metalurh Donetsk" position="3"/>
+            <team name="Metalurh Zaporizhya" position="4"/>
+            <team name="Metalist Kharkiv" position="4"/>
+            <team name="Dnipro Dnipropetrovsk" position="6"/>
+        </year>
+        <year name="2002-2003">
+            <team name="Dynamo Kyiv" position="1"/>
+            <team name="Shakhtar Donetsk" position="2"/>
+            <team name="Metalurh Donetsk" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Arsenal Kyiv" position="5"/>
+            <team name="Volyn Lutsk" position="6"/>
+        </year>
+        <year name="2003-2004">
+            <team name="Dynamo Kyiv" position="1"/>
+            <team name="Shakhtar Donetsk" position="2"/>
+            <team name="Dnipro Dnipropetrovsk" position="3"/>
+            <team name="Metalurh Donetsk" position="4"/>
+            <team name="Chornomorets Odessa" position="5"/>
+            <team name="Obolon Kyiv" position="6"/>
+        </year>
+        <year name="2004-2005">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Metalurh Donetsk" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Illichivets Mariupol" position="5"/>
+            <team name="Chornomorets Odessa" position="6"/>
+        </year>
+        <year name="2005-2006">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Chornomorets Odessa" position="3"/>
+            <team name="Illychivets Mariupol" position="4"/>
+            <team name="Metalist Kharkiv" position="5"/>
+            <team name="Dnipro Dnipropetrovsk" position="6"/>
+        </year>
+        <year name="2006-2007">
+            <team name="Dynamo Kyiv" position="1"/>
+            <team name="Shakhtar Donetsk" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Tavriya Simferopol" position="5"/>
+            <team name="Chornomorets Odessa" position="6"/>
+        </year>
+        <year name="2007-2008">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Tavriya Simferopol" position="5"/>
+            <team name="Arsenal Kyiv" position="6"/>
+        </year>
+        <year name="2008-2009">
+            <team name="Dynamo Kyiv" position="1"/>
+            <team name="Shakhtar Donetsk" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Metalurh Donetsk" position="4"/>
+            <team name="Vorskla Poltava" position="5"/>
+            <team name="Dnipro Dnipropetrovsk" position="6"/>
+        </year>
+        <year name="2009-2010">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Karpaty Lviv" position="5"/>
+            <team name="Tavriya Simferopol" position="6"/>
+        </year>
+        <year name="2010-2011">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Karpaty Lviv" position="5"/>
+            <team name="Vorskla Poltava" position="6"/>
+        </year>
+        <year name="2011-2012">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dynamo Kyiv" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Arsenal Kyiv" position="5"/>
+            <team name="Tavriya Simferopol" position="6"/>
+        </year>
+        <year name="2012-2013">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Metalist Kharkiv" position="2"/>
+            <team name="Dynamo Kyiv" position="3"/>
+            <team name="Dnipro Dnipropetrovsk" position="4"/>
+            <team name="Metalurh Donetsk" position="5"/>
+            <team name="Chornomorets Odessa" position="6"/>
+        </year>
+        <year name="2013-2014">
+            <team name="Shakhtar Donetsk" position="1"/>
+            <team name="Dnipro Dnipropetrovsk" position="2"/>
+            <team name="Metalist Kharkiv" position="3"/>
+            <team name="Dynamo Kyiv" position="4"/>
+            <team name="Chornomorets Odessa" position="5"/>
+            <team name="Metalurh Donetsk" position="6"/>
+        </year>
+    </table>
+</league>

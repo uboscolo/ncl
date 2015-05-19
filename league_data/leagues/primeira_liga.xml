@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<league name="Serie A">
+    <table name="Top 6">
+        <year name="2000-2001">
+            <team name="Boavista" position="1"/>
+            <team name="Porto" position="2"/>
+            <team name="Sporting CP" position="3"/>
+            <team name="Braga" position="4"/>
+            <team name="União de Leiria" position="5"/>
+            <team name="Benfica" position="6"/>
+        </year>
+        <year name="2001-2002">
+            <team name="Sporting CP" position="1"/>
+            <team name="Boavista" position="2"/>
+            <team name="Porto" position="3"/>
+            <team name="Benfica" position="4"/>
+            <team name="Belenenses" position="4"/>
+            <team name="Marítimo" position="6"/>
+        </year>
+        <year name="2002-2003">
+            <team name="Porto" position="1"/>
+            <team name="Benfica" position="2"/>
+            <team name="Sporting CP" position="3"/>
+            <team name="Vitória de Guimarães" position="4"/>
+            <team name="União de Leiria" position="5"/>
+            <team name="Paços de Ferreira" position="6"/>
+        </year>
+        <year name="2003-2004">
+            <team name="Porto" position="1"/>
+            <team name="Benfica" position="2"/>
+            <team name="Sporting CP" position="3"/>
+            <team name="Nacional" position="4"/>
+            <team name="Braga" position="5"/>
+            <team name="Marítimo" position="6"/>
+        </year>
+        <year name="2004-2005">
+            <team name="Benfica" position="1"/>
+            <team name="Porto" position="2"/>
+            <team name="Sporting CP" position="3"/>
+            <team name="Braga" position="4"/>
+            <team name="Vitória de Guimarães" position="5"/>
+            <team name="Boavista" position="6"/>
+        </year>
+        <year name="2005-2006">
+            <team name="Porto" position="1"/>
+            <team name="Sporting CP" position="2"/>
+            <team name="Benfica" position="3"/>
+            <team name="Braga" position="4"/>
+            <team name="Nacional" position="5"/>
+            <team name="Boavista" position="6"/>
+        </year>
+        <year name="2006-2007">
+            <team name="Porto" position="1"/>
+            <team name="Sporting CP" position="2"/>
+            <team name="Benfica" position="3"/>
+            <team name="Braga" position="4"/>
+            <team name="Belenenses" position="5"/>
+            <team name="Paços de Ferreira" position="6"/>
+        </year>
+        <year name="2007-2008">
+            <team name="Porto" position="1"/>
+            <team name="Sporting CP" position="2"/>
+            <team name="Vitória de Guimarães" position="3"/>
+            <team name="Benfica" position="4"/>
+            <team name="Marítimo" position="5"/>
+            <team name="Vitória de Setúbal" position="6"/>
+        </year>
+        <year name="2008-2009">
+            <team name="Porto" position="1"/>
+            <team name="Sporting CP" position="2"/>
+            <team name="Benfica" position="3"/>
+            <team name="Nacional" position="4"/>
+            <team name="Braga" position="5"/>
+            <team name="Leixões" position="6"/>
+        </year>
+        <year name="2009-2010">
+            <team name="Benfica" position="1"/>
+            <team name="Braga" position="2"/>
+            <team name="Porto" position="3"/>
+            <team name="Sporting CP" position="4"/>
+            <team name="Marítimo" position="5"/>
+            <team name="Vitória de Guimarães" position="6"/>
+        </year>
+        <year name="2010-2011">
+            <team name="Porto" position="1"/>
+            <team name="Benfica" position="2"/>
+            <team name="Sporting CP" position="3"/>
+            <team name="Braga" position="4"/>
+            <team name="Vitória de Guimarães" position="5"/>
+            <team name="Nacional" position="6"/>
+        </year>
+        <year name="2011-2012">
+            <team name="Porto" position="1"/>
+            <team name="Benfica" position="2"/>
+            <team name="Braga" position="3"/>
+            <team name="Sporting CP" position="4"/>
+            <team name="Marítimo" position="5"/>
+            <team name="Vitória de Guimarães" position="6"/>
+        </year>
+        <year name="2012-2013">
+            <team name="Porto" position="1"/>
+            <team name="Benfica" position="2"/>
+            <team name="Paços de Ferreira" position="3"/>
+            <team name="Braga" position="4"/>
+            <team name="Estoril" position="5"/>
+            <team name="Rio Ave" position="6"/>
+        </year>
+        <year name="2013-2014">
+            <team name="Benfica" position="1"/>
+            <team name="Sporting CP" position="2"/>
+            <team name="Porto" position="3"/>
+            <team name="Estoril" position="4"/>
+            <team name="Nacional" position="5"/>
+            <team name="Marítimo" position="6"/>
+        </year>
+    </table>
+</league>
