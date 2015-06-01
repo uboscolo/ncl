@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<combo_call_model name="VFIN" pdns="1200000">
+    <call_model name="3G" percentage_pdns="1">
+        <event name="makebreak">
+            <target_rate>6.40</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>60</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="handoff">
+            <target_rate>1.04</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>20</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+</combo_call_model>

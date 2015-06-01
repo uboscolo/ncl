@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<combo_call_model name="KDDI" pdns="770000">
+    <call_model name="v4" percentage_pdns="0.65">
+        <event name="pdn_act_deact">
+            <target_rate>10.0</target_rate>
+            <rate_scale_factor>0.65</rate_scale_factor>
+            <instances>240</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+    <call_model name="v4v6" percentage_pdns="0.35">
+        <event name="lte_to_ehrpd_ho">
+            <target_rate>1.25</target_rate>
+            <rate_scale_factor>0.35</rate_scale_factor>
+            <instances>40</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="ehrpd_to_lte_ho">
+            <target_rate>1.25</target_rate>
+            <rate_scale_factor>0.35</rate_scale_factor>
+            <instances>40</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="s1_lte_ho">
+            <target_rate>1.25</target_rate>
+            <rate_scale_factor>0.35</rate_scale_factor>
+            <instances>40</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="ehrpd_ho">
+            <target_rate>1.25</target_rate>
+            <rate_scale_factor>0.35</rate_scale_factor>
+            <instances>40</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+</combo_call_model>

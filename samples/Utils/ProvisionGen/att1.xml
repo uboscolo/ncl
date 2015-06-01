@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<combo_call_model name="ATT" pdns="8200000">
+    <call_model name="3G" percentage_pdns="0.7">
+        <event name="makebreak">
+            <target_rate>1.07</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>102</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="static">
+            <target_rate>2.5</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>238</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+    <call_model name="4G" percentage_pdns="0.3">
+        <event name="lte_to_3g_ho">
+            <target_rate>3.6</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>14</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="makebreak_ho">
+            <target_rate>1.09</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>14</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="s1_release">
+            <target_rate>25.2</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>98</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="ho">
+            <target_rate>3.6</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>14</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+</combo_call_model>

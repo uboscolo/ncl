@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<combo_call_model name="VzW" pdns="4640000">
+    <call_model name="4G" percentage_pdns="1">
+        <event name="lte_to_ehrpd_ho">
+            <target_rate>0.405</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>40</instances>
+            <pdns_per_ue>2</pdns_per_ue>
+        </event>
+        <event name="ehrpd_to_lte_ho">
+            <target_rate>0.405</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>40</instances>
+            <pdns_per_ue>2</pdns_per_ue>
+        </event>
+        <event name="pdn_act_deact">
+            <target_rate>0.56</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>80</instances>
+            <pdns_per_ue>2</pdns_per_ue>
+        </event>
+        <event name="pdn_act">
+            <target_rate>1.68</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>292</instances>
+            <pdns_per_ue>2</pdns_per_ue>
+        </event>
+    </call_model>
+</combo_call_model>

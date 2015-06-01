@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<combo_call_model name="ATT" pdns="4800000">
+    <call_model name="3G" percentage_pdns="0.05">
+        <event name="makebreak">
+            <target_rate>0.47</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>2</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="static">
+            <target_rate>4.23</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>18</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+    <call_model name="4G" percentage_pdns="0.5">
+        <event name="lte_to_3g_ho">
+            <target_rate>3.34</target_rate>
+            <rate_scale_factor>0.5</rate_scale_factor>
+            <instances>22</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="makebreak_ho">
+            <target_rate>0.96</target_rate>
+            <rate_scale_factor>0.5</rate_scale_factor>
+            <instances>22</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="s1_release">
+            <target_rate>32.1</target_rate>
+            <rate_scale_factor>0.5</rate_scale_factor>
+            <instances>154</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+        <event name="ho">
+            <target_rate>4.1</target_rate>
+            <rate_scale_factor>0.5</rate_scale_factor>
+            <instances>22</instances>
+            <pdns_per_ue>1</pdns_per_ue>
+        </event>
+    </call_model>
+    <call_model name="VoLTE" percentage_pdns="0.4">
+        <event name="static">
+            <target_rate>8</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>220</instances>
+            <pdns_per_ue>2</pdns_per_ue>
+        </event>
+    </call_model>
+    <call_model name="Video" percentage_pdns="0.05">
+        <event name="static">
+            <target_rate>8</target_rate>
+            <rate_scale_factor>1</rate_scale_factor>
+            <instances>20</instances>
+            <pdns_per_ue>2</pdns_per_ue>
+        </event>
+    </call_model>
+</combo_call_model>
