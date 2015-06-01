@@ -1,0 +1,7 @@
+create the following:
+
+- Connection class
+- Ssh class extends Connection class
+- Telnet class extends Connection class
+- Connection class has a Host class
+- simple test procedure to test connection
