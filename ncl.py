@@ -18,19 +18,19 @@ league = League(league_name)
 
 for conf_tag in league_tag:
     conf_name = conf_tag.attrib['name']
-    league.add_conference(conf_name)
+    league.Add(conf_name)
     for div_tag in conf_tag:
         div_name = div_tag.attrib['name']
-        league.add_division(conf_name, div_name)
+        current_conf = league.conferences_table_by_name[conf_name]
+        current_conf.Add(div_name)
         for team_tag in div_tag:
             team_name = team_tag.attrib['name']
             team_strength = int(team_tag.attrib['strength'])
-            league.add_team(div_name, team_name, team_strength)
+            curr_div = current_conf.divisions_table_by_name[div_name]
+            curr_div.Add(team_name, team_strength)
 
-league.display_conferences()
-league.display_divisions()
-league.display_teams()
+league.Display()
 
-league.initialize()
+league.Initialize()
 
-league.play()
+league.Play()
