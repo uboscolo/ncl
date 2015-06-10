@@ -12,7 +12,7 @@ class DistributionTables(object):
         self.score_distr = {}
         self.result_distr = Distribution()
 
-    def initialize(self):
+    def Initialize(self):
         self.score_distr["away"] = Distribution()
         self.score_distr["draw"] = Distribution()
         self.score_distr["home"] = Distribution()
@@ -72,7 +72,9 @@ class League(object):
         self.tables = DistributionTables("Tables")
         self.conferences = [ ]
         self.conferences_table_by_name = { } 
+        self.playoff_teams = [ ]
         self.champion = None
+        self.schedule = None
 
     def __Final(self):
         team1 = self.conferences[0].champion
@@ -98,7 +100,7 @@ class League(object):
             conf.Display()
 
     def Initialize(self):
-        self.tables.initialize()
+        self.tables.Initialize()
         for conf in self.conferences:
             conf.Initialize(self.tables)
         
@@ -108,23 +110,22 @@ class League(object):
         play_on = True
         while play_on:
             for conf in self.conferences:
-                for div in conf.divisions:
-                    # Regular Season
-                    div.Play()
-                    play_on = play_on and not div.schedule_completed
+                conf.PlayDiv()
+                play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
         for conf in self.conferences:
+            conf.schedule.completed = False
             for div in conf.divisions:
-                div.stats.Display(div.name)
+                div.schedule.stats.Display(div.name)
             conf.Setup_playoff_schedule()
         # Play Conference Playoffs
-        play_on = True
         print "\n Conference Playoffs start..."
+        play_on = True
         while play_on:
             for conf in self.conferences:
-                # Playoffs
+                conf.BuildPlayoffs()
                 conf.Play()
-                play_on = play_on and not conf.schedule_completed
+                play_on = play_on and not conf.schedule.completed
         # Play Final
         self.__Final()
 
@@ -135,12 +136,8 @@ class Conference(League):
         super(Conference, self).__init__(name)
         self.divisions = [ ]
         self.divisions_table_by_name = { }
-        self.playoff_list = [ ]
         self.series_len = 3
         self.series_list = [ ]
-        self.current_day = 0
-        self.schedule = None
-        self.schedule_completed = False
 
     def Add(self, name):
         print "Adding division %s ..." % name
@@ -164,69 +161,63 @@ class Conference(League):
         self.schedule = Schedule(tables)
 
     def Setup_playoff_schedule(self):
+        # Build Conference Playoff team list
         for div in self.divisions:
             for team in div.playoff_teams:
-                if len(self.playoff_list) > 0:
+                if len(self.playoff_teams) > 0:
                     found = 0
-                    for pos in range(len(self.playoff_list)):
-                        if team.points >= self.playoff_list[pos].points:
-                            self.playoff_list.insert(pos, team)
+                    for pos in range(len(self.playoff_teams)):
+                        if team.points >= self.playoff_teams[pos].points:
+                            self.playoff_teams.insert(pos, team)
                             found = 1
                             break
                     if found == 0: 
-                        self.playoff_list.append(team)
+                        self.playoff_teams.append(team)
                 else:
-                    self.playoff_list.append(team)
-        dlen = len(self.playoff_list)
-        if dlen % 2:
-            print "Number of Playoff teams not even (%s)" % dlen
-            sys.exit(1)
-        for i in range(0, int(math.log(dlen, 2)) * self.series_len):
-            new_day = Day(i + 1)
+                    self.playoff_teams.append(team)
+
+    def BuildPlayoffs(self):
+        if len(self.series_list) > 0:
+            return
+        for i in range(0, len(self.playoff_teams)/2):
+            team1 = self.playoff_teams[i]
+            team2 = self.playoff_teams[len(self.playoff_teams) - 1 - i]
+            new_series = Series(team1, team2, self.series_len)
+            self.series_list.append(new_series)
+        for i in range(1, self.series_len + 1):
+            new_day = Day(i)
             self.schedule.days.append(new_day)
-            
-    def Play(self):
-        if self.current_day < len(self.schedule.days):
-            day = self.schedule.days[self.current_day]
-            print "\nDay: %d - Conference: %s\n" % (day.number, self.name)
-            if len(self.series_list) == 0:
-                for i in range(0, len(self.playoff_list)/2):
-                    team1 = self.playoff_list[i]
-                    team2 = self.playoff_list[len(self.playoff_list) - 1 - i]
-                    new_series = Series(team1, team2, self.series_len)
-                    self.series_list.append(new_series)
             for s in self.series_list:
-                if s.played % 2:
+                if i % 2:
                     match = Match(s.team2, s.team1, self.tables)
                 else:
                     match = Match(s.team1, s.team2, self.tables)
                 match.series = s
-                day.Add(match)
-            for match in day.matches:
-                mnum = match.series.played + 1
-                mlen = len(self.playoff_list)
-                if mlen > 8:
-                    print "Conference Round of 16 - Match %s" % (mnum)
-                elif mlen > 4:
-                    print "Conference Quarterfinals - Match %s" % (mnum)
-                elif mlen > 2:
-                    print "Conference Semifinals - Match %s" % (mnum)
-                else:
-                    print "Conference Finals - Match %s" % (mnum)
-                match.PlayWinner()
-                match.series.Update(match.winner)
-                if match.series.is_over:
-                    loser = self.playoff_list.index(match.series.loser)
-                    self.playoff_list.pop(loser)
-                    self.series_list.remove(match.series)
-                print "Game over ...\n"
-                if mlen == 2:
-                    self.champion = match.winner        
-            self.current_day += 1
-        else:
-            print "Conference %s - Playoffs are over" % self.name
-            print "Winner: %s\n" % (self.champion.name)
-            self.schedule_completed = True
+                new_day.Add(match)
+        self.schedule.SetCurrentDay(0)
+
+    def Play(self):
+        self.schedule.Play(0)
+        if self.schedule.completed:
+            for s in self.series_list:
+                loser = self.playoff_teams.index(s.loser)
+                self.playoff_teams.pop(loser)
+            if len(self.playoff_teams) > 1:
+                self.schedule.completed = False
+                self.schedule.days = [ ]
+                self.series_list = [ ]
+            else:
+                self.champion = self.playoff_teams[0]
+                print "Conference %s - Playoffs are over" % self.name
+                print "Winner: %s\n" % self.champion.name
+
+    def PlayDiv(self):
+        play_on = True
+        for div in self.divisions:
+            # Regular Season
+            div.Play()
+            play_on = play_on and not div.schedule.completed
+        self.schedule.completed = not play_on
 
 
 class Division(Conference):
@@ -234,9 +225,7 @@ class Division(Conference):
     def __init__(self, name):
         super(Division, self).__init__(name)
         self.teams = [ ]
-        self.playoff_teams = [ ]
         self.table = Table()
-        self.stats = Statistics("Division Statistics")
 
     def Add(self, name, strength):
         print "Adding team %s with strength: %d ..." % (name, strength)
@@ -253,30 +242,20 @@ class Division(Conference):
         self.schedule = Schedule(tables)
         self.schedule.RoundRobin(self.teams)
         self.schedule.SwapHomeAway()
-        self.stats.Add("home")
-        self.stats.Add("away")
-        self.stats.Add("draw")
+        self.schedule.SetCurrentDay(0)
 
     def Play(self):
-        if self.current_day < len(self.schedule.days):
-            day = self.schedule.days[self.current_day]
-            print "\nDay: %d - Division: %s\n" % (day.number, self.name)
-            for match in day.matches:
-                print "Starting regular season game ..."
-                match.Play(90)
-                match.Update()
-                self.stats.Update(match.result.result, 1)
-                print "Game over ...\n"
-            self.table.Sort(self.teams)
-            self.table.Display(day, self.name)
-            self.current_day += 1
-        else:
+        self.schedule.Play(90)
+        self.table.Sort(self.teams)
+        self.table.Display(self.name)
+        if self.schedule.completed:
+            # Build Playoffs
             print "\n Division %s - Regular Season is over\n" % self.name
             teams = self.table.sorted_teams
             self.playoff_teams = teams[0:len(teams)/2]
             for team in self.playoff_teams:
                 print "Team %s made the playoffs" % team.name
-            self.schedule_completed = True
+            print ""
 
 
 class Table(object):
@@ -300,11 +279,12 @@ class Table(object):
                 sorted_teams.append(team)
         self.sorted_teams = sorted_teams[:]
 
-    def Display(self, day, name):
-        print "\nDay %d Table\n" % day.number
+    def Display(self, name):
+        print "Table\n"
         print "--- {:15s} ---".format(name) 
         for team in self.sorted_teams:
             print "{:20s} {:2d}".format(team.name, team.points)
+        print ""
 
 
 class Team(object):
@@ -330,16 +310,26 @@ class Statistics(object):
 
     def Display(self, div_name):
         print "----------- Division %s Statistics: -----------" % div_name
+        total = 0
         for t in self.table.keys():
-            print "%s: %s" % (t, self.table[t])
+            total += self.table[t]
+        for t in self.table.keys():
+            print "{:20s} {:2.2f}".format(t, float(self.table[t])/total*100)
+            #print "%s victory rate: %f" % (t, float(self.table[t])/total*100)
 
 
 class Schedule(object):
 
     def __init__(self, tables):
         self.rotating_table = { }
-        self.days = []
+        self.days = [ ]
+        self.current_day = None
+        self.completed = False
         self.tables = tables
+        self.stats = Statistics("Division Statistics")
+        self.stats.Add("home")
+        self.stats.Add("away")
+        self.stats.Add("draw")
  
     def Display(self, div_name):
         print "----------- Division %s Schedule: -----------" % div_name
@@ -348,6 +338,32 @@ class Schedule(object):
                 home = match.home_team.name
                 away = match.away_team.name
                 print "Day %s - Match: %s vs %s" % (day.number, home, away) 
+
+    def SetCurrentDay(self, index):
+        self.current_day = self.days[index]
+
+    def Play(self, minutes):
+        if self.current_day.number < len(self.days) + 1:
+            print "Day: %d\n" % (self.current_day.number)
+            for match in self.current_day.matches:
+                if minutes > 0:
+                    print "Starting %s-minute game ..." % (minutes)
+                    match.Play(minutes)
+                    match.Update()
+                    self.stats.Update(match.result.result, 1)
+                    print "Game over ...\n"
+                else:
+                    if not match.series.is_over:
+                        print "Starting Playoff game ..."
+                        match.PlayWinner()
+                        match.series.Update(match.winner)
+                        self.stats.Update(match.result.result, 1)
+                        print "Game over ...\n"
+                    else:
+                        print "No game, series is over, Winner: %s\n" % match.series.winner.name
+            self.current_day.number += 1
+        else:
+            self.completed = True
 
     def SwapHomeAway(self):
         curr_day = len(self.days) + 1
@@ -395,6 +411,7 @@ class Schedule(object):
                     curr_val = self.rotating_table[entry]
                     self.rotating_table[entry] = self.rotating_table[len(teams)]
 
+
 class Day(object):
 
     def __init__(self, number):
@@ -429,6 +446,7 @@ class Series(object):
             else:
                 self.winner = self.team2
                 self.loser = self.team1
+            print "Series is over, Winner: %s, Loser: %s" % (self.winner.name, self.loser.name)
         
 class Match(object):
 
