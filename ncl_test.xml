@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<league name="The New Champions' League">
+    <conference name="Northern Europe">
+        <division name="Atlantic">
+            <team name="Chelsea" strength="77">
+            </team>
+            <team name="Manchester Utd" strength="68">
+            </team>
+        </division>
+        <division name="Continental">
+            <team name="Bayern Munich" strength="70">
+            </team>
+            <team name="Borussia Dortmund" strength="20">
+            </team>
+        </division>
+    </conference>
+    <conference name="Southern Europe">
+        <division name="South-West">
+            <team name="Atletico Madrid" strength="18">
+            </team>
+            <team name="Real Madrid" strength="53">
+            </team>
+        </division>
+        <division name="South-East">
+            <team name="Oympiacos" strength="11">
+            </team>
+            <team name="AC Milan" strength="55">
+            </team>
+        </division>
+    </conference>
+</league>
