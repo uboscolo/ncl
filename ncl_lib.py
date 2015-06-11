@@ -3,78 +3,84 @@ from random import *
 import math
 import re
 
-class DistributionTables(object):
+
+class Distribution(object):
     """These Tables are used to simulate results and
        scores"""
 
     def __init__(self, name):
         self.name = name
-        self.score_distr = {}
-        self.result_distr = Distribution()
+        self.frequency_distribution = {}
+        self.cumulative_distribution = {}
+        self.total = 0
+
+    def __Populate(self, tag, value):
+        self.frequency_distribution[tag] = value
+        self.total += value
+        #print "Tag: %s, Val: %s, Cumulative Val: %s" % (tag, value, self.total)
+        self.cumulative_distribution[self.total] = tag
+
+    def Display(self):
+        for k in sorted(self.frequency_distribution.keys()):
+            print "Key: %s, Value: %s" % (k, self.frequency_distribution[k])
 
     def Initialize(self):
-        self.score_distr["away"] = Distribution()
-        self.score_distr["draw"] = Distribution()
-        self.score_distr["home"] = Distribution()
         # 0
-        self.score_distr["draw"].Add("0-0", 0.085)
+        self.__Populate("0-0", 0.085)
         # 1
-        self.score_distr["home"].Add("1-0", 0.125)
-        self.score_distr["away"].Add("0-1", 0.065)
+        self.__Populate("1-0", 0.125)
+        self.__Populate("0-1", 0.065)
         # 2
-        self.score_distr["draw"].Add("1-1", 0.120)
-        self.score_distr["home"].Add("2-0", 0.090)
-        self.score_distr["away"].Add("0-2", 0.050)
+        self.__Populate("1-1", 0.120)
+        self.__Populate("2-0", 0.090)
+        self.__Populate("0-2", 0.050)
         # 3
-        self.score_distr["home"].Add("2-1", 0.093)
-        self.score_distr["away"].Add("1-2", 0.053)
-        self.score_distr["home"].Add("3-0", 0.045)
-        self.score_distr["away"].Add("0-3", 0.015)
+        self.__Populate("2-1", 0.093)
+        self.__Populate("1-2", 0.053)
+        self.__Populate("3-0", 0.045)
+        self.__Populate("0-3", 0.015)
         # 4
-        self.score_distr["draw"].Add("2-2", 0.045)
-        self.score_distr["home"].Add("4-0", 0.025)
-        self.score_distr["away"].Add("0-4", 0.015)
-        self.score_distr["home"].Add("3-1", 0.045)
-        self.score_distr["away"].Add("1-3", 0.025)
+        self.__Populate("2-2", 0.045)
+        self.__Populate("4-0", 0.025)
+        self.__Populate("0-4", 0.015)
+        self.__Populate("3-1", 0.045)
+        self.__Populate("1-3", 0.025)
         # 5
-        self.score_distr["home"].Add("3-2", 0.020)
-        self.score_distr["away"].Add("2-3", 0.015)
-        self.score_distr["home"].Add("4-1", 0.015)
-        self.score_distr["away"].Add("1-4", 0.010)
-        self.score_distr["home"].Add("5-0", 0.005)
-        self.score_distr["away"].Add("0-5", 0.003)
+        self.__Populate("3-2", 0.020)
+        self.__Populate("2-3", 0.015)
+        self.__Populate("4-1", 0.015)
+        self.__Populate("1-4", 0.010)
+        self.__Populate("5-0", 0.005)
+        self.__Populate("0-5", 0.003)
         # 6
-        self.score_distr["draw"].Add("3-3", 0.007)
-        self.score_distr["home"].Add("4-2", 0.007)
-        self.score_distr["away"].Add("2-4", 0.002)
-        self.score_distr["home"].Add("5-1", 0.005)
-        self.score_distr["away"].Add("1-5", 0.002)
-        self.score_distr["home"].Add("6-0", 0.002)
-        self.score_distr["away"].Add("0-6", 0.001)
+        self.__Populate("3-3", 0.007)
+        self.__Populate("4-2", 0.007)
+        self.__Populate("2-4", 0.002)
+        self.__Populate("5-1", 0.005)
+        self.__Populate("1-5", 0.002)
+        self.__Populate("6-0", 0.002)
+        self.__Populate("0-6", 0.001)
         # 7
-        self.score_distr["home"].Add("4-3", 0.003)
-        self.score_distr["away"].Add("3-4", 0.002)
-        self.score_distr["home"].Add("5-2", 0.001)
-        self.score_distr["away"].Add("2-5", 0.001)
-        self.score_distr["home"].Add("6-1", 0.001)
-        self.score_distr["away"].Add("1-6", 0.001)
-        self.score_distr["home"].Add("7-0", 0.001)
-        # results
-        self.result_distr.Add("away", 0.32)
-        self.result_distr.Add("draw", 0.19)
-        self.result_distr.Add("home", 0.49)
+        self.__Populate("4-3", 0.003)
+        self.__Populate("3-4", 0.002)
+        self.__Populate("5-2", 0.001)
+        self.__Populate("2-5", 0.001)
+        self.__Populate("6-1", 0.001)
+        self.__Populate("1-6", 0.001)
+        self.__Populate("7-0", 0.001)
 
  
 class League(object):
 
     def __init__(self, name):
         self.name = name
-        self.tables = DistributionTables("Tables")
+        self.tables = Distribution("Scores")
         self.conferences = [ ]
         self.conferences_table_by_name = { } 
         self.playoff_teams = [ ]
         self.champion = None
         self.schedule = None
+        self.series_length = 3
 
     def __Final(self):
         team1 = self.conferences[0].champion
@@ -110,7 +116,7 @@ class League(object):
         play_on = True
         while play_on:
             for conf in self.conferences:
-                conf.PlayDiv()
+                conf.RegularSeason()
                 play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
         for conf in self.conferences:
@@ -123,10 +129,10 @@ class League(object):
         play_on = True
         while play_on:
             for conf in self.conferences:
-                conf.BuildPlayoffs()
                 conf.Play()
                 play_on = play_on and not conf.schedule.completed
         # Play Final
+        # TODO add to schedule
         self.__Final()
 
     def Sort(self, teams):
@@ -153,34 +159,12 @@ class Conference(League):
         super(Conference, self).__init__(name)
         self.divisions = [ ]
         self.divisions_table_by_name = { }
-        self.series_len = 3
-        self.series_list = [ ]
 
     def Add(self, name):
         print "Adding division %s ..." % name
         new_div = Division(name)
         self.divisions.append(new_div) 
         self.divisions_table_by_name[name] = new_div
-
-    def BuildPlayoffs(self):
-        if len(self.series_list) > 0:
-            return
-        for i in range(0, len(self.playoff_teams)/2):
-            team1 = self.playoff_teams[i]
-            team2 = self.playoff_teams[len(self.playoff_teams) - 1 - i]
-            new_series = Series(team1, team2, self.series_len)
-            self.series_list.append(new_series)
-        for i in range(1, self.series_len + 1):
-            new_day = Day(i)
-            self.schedule.days.append(new_day)
-            for s in self.series_list:
-                if (i - 1) % 2:
-                    match = Match(s.team2, s.team1, self.tables)
-                else:
-                    match = Match(s.team1, s.team2, self.tables)
-                match.series = s
-                new_day.Add(match)
-        self.schedule.SetCurrentDay(0)
 
     def Display(self):
         print "Conference %s has %d divisions:" % (
@@ -198,21 +182,20 @@ class Conference(League):
         self.schedule = Schedule(tables)
 
     def Play(self):
+        self.schedule.Playoffs(self.playoff_teams, self.series_length)
         self.schedule.Play(0)
         if self.schedule.completed:
-            for s in self.series_list:
+            for s in self.schedule.series_list:
                 loser = self.playoff_teams.index(s.loser)
                 self.playoff_teams.pop(loser)
             if len(self.playoff_teams) > 1:
-                self.schedule.completed = False
-                self.schedule.days = [ ]
-                self.series_list = [ ]
+                self.schedule.Initialize()
             else:
                 self.champion = self.playoff_teams[0]
                 print "Conference %s - Playoffs are over" % self.name
                 print "Winner: %s\n" % self.champion.name
 
-    def PlayDiv(self):
+    def RegularSeason(self):
         play_on = True
         for div in self.divisions:
             # Regular Season
@@ -328,11 +311,11 @@ class Statistics(object):
 class Schedule(object):
 
     def __init__(self, tables):
-        self.rotating_table = { }
         self.days = [ ]
         self.current_day = None
         self.completed = False
         self.tables = tables
+        self.series_list = [ ]
         self.stats = Statistics("Statistics")
         self.stats.Add("home")
         self.stats.Add("away")
@@ -346,34 +329,57 @@ class Schedule(object):
                 away = match.away_team.name
                 print "Day %s - Match: %s vs %s" % (day.number, home, away) 
 
-    def SetCurrentDay(self, index):
-        self.current_day = self.days[index]
+    def Initialize(self):
+        self.completed = False
+        self.series_list = [ ]
+        self.days = [ ]
+        self.current_day = None
 
     def Play(self, minutes):
-        if self.current_day.number <= len(self.days):
-            print "Day: %d\n" % (self.current_day.number)
-            for match in self.current_day.matches:
-                if minutes > 0:
-                    print "Starting %s-minute game ..." % (minutes)
-                    match.Play(minutes)
-                    match.Update()
+        print "Day: %d\n" % (self.current_day.number)
+        for match in self.current_day.matches:
+            if minutes > 0:
+                print "Starting %s-minute game ..." % (minutes)
+                match.Play(minutes)
+                match.Update()
+                self.stats.Update(match.result.result, 1)
+                print "Game over ...\n"
+            else:
+                if not match.series.is_over:
+                    print "Starting Playoff game ..."
+                    match.PlayWinner()
+                    match.series.Update(match.winner)
                     self.stats.Update(match.result.result, 1)
                     print "Game over ...\n"
                 else:
-                    if not match.series.is_over:
-                        print "Starting Playoff game ..."
-                        match.PlayWinner()
-                        match.series.Update(match.winner)
-                        self.stats.Update(match.result.result, 1)
-                        print "Game over ...\n"
-                    else:
-                        print "No game, series is over, Winner: %s\n" % match.series.winner.name
-            if self.current_day.number < len(self.days):
-                self.current_day = self.days[self.current_day.number]
-            else:
-                self.current_day.number += 1
+                    print "No game, series is over, Winner: %s\n" % match.series.winner.name
+        if self.current_day.number < len(self.days):
+            self.current_day = self.days[self.current_day.number]
         else:
             self.completed = True
+
+    def Playoffs(self, teams, series_length):
+        if len(self.series_list) > 0:
+            return
+        for i in range(0, len(teams)/2):
+            team1 = teams[i]
+            team2 = teams[len(teams) - 1 - i]
+            new_series = Series(team1, team2, series_length)
+            self.series_list.append(new_series)
+        for i in range(1, series_length + 1):
+            new_day = Day(i)
+            self.days.append(new_day)
+            for s in self.series_list:
+                if (i - 1) % 2:
+                    match = Match(s.team2, s.team1, self.tables)
+                else:
+                    match = Match(s.team1, s.team2, self.tables)
+                match.series = s
+                new_day.Add(match)
+        self.SetCurrentDay(0)
+
+    def SetCurrentDay(self, index):
+        self.current_day = self.days[index]
 
     def SwapHomeAway(self):
         curr_day = len(self.days) + 1
@@ -392,8 +398,9 @@ class Schedule(object):
 
     def RoundRobin(self, teams):
         i = 0
+        rotating_table = { }
         for team in teams:
-            self.rotating_table[i + 1] = teams[i]
+            rotating_table[i + 1] = teams[i]
             i += 1
         day = 1
         while day <= len(teams) - 1:
@@ -402,24 +409,24 @@ class Schedule(object):
             match = 1
             while match <= len(teams) / 2:
                 if match == 1:
-                    team1 = self.rotating_table[match]
-                    team2 = self.rotating_table[match + 1]
+                    team1 = rotating_table[match]
+                    team2 = rotating_table[match + 1]
                 else:
-                    team1 = self.rotating_table[match + 1]
-                    team2 = self.rotating_table[len(teams) - match + 2]
+                    team1 = rotating_table[match + 1]
+                    team2 = rotating_table[len(teams) - match + 2]
                 new_match = Match(team1, team2, self.tables)
                 new_day.Add(new_match)                
                 match += 1
             day += 1
             # rotate table
-            for entry in self.rotating_table.keys():
+            for entry in rotating_table.keys():
                 if entry > 2:
-                    stored_val = self.rotating_table[entry]
-                    self.rotating_table[entry] = curr_val
+                    stored_val = rotating_table[entry]
+                    rotating_table[entry] = curr_val
                     curr_val = stored_val
                 elif entry == 2:
-                    curr_val = self.rotating_table[entry]
-                    self.rotating_table[entry] = self.rotating_table[len(teams)]
+                    curr_val = rotating_table[entry]
+                    rotating_table[entry] = rotating_table[len(teams)]
 
 
 class Day(object):
@@ -472,8 +479,10 @@ class Match(object):
         strength1 = self.home_team.strength
         strength2 = self.away_team.strength
         self.result.score.Display(self.home_team.name, self.away_team.name)
-        self.result.Roll(strength1, strength2)
-        self.result.score.Generate(self.result.result, minutes)
+        # Generate the score
+        self.result.score.Generate()
+        # Determine the result: home, away, draw
+        self.result.Add()
         home_team = self.home_team.name
         away_team = self.away_team.name
         self.result.score.SimulateScoring(minutes, home_team, away_team)
@@ -542,17 +551,14 @@ class Result(object):
     def __init__(self, tables):
         self.score = Score(0, 0, tables)
         self.result = None
-        self.distribution = tables.result_distr
 
-    def Roll(self, strength1, strength2):
-        m1 = uniform(0, strength1)
-        m2 = strength2 - (uniform(0, strength2))
-        mmax = strength1 + strength2
-        md = (m1 + m2)
-        for k in sorted(self.distribution.cumulative_distribution.keys()):
-            if md <= k * mmax:
-                self.result = self.distribution.cumulative_distribution[k]
-                break
+    def Add(self):
+        if self.score.home == self.score.away:
+            self.result = "draw"
+        elif self.score.home > self.score.away:
+            self.result = "home"
+        else:
+            self.result = "away"
 
 
 class Score(object):
@@ -561,13 +567,10 @@ class Score(object):
         self.home = home
         self.away = away
         self.score = "0-0"
-        self.distributions = {}
-        self.distributions["away"] = tables.score_distr["away"]
-        self.distributions["draw"] = tables.score_distr["draw"]
-        self.distributions["home"] = tables.score_distr["home"]
+        self.distribution = tables
 
-    def Generate(self, result, minutes):
-        table = self.distributions[result]
+    def Generate(self):
+        table = self.distribution
         m = uniform(0, table.total)
         for k in sorted(table.cumulative_distribution.keys()):
            res = table.cumulative_distribution[k]
@@ -599,22 +602,3 @@ class Score(object):
                     goal_list[minute] = t_list[s]
         for goal in sorted(goal_list.keys()):
             print "Minute: %s, Goal!!! %s scored" % (goal, goal_list[goal])
-
-
-class Distribution(object):
-
-    def __init__(self):
-        self.frequency_distribution = {}
-        self.cumulative_distribution = {}
-        self.total = 0
-
-    def Add(self, tag, value):
-        self.frequency_distribution[tag] = value
-        self.total += value
-        #print "Tag: %s, Val: %s, Cumulative Val: %s" % (tag, value, self.total)
-        self.cumulative_distribution[self.total] = tag
-
-    def Display(self):
-        for k in sorted(self.frequency_distribution.keys()):
-            print "Key: %s, Value: %s" % (k, self.frequency_distribution[k])
-
