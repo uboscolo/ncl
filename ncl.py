@@ -34,3 +34,5 @@ league.Display()
 league.Initialize()
 
 league.Play()
+
+league.Destroy()

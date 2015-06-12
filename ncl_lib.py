@@ -2,79 +2,59 @@ from sys import exit
 from random import *
 import math
 import re
+import sqlite3
 
 
-class Distribution(object):
-    """These Tables are used to simulate results and
-       scores"""
+class DistributionDB(object):
 
-    def __init__(self, name):
-        self.name = name
-        self.frequency_distribution = {}
-        self.cumulative_distribution = {}
-        self.total = 0
+    def __init__(self, db_name):
+        self.regular_season_db = db_name
+        #supply the special name :memory: to create a database in RAM
+        self.conn = sqlite3.connect(db_name)
+        self.cursor = self.conn.cursor()
+        self.cumulative_total = 0
 
-    def __Populate(self, tag, value):
-        self.frequency_distribution[tag] = value
-        self.total += value
-        #print "Tag: %s, Val: %s, Cumulative Val: %s" % (tag, value, self.total)
-        self.cumulative_distribution[self.total] = tag
+    def CreateTable(self):
+        self.cursor.execute('''CREATE TABLE scores(score TEXT PRIMARY KEY,
+            probability FLOAT)''')
+        self.conn.commit()
+
+    def AddScore(self, s, p):
+        self.cumulative_total += p
+        #self.cumulative_distribution[self.cumulative_total] = s
+        self.cursor.execute('''INSERT INTO scores(score, probability)
+            VALUES(?,?)''', (s, self.cumulative_total))
+        self.conn.commit()
+
+    def Close(self):
+        self.conn.close()
+
+    def Destroy(self):
+        self.cursor.execute('''DROP TABLE scores''')
+        self.conn.commit()
+        self.conn.close()
+
+    def GetScore(self, sample):
+        self.cursor.execute('''SELECT score FROM scores 
+            WHERE probability > ?''', (sample,))
+        return self.cursor.fetchone()[0]
 
     def Display(self):
-        for k in sorted(self.frequency_distribution.keys()):
-            print "Key: %s, Value: %s" % (k, self.frequency_distribution[k])
+        self.cursor.execute("SELECT * FROM scores")
+        # needs fixes
+        for record in self.cursor.fetchall():
+            score = record[0]
+            probability = record[1]
+            print "Score %s has probabilty %s" % (score, probability)
+        print ""
 
-    def Initialize(self):
-        # 0
-        self.__Populate("0-0", 0.085)
-        # 1
-        self.__Populate("1-0", 0.125)
-        self.__Populate("0-1", 0.065)
-        # 2
-        self.__Populate("1-1", 0.120)
-        self.__Populate("2-0", 0.090)
-        self.__Populate("0-2", 0.050)
-        # 3
-        self.__Populate("2-1", 0.093)
-        self.__Populate("1-2", 0.053)
-        self.__Populate("3-0", 0.045)
-        self.__Populate("0-3", 0.015)
-        # 4
-        self.__Populate("2-2", 0.045)
-        self.__Populate("4-0", 0.025)
-        self.__Populate("0-4", 0.015)
-        self.__Populate("3-1", 0.045)
-        self.__Populate("1-3", 0.025)
-        # 5
-        self.__Populate("3-2", 0.020)
-        self.__Populate("2-3", 0.015)
-        self.__Populate("4-1", 0.015)
-        self.__Populate("1-4", 0.010)
-        self.__Populate("5-0", 0.005)
-        self.__Populate("0-5", 0.003)
-        # 6
-        self.__Populate("3-3", 0.007)
-        self.__Populate("4-2", 0.007)
-        self.__Populate("2-4", 0.002)
-        self.__Populate("5-1", 0.005)
-        self.__Populate("1-5", 0.002)
-        self.__Populate("6-0", 0.002)
-        self.__Populate("0-6", 0.001)
-        # 7
-        self.__Populate("4-3", 0.003)
-        self.__Populate("3-4", 0.002)
-        self.__Populate("5-2", 0.001)
-        self.__Populate("2-5", 0.001)
-        self.__Populate("6-1", 0.001)
-        self.__Populate("1-6", 0.001)
-        self.__Populate("7-0", 0.001)
 
- 
 class League(object):
 
     def __init__(self, name):
         self.name = name
-        self.tables = Distribution("Scores")
+        self.regular_season_db = DistributionDB("regular_season.db")
+        self.extra_time_db = DistributionDB("extra_time.db")
         self.conferences = [ ]
         self.conferences_table_by_name = { } 
         self.playoff_teams = [ ]
@@ -85,7 +65,7 @@ class League(object):
     def __Final(self):
         team1 = self.conferences[0].champion
         team2 = self.conferences[1].champion
-        final = Match(team1, team2, self.tables)
+        final = Match(team1, team2)
         print "\n League %s Final\n" % self.name
         final.PlayWinner()
         print "\nThe League Champion is %s!\n" % (final.winner.name)
@@ -95,6 +75,10 @@ class League(object):
         new_conf = Conference(name)
         self.conferences.append(new_conf)
         self.conferences_table_by_name[name] = new_conf
+
+    def Destroy(self):
+        self.regular_season_db.Destroy()
+        self.extra_time_db.Destroy()
         
     def Display(self):
         print "\n"
@@ -106,9 +90,58 @@ class League(object):
             conf.Display()
 
     def Initialize(self):
-        self.tables.Initialize()
         for conf in self.conferences:
-            conf.Initialize(self.tables)
+            conf.Initialize()
+        self.regular_season_db.CreateTable()
+        self.regular_season_db.AddScore("0-0", 0.085)
+        self.regular_season_db.AddScore("1-0", 0.125)
+        self.regular_season_db.AddScore("0-1", 0.065)
+        self.regular_season_db.AddScore("1-1", 0.120)
+        self.regular_season_db.AddScore("2-0", 0.090)
+        self.regular_season_db.AddScore("0-2", 0.050)
+        self.regular_season_db.AddScore("2-1", 0.093)
+        self.regular_season_db.AddScore("1-2", 0.053)
+        self.regular_season_db.AddScore("3-0", 0.045)
+        self.regular_season_db.AddScore("0-3", 0.015)
+        self.regular_season_db.AddScore("2-2", 0.045)
+        self.regular_season_db.AddScore("4-0", 0.025)
+        self.regular_season_db.AddScore("0-4", 0.015)
+        self.regular_season_db.AddScore("3-1", 0.045)
+        self.regular_season_db.AddScore("1-3", 0.025)
+        self.regular_season_db.AddScore("3-2", 0.020)
+        self.regular_season_db.AddScore("2-3", 0.015)
+        self.regular_season_db.AddScore("4-1", 0.015)
+        self.regular_season_db.AddScore("1-4", 0.010)
+        self.regular_season_db.AddScore("5-0", 0.005)
+        self.regular_season_db.AddScore("0-5", 0.003)
+        self.regular_season_db.AddScore("3-3", 0.007)
+        self.regular_season_db.AddScore("4-2", 0.007)
+        self.regular_season_db.AddScore("2-4", 0.002)
+        self.regular_season_db.AddScore("5-1", 0.005)
+        self.regular_season_db.AddScore("1-5", 0.002)
+        self.regular_season_db.AddScore("6-0", 0.002)
+        self.regular_season_db.AddScore("0-6", 0.001)
+        self.regular_season_db.AddScore("4-3", 0.003)
+        self.regular_season_db.AddScore("3-4", 0.002)
+        self.regular_season_db.AddScore("5-2", 0.001)
+        self.regular_season_db.AddScore("2-5", 0.001)
+        self.regular_season_db.AddScore("6-1", 0.001)
+        self.regular_season_db.AddScore("1-6", 0.001)
+        self.regular_season_db.AddScore("7-0", 0.001)
+        #self.regular_season_db.Display()
+
+        self.extra_time_db.CreateTable()
+        self.extra_time_db.AddScore("0-0", 0.120)
+        self.extra_time_db.AddScore("1-0", 0.150)
+        self.extra_time_db.AddScore("0-1", 0.095)
+        self.extra_time_db.AddScore("1-1", 0.145)
+        self.extra_time_db.AddScore("2-0", 0.115)
+        self.extra_time_db.AddScore("0-2", 0.075)
+        self.extra_time_db.AddScore("2-1", 0.110)
+        self.extra_time_db.AddScore("1-2", 0.080)
+        self.extra_time_db.AddScore("3-0", 0.070)
+        self.extra_time_db.AddScore("0-3", 0.040)
+
         
     def Play(self):
         # Play Regular Season
@@ -174,12 +207,11 @@ class Conference(League):
         for div in self.divisions:
             div.Display()
 
-    def Initialize(self, tables):
-        self.tables = tables
+    def Initialize(self):
         for div in self.divisions:
-            div.Initialize(self.tables)
+            div.Initialize()
             div.schedule.Display(div.name)
-        self.schedule = Schedule(tables)
+        self.schedule = Schedule()
 
     def Play(self):
         self.schedule.Playoffs(self.playoff_teams, self.series_length)
@@ -227,9 +259,8 @@ class Division(Conference):
         for div in self.teams:
            print "\t - Team %s" % (div.name)
 
-    def Initialize(self, tables):
-        self.tables = tables
-        self.schedule = Schedule(tables)
+    def Initialize(self):
+        self.schedule = Schedule()
         self.schedule.RoundRobin(self.teams)
         self.schedule.SwapHomeAway()
         self.schedule.SetCurrentDay(0)
@@ -310,11 +341,10 @@ class Statistics(object):
 
 class Schedule(object):
 
-    def __init__(self, tables):
+    def __init__(self):
         self.days = [ ]
         self.current_day = None
         self.completed = False
-        self.tables = tables
         self.series_list = [ ]
         self.stats = Statistics("Statistics")
         self.stats.Add("home")
@@ -328,6 +358,7 @@ class Schedule(object):
                 home = match.home_team.name
                 away = match.away_team.name
                 print "Day %s - Match: %s vs %s" % (day.number, home, away) 
+        print ""
 
     def Initialize(self):
         self.completed = False
@@ -371,9 +402,9 @@ class Schedule(object):
             self.days.append(new_day)
             for s in self.series_list:
                 if (i - 1) % 2:
-                    match = Match(s.team2, s.team1, self.tables)
+                    match = Match(s.team2, s.team1)
                 else:
-                    match = Match(s.team1, s.team2, self.tables)
+                    match = Match(s.team1, s.team2)
                 match.series = s
                 new_day.Add(match)
         self.SetCurrentDay(0)
@@ -391,7 +422,7 @@ class Schedule(object):
             for match in day.matches:
                 team1 = match.away_team
                 team2 = match.home_team
-                new_match = Match(team1, team2, self.tables)
+                new_match = Match(team1, team2)
                 new_day.Add(new_match)                
         for day in add_days:
             self.days.append(day)
@@ -414,7 +445,7 @@ class Schedule(object):
                 else:
                     team1 = rotating_table[match + 1]
                     team2 = rotating_table[len(teams) - match + 2]
-                new_match = Match(team1, team2, self.tables)
+                new_match = Match(team1, team2)
                 new_day.Add(new_match)                
                 match += 1
             day += 1
@@ -463,14 +494,16 @@ class Series(object):
             else:
                 self.winner = self.team2
                 self.loser = self.team1
-            print "Series is over, Winner: %s, Loser: %s" % (self.winner.name, self.loser.name)
+            print "Series is over, Winner: %s, Loser: %s" % (self.winner.name, 
+                self.loser.name)
         
+
 class Match(object):
 
-    def __init__(self, home_team, away_team, tables):
+    def __init__(self, home_team, away_team):
         self.home_team = home_team
         self.away_team = away_team
-        self.result = Result(tables)
+        self.result = Result()
         self.winner = None
         self.loser = None
         self.series = None
@@ -480,7 +513,10 @@ class Match(object):
         strength2 = self.away_team.strength
         self.result.score.Display(self.home_team.name, self.away_team.name)
         # Generate the score
-        self.result.score.Generate()
+        if minutes == 30:
+            self.result.score.Generate("extra_time.db")
+        else:
+            self.result.score.Generate("regular_season.db")
         # Determine the result: home, away, draw
         self.result.Add()
         home_team = self.home_team.name
@@ -548,8 +584,8 @@ class Match(object):
 
 class Result(object):
 
-    def __init__(self, tables):
-        self.score = Score(0, 0, tables)
+    def __init__(self):
+        self.score = Score(0, 0)
         self.result = None
 
     def Add(self):
@@ -563,23 +599,21 @@ class Result(object):
 
 class Score(object):
 
-    def __init__(self, home, away, tables):
+    def __init__(self, home, away):
         self.home = home
         self.away = away
         self.score = "0-0"
-        self.distribution = tables
 
-    def Generate(self):
-        table = self.distribution
-        m = uniform(0, table.total)
-        for k in sorted(table.cumulative_distribution.keys()):
-           res = table.cumulative_distribution[k]
-           if m <= k:
-               self.score = res
-               res_obj = re.search(r'(\d)-(\d)', res)
-               self.home += int(res_obj.group(1))
-               self.away += int(res_obj.group(2))
-               break
+    def Generate(self, db_name):
+        db = DistributionDB(db_name)
+        m = uniform(0, 1.0)
+        #print "Random number %s (Max=%s)" % (m, 1.0)
+        self.score = db.GetScore(m)
+        db.Close()
+        #print "Score %s" % (self.score)
+        res_obj = re.search(r'(\d)-(\d)', self.score)
+        self.home += int(res_obj.group(1))
+        self.away += int(res_obj.group(2))
 
     def Display(self, home_team, away_team):
         print "%s %d : %s %d" % (home_team, self.home, away_team, self.away)
