@@ -1,29 +1,34 @@
-from sys import exit
 from random import *
 import math
 import re
 import sqlite3
+import os
+import signal
+import sys
 
 
 class DistributionDB(object):
 
     def __init__(self, db_name):
-        self.regular_season_db = db_name
         #supply the special name :memory: to create a database in RAM
         self.conn = sqlite3.connect(db_name)
         self.cursor = self.conn.cursor()
         self.cumulative_total = 0
 
     def CreateTable(self):
+        try:
+            self.cursor.execute('''DROP TABLE scores''')
+        except sqlite3.OperationalError as err:
+            print "Error: %s" % str(err)
         self.cursor.execute('''CREATE TABLE scores(score TEXT PRIMARY KEY,
-            probability FLOAT)''')
+            probability FLOAT, hit INT)''')
         self.conn.commit()
 
     def AddScore(self, s, p):
         self.cumulative_total += p
         #self.cumulative_distribution[self.cumulative_total] = s
-        self.cursor.execute('''INSERT INTO scores(score, probability)
-            VALUES(?,?)''', (s, self.cumulative_total))
+        self.cursor.execute('''INSERT INTO scores(score, probability, hit)
+            VALUES(?,?,?)''', (s, self.cumulative_total, 0))
         self.conn.commit()
 
     def Close(self):
@@ -34,11 +39,6 @@ class DistributionDB(object):
         self.conn.commit()
         self.conn.close()
 
-    def GetScore(self, sample):
-        self.cursor.execute('''SELECT score FROM scores 
-            WHERE probability > ?''', (sample,))
-        return self.cursor.fetchone()[0]
-
     def Display(self):
         self.cursor.execute("SELECT * FROM scores")
         # needs fixes
@@ -48,11 +48,27 @@ class DistributionDB(object):
             print "Score %s has probabilty %s" % (score, probability)
         print ""
 
+    def GetHit(self, sample):
+        self.cursor.execute('''SELECT hit FROM scores 
+            WHERE score = ?''', (sample,))
+        return self.cursor.fetchone()[0]
+
+    def GetScore(self, sample):
+        self.cursor.execute('''SELECT score FROM scores 
+            WHERE probability > ?''', (sample,))
+        return self.cursor.fetchone()[0]
+
+    def Update(self, tag, value):
+        self.cursor.execute('''UPDATE scores SET hit = ? WHERE score = ? ''',
+            (value, tag))
+        self.conn.commit()
 
 class League(object):
 
     def __init__(self, name):
         self.name = name
+        signal.signal(signal.SIGPIPE, self.__SignalHandler)
+        signal.signal(signal.SIGINT, self.__SignalHandler)
         self.regular_season_db = DistributionDB("regular_season.db")
         self.extra_time_db = DistributionDB("extra_time.db")
         self.conferences = [ ]
@@ -69,6 +85,11 @@ class League(object):
         print "\n League %s Final\n" % self.name
         final.PlayWinner()
         print "\nThe League Champion is %s!\n" % (final.winner.name)
+
+    def __SignalHandler(self, signum, frame):
+        print "Interrupt handler called: %s" % (signum)
+        self.Destroy
+        sys.exit(0)
 
     def Add(self, name):
         print "Adding conference %s ..." % name
@@ -153,9 +174,10 @@ class League(object):
                 play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
         for conf in self.conferences:
-            conf.schedule.completed = False
+            conf.schedule.Initialize()
             for div in conf.divisions:
-                div.schedule.stats.Display(div.name)
+                name = "Division " + div.name
+                div.schedule.stats.Display(name)
             conf.SetupPlayoffs()
         # Play Conference Playoffs
         print "\n Conference Playoffs start..."
@@ -165,7 +187,7 @@ class League(object):
                 conf.Play()
                 play_on = play_on and not conf.schedule.completed
         # Play Final
-        # TODO add to schedule
+        # TODO add to schedule as a single day match
         self.__Final()
 
     def Sort(self, teams):
@@ -285,6 +307,7 @@ class Table(object):
         self.sorted_teams = [ ]
 
     def Sort(self, teams):
+        # TODO 2 versions if this method implemented
         sorted_teams = [ ]
         for team in teams:
             if len(sorted_teams) > 0:
@@ -329,14 +352,13 @@ class Statistics(object):
     def Update(self, tag, value):
         self.table[tag] += value
 
-    def Display(self, div_name):
-        print "----------- Division %s Statistics: -----------" % div_name
+    def Display(self, name):
+        print "----------- %s Statistics: -----------" % name
         total = 0
         for t in self.table.keys():
             total += self.table[t]
         for t in self.table.keys():
             print "{:20s} {:2.2f}".format(t, float(self.table[t])/total*100)
-            #print "%s victory rate: %f" % (t, float(self.table[t])/total*100)
 
 
 class Schedule(object):
@@ -411,6 +433,10 @@ class Schedule(object):
 
     def SetCurrentDay(self, index):
         self.current_day = self.days[index]
+
+    def Single(self, team1, team2):
+        # schedule single game here
+        pass
 
     def SwapHomeAway(self):
         curr_day = len(self.days) + 1
@@ -609,6 +635,9 @@ class Score(object):
         m = uniform(0, 1.0)
         #print "Random number %s (Max=%s)" % (m, 1.0)
         self.score = db.GetScore(m)
+        hit = db.GetHit(self.score) + 1
+        print "Number of hits for score %s: %s" % (self.score, hit)
+        db.Update(self.score, hit)
         db.Close()
         #print "Score %s" % (self.score)
         res_obj = re.search(r'(\d)-(\d)', self.score)
