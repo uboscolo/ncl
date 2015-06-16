@@ -26,7 +26,6 @@ class DistributionDB(object):
 
     def AddScore(self, s, p):
         self.cumulative_total += p
-        #self.cumulative_distribution[self.cumulative_total] = s
         self.cursor.execute('''INSERT INTO scores(score, probability, hit)
             VALUES(?,?,?)''', (s, self.cumulative_total, 0))
         self.conn.commit()
@@ -40,12 +39,34 @@ class DistributionDB(object):
         self.conn.close()
 
     def Display(self):
+        total = 0
+        draw = 0
+        home = 0
+        away = 0
         self.cursor.execute("SELECT * FROM scores")
-        # needs fixes
-        for record in self.cursor.fetchall():
+        records = self.cursor.fetchall()
+        for record in records:
+            actual = record[2]
+            total += actual
+            res_obj = re.search(r'(\d)-(\d)', record[0])
+            if int(res_obj.group(1)) == int(res_obj.group(2)): 
+                draw += actual
+            elif int(res_obj.group(1)) > int(res_obj.group(2)):
+                home += actual
+            else:
+                away += actual
+        for record in records:
             score = record[0]
             probability = record[1]
-            print "Score %s has probabilty %s" % (score, probability)
+            actual = float(record[2])/total
+            print "Score %s actual probabilty %s" % (score, actual)
+        print ""
+        home_wins = float(home)/total
+        away_wins = float(away)/total
+        draws = float(draw)/total
+        print "Home wins have probabilty %f" % home_wins
+        print "Away wins have probabilty %f" % away_wins
+        print "Draws have probabilty %f" % draws
         print ""
 
     def GetHit(self, sample):
@@ -63,6 +84,7 @@ class DistributionDB(object):
             (value, tag))
         self.conn.commit()
 
+
 class League(object):
 
     def __init__(self, name):
@@ -77,14 +99,6 @@ class League(object):
         self.champion = None
         self.schedule = None
         self.series_length = 3
-
-    def __Final(self):
-        team1 = self.conferences[0].champion
-        team2 = self.conferences[1].champion
-        final = Match(team1, team2)
-        print "\n League %s Final\n" % self.name
-        final.PlayWinner()
-        print "\nThe League Champion is %s!\n" % (final.winner.name)
 
     def __SignalHandler(self, signum, frame):
         print "Interrupt handler called: %s" % (signum)
@@ -111,6 +125,7 @@ class League(object):
             conf.Display()
 
     def Initialize(self):
+        self.schedule = Schedule()
         for conf in self.conferences:
             conf.Initialize()
         self.regular_season_db.CreateTable()
@@ -166,29 +181,34 @@ class League(object):
         
     def Play(self):
         # Play Regular Season
-        # needs enhancement
         play_on = True
+        # state machine?
         while play_on:
             for conf in self.conferences:
                 conf.RegularSeason()
                 play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
+        self.regular_season_db.Display()
         for conf in self.conferences:
             conf.schedule.Initialize()
-            for div in conf.divisions:
-                name = "Division " + div.name
-                div.schedule.stats.Display(name)
             conf.SetupPlayoffs()
         # Play Conference Playoffs
         print "\n Conference Playoffs start..."
+        # state machine?
         play_on = True
         while play_on:
             for conf in self.conferences:
                 conf.Play()
                 play_on = play_on and not conf.schedule.completed
         # Play Final
-        # TODO add to schedule as a single day match
-        self.__Final()
+        for conf in self.conferences:
+            self.playoff_teams.append(conf.champion)
+        self.schedule.Initialize()
+        self.schedule.Playoffs(self.playoff_teams, 1)
+        self.schedule.Play(0)
+        self.playoff_teams = self.schedule.Update(self.playoff_teams)
+        self.champion = self.playoff_teams[0]
+        print "League Winner: %s\n" % self.champion.name
 
     def Sort(self, teams):
         sorted_teams = [ ]
@@ -239,9 +259,7 @@ class Conference(League):
         self.schedule.Playoffs(self.playoff_teams, self.series_length)
         self.schedule.Play(0)
         if self.schedule.completed:
-            for s in self.schedule.series_list:
-                loser = self.playoff_teams.index(s.loser)
-                self.playoff_teams.pop(loser)
+            self.playoff_teams = self.schedule.Update(self.playoff_teams)
             if len(self.playoff_teams) > 1:
                 self.schedule.Initialize()
             else:
@@ -285,7 +303,6 @@ class Division(Conference):
         self.schedule = Schedule()
         self.schedule.RoundRobin(self.teams)
         self.schedule.SwapHomeAway()
-        self.schedule.SetCurrentDay(0)
 
     def Play(self):
         self.schedule.Play(90)
@@ -339,28 +356,6 @@ class Team(object):
         self.points = 0
         self.series_wins = 0
 
-
-class Statistics(object):
-
-    def __init__(self, name):
-        self.name = name
-        self.table = { }
-
-    def Add(self, tag):
-        self.table[tag] = 0
-        
-    def Update(self, tag, value):
-        self.table[tag] += value
-
-    def Display(self, name):
-        print "----------- %s Statistics: -----------" % name
-        total = 0
-        for t in self.table.keys():
-            total += self.table[t]
-        for t in self.table.keys():
-            print "{:20s} {:2.2f}".format(t, float(self.table[t])/total*100)
-
-
 class Schedule(object):
 
     def __init__(self):
@@ -368,13 +363,9 @@ class Schedule(object):
         self.current_day = None
         self.completed = False
         self.series_list = [ ]
-        self.stats = Statistics("Statistics")
-        self.stats.Add("home")
-        self.stats.Add("away")
-        self.stats.Add("draw")
  
-    def Display(self, div_name):
-        print "----------- Division %s Schedule: -----------" % div_name
+    def Display(self, name):
+        print "-------------- %s Schedule: --------------" % name
         for day in self.days:
             for match in day.matches:
                 home = match.home_team.name
@@ -395,14 +386,12 @@ class Schedule(object):
                 print "Starting %s-minute game ..." % (minutes)
                 match.Play(minutes)
                 match.Update()
-                self.stats.Update(match.result.result, 1)
                 print "Game over ...\n"
             else:
                 if not match.series.is_over:
-                    print "Starting Playoff game ..."
+                    print "Starting game ..."
                     match.PlayWinner()
                     match.series.Update(match.winner)
-                    self.stats.Update(match.result.result, 1)
                     print "Game over ...\n"
                 else:
                     print "No game, series is over, Winner: %s\n" % match.series.winner.name
@@ -429,14 +418,7 @@ class Schedule(object):
                     match = Match(s.team1, s.team2)
                 match.series = s
                 new_day.Add(match)
-        self.SetCurrentDay(0)
-
-    def SetCurrentDay(self, index):
-        self.current_day = self.days[index]
-
-    def Single(self, team1, team2):
-        # schedule single game here
-        pass
+        self.current_day = self.days[0]
 
     def SwapHomeAway(self):
         curr_day = len(self.days) + 1
@@ -452,6 +434,7 @@ class Schedule(object):
                 new_day.Add(new_match)                
         for day in add_days:
             self.days.append(day)
+        self.current_day = self.days[0]
 
     def RoundRobin(self, teams):
         i = 0
@@ -484,6 +467,12 @@ class Schedule(object):
                 elif entry == 2:
                     curr_val = rotating_table[entry]
                     rotating_table[entry] = rotating_table[len(teams)]
+
+    def Update(self, teams):
+        for s in self.series_list:
+            loser = teams.index(s.loser)
+            teams.pop(loser)
+        return teams
 
 
 class Day(object):
