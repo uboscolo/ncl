@@ -34,7 +34,7 @@ class DistributionDB(object):
         self.conn.close()
 
     def Destroy(self):
-        self.cursor.execute('''DROP TABLE scores''')
+        self.cursor.execute('''DROP TABLE if exists scores''')
         self.conn.commit()
         self.conn.close()
 

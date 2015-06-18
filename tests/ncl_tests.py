@@ -1,11 +1,13 @@
 from nose.tools import *
-import ncl
+from ncl.ncl import DistributionDB
 
 def setup():
-    print "SETUP!"
+    pass
 
 def teardown():
-    print "TEAR DOWN!"
+    pass
 
 def test_basic():
-    print "I RAN!"
+    db = DistributionDB("test.db")
+    assert_equal (db.cumulative_total, 0)
+    db.Destroy()
