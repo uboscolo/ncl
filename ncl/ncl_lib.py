@@ -116,8 +116,8 @@ class League(Association):
         super(League, self).__init__(name)
         #signal.signal(signal.SIGPIPE, self.__SignalHandler)
         #signal.signal(signal.SIGINT, self.__SignalHandler)
-        self.regular_season_db = DistributionDB("regular_season.db")
-        self.extra_time_db = DistributionDB("extra_time.db")
+        self.distributions = [ ]
+        self.distributions_by_name = { }
         self.conferences = [ ]
         self.conferences_table_by_name = { } 
 
@@ -132,9 +132,16 @@ class League(Association):
         self.conferences.append(new_conf)
         self.conferences_table_by_name[name] = new_conf
 
+    def CreateDistribution(self, name):
+        db_name = name + ".db"
+        new_db = DistributionDB(db_name)
+        self.distributions.append(new_db)
+        self.distributions_by_name[name] = new_db
+        new_db.CreateTable()
+
     def Destroy(self):
-        self.regular_season_db.Destroy()
-        self.extra_time_db.Destroy()
+        for db in self.distributions:
+            db.Destroy()
         
     def Display(self):
         print "\n"
@@ -148,56 +155,6 @@ class League(Association):
     def Initialize(self):
         for conf in self.conferences:
             conf.Initialize()
-        self.regular_season_db.CreateTable()
-        self.regular_season_db.AddScore("0-0", 0.085)
-        self.regular_season_db.AddScore("1-0", 0.125)
-        self.regular_season_db.AddScore("0-1", 0.065)
-        self.regular_season_db.AddScore("1-1", 0.120)
-        self.regular_season_db.AddScore("2-0", 0.090)
-        self.regular_season_db.AddScore("0-2", 0.050)
-        self.regular_season_db.AddScore("2-1", 0.093)
-        self.regular_season_db.AddScore("1-2", 0.053)
-        self.regular_season_db.AddScore("3-0", 0.045)
-        self.regular_season_db.AddScore("0-3", 0.015)
-        self.regular_season_db.AddScore("2-2", 0.045)
-        self.regular_season_db.AddScore("4-0", 0.025)
-        self.regular_season_db.AddScore("0-4", 0.015)
-        self.regular_season_db.AddScore("3-1", 0.045)
-        self.regular_season_db.AddScore("1-3", 0.025)
-        self.regular_season_db.AddScore("3-2", 0.020)
-        self.regular_season_db.AddScore("2-3", 0.015)
-        self.regular_season_db.AddScore("4-1", 0.015)
-        self.regular_season_db.AddScore("1-4", 0.010)
-        self.regular_season_db.AddScore("5-0", 0.005)
-        self.regular_season_db.AddScore("0-5", 0.003)
-        self.regular_season_db.AddScore("3-3", 0.007)
-        self.regular_season_db.AddScore("4-2", 0.007)
-        self.regular_season_db.AddScore("2-4", 0.002)
-        self.regular_season_db.AddScore("5-1", 0.005)
-        self.regular_season_db.AddScore("1-5", 0.002)
-        self.regular_season_db.AddScore("6-0", 0.002)
-        self.regular_season_db.AddScore("0-6", 0.001)
-        self.regular_season_db.AddScore("4-3", 0.003)
-        self.regular_season_db.AddScore("3-4", 0.002)
-        self.regular_season_db.AddScore("5-2", 0.001)
-        self.regular_season_db.AddScore("2-5", 0.001)
-        self.regular_season_db.AddScore("6-1", 0.001)
-        self.regular_season_db.AddScore("1-6", 0.001)
-        self.regular_season_db.AddScore("7-0", 0.001)
-        #self.regular_season_db.Display()
-
-        self.extra_time_db.CreateTable()
-        self.extra_time_db.AddScore("0-0", 0.120)
-        self.extra_time_db.AddScore("1-0", 0.150)
-        self.extra_time_db.AddScore("0-1", 0.095)
-        self.extra_time_db.AddScore("1-1", 0.145)
-        self.extra_time_db.AddScore("2-0", 0.115)
-        self.extra_time_db.AddScore("0-2", 0.075)
-        self.extra_time_db.AddScore("2-1", 0.110)
-        self.extra_time_db.AddScore("1-2", 0.080)
-        self.extra_time_db.AddScore("3-0", 0.070)
-        self.extra_time_db.AddScore("0-3", 0.040)
-
         
     def Play(self):
         # Play Regular Season
@@ -208,7 +165,6 @@ class League(Association):
                 conf.RegularSeason()
                 play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
-        self.regular_season_db.Display()
         for conf in self.conferences:
             conf.schedule.Initialize()
             conf.SetupPlayoffs()
@@ -498,9 +454,9 @@ class Match(object):
         self.score.Display(self.home_team.name, self.away_team.name)
         # Generate the score
         if minutes == 30:
-            self.score.Generate("extra_time.db")
+            self.score.Generate("extra_time")
         else:
-            self.score.Generate("regular_season.db")
+            self.score.Generate("regular_season_game")
         # Determine the result: home, away, draw
         #self.result.Add()
         home_team = self.home_team.name
@@ -573,7 +529,8 @@ class Score(object):
         self.away = 0
         self.score = "0-0"
 
-    def Generate(self, db_name):
+    def Generate(self, name):
+        db_name = name + ".db"
         db = DistributionDB(db_name)
         m = uniform(0, 1.0)
         #print "Random number %s (Max=%s)" % (m, 1.0)

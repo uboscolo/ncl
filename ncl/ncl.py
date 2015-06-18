@@ -37,22 +37,39 @@ def main(argv):
     script, xml_file = sys.argv
     tree = ET.parse(xml_file)
 
-    league_tag = tree.getroot()
-    league_name = league_tag.attrib['name']
+    root_tag = tree.getroot()
+    assert root_tag.tag == "league"
+    league_name = root_tag.attrib['name']
     league = League(league_name)
 
-    for conf_tag in league_tag:
-        conf_name = conf_tag.attrib['name']
-        league.Add(conf_name)
-        for div_tag in conf_tag:
-            div_name = div_tag.attrib['name']
-            current_conf = league.conferences_table_by_name[conf_name]
-            current_conf.Add(div_name)
-            for team_tag in div_tag:
-                team_name = team_tag.attrib['name']
-                team_strength = int(team_tag.attrib['strength'])
-                curr_div = current_conf.divisions_table_by_name[div_name]
-                curr_div.Add(team_name, team_strength)
+    for next_tag in root_tag:
+        if next_tag.tag == "conference":
+            conf_name = next_tag.attrib['name']
+            league.Add(conf_name)
+            for div_tag in next_tag:
+                assert div_tag.tag == "division"
+                div_name = div_tag.attrib['name']
+                current_conf = league.conferences_table_by_name[conf_name]
+                current_conf.Add(div_name)
+                for team_tag in div_tag:
+                    assert team_tag.tag == "team"
+                    team_name = team_tag.attrib['name']
+                    team_strength = int(team_tag.attrib['strength'])
+                    curr_div = current_conf.divisions_table_by_name[div_name]
+                    curr_div.Add(team_name, team_strength)
+        elif next_tag.tag == "distribution":
+            dist_name = next_tag.attrib['name']
+            assert (dist_name == "regular_season_game" or dist_name == "extra_time")
+            league.CreateDistribution(dist_name)
+            for score_tag in next_tag:
+                assert score_tag.tag == "score"
+                score = score_tag.attrib['value']
+                iprob = float(score_tag.attrib['probability'])
+                curr_dis = league.distributions_by_name[dist_name]
+                curr_dis.AddScore(score, iprob)
+        else:
+            print "Error: unrecognized tag %s" % next_tag.tag
+            sys.exit(1)
 
     try:
         league.Display()
