@@ -323,6 +323,7 @@ class Team(object):
         self.points = 0
         self.series_wins = 0
 
+
 class Schedule(object):
 
     def __init__(self):
@@ -486,7 +487,7 @@ class Match(object):
     def __init__(self, home_team, away_team):
         self.home_team = home_team
         self.away_team = away_team
-        self.result = Result()
+        self.score = Score()
         self.winner = None
         self.loser = None
         self.series = None
@@ -494,29 +495,29 @@ class Match(object):
     def Play(self, minutes):
         strength1 = self.home_team.strength
         strength2 = self.away_team.strength
-        self.result.score.Display(self.home_team.name, self.away_team.name)
+        self.score.Display(self.home_team.name, self.away_team.name)
         # Generate the score
         if minutes == 30:
-            self.result.score.Generate("extra_time.db")
+            self.score.Generate("extra_time.db")
         else:
-            self.result.score.Generate("regular_season.db")
+            self.score.Generate("regular_season.db")
         # Determine the result: home, away, draw
-        self.result.Add()
+        #self.result.Add()
         home_team = self.home_team.name
         away_team = self.away_team.name
-        self.result.score.SimulateScoring(minutes, home_team, away_team)
-        self.result.score.Display(home_team, away_team)
-        if self.result.score.home > self.result.score.away:
+        self.score.SimulateScoring(minutes, home_team, away_team)
+        self.score.Display(home_team, away_team)
+        if self.score.home > self.score.away:
             self.winner = self.home_team
             self.loser = self.away_team
-        elif self.result.score.home < self.result.score.away:
+        elif self.score.home < self.score.away:
             self.winner = self.away_team
             self.loser = self.home_team
 
     def Update(self):
-        if self.result.score.home > self.result.score.away:
+        if self.score.home > self.score.away:
             self.home_team.points +=3
-        elif self.result.score.home == self.result.score.away:
+        elif self.score.home == self.score.away:
             self.home_team.points +=1
             self.away_team.points +=1
         else:
@@ -546,45 +547,30 @@ class Match(object):
                 self.winner = self.home_team
                 self.loser = self.away_team
                 break
-        self.result.score.home += team1_total   
-        self.result.score.away += team2_total   
+        self.score.home += team1_total   
+        self.score.away += team2_total   
         if team1_total == team2_total:
             while team1_total == team2_total:
                 val1 = randint(0, 1)
                 val2 = randint(0, 1)
                 team1_total += val1
                 team2_total += val2
-                self.result.score.home += team1_total
-                self.result.score.away += team2_total
+                self.score.home += team1_total
+                self.score.away += team2_total
         if team1_total > team2_total:
             self.winner = self.home_team
             self.loser = self.away_team
         else:
             self.winner = self.away_team
             self.loser = self.home_team
-        self.result.score.Display(self.home_team.name, self.away_team.name)
-
-
-class Result(object):
-
-    def __init__(self):
-        self.score = Score(0, 0)
-        self.result = None
-
-    def Add(self):
-        if self.score.home == self.score.away:
-            self.result = "draw"
-        elif self.score.home > self.score.away:
-            self.result = "home"
-        else:
-            self.result = "away"
+        self.score.Display(self.home_team.name, self.away_team.name)
 
 
 class Score(object):
 
-    def __init__(self, home, away):
-        self.home = home
-        self.away = away
+    def __init__(self):
+        self.home = 0
+        self.away = 0
         self.score = "0-0"
 
     def Generate(self, db_name):
