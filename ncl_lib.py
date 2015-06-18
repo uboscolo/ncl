@@ -17,7 +17,7 @@ class DistributionDB(object):
 
     def CreateTable(self):
         try:
-            self.cursor.execute('''DROP TABLE scores''')
+            self.cursor.execute('''DROP TABLE if exists scores''')
         except sqlite3.OperationalError as err:
             print "Error: %s" % str(err)
         self.cursor.execute('''CREATE TABLE scores(score TEXT PRIMARY KEY,
@@ -97,7 +97,7 @@ class League(object):
         self.conferences_table_by_name = { } 
         self.playoff_teams = [ ]
         self.champion = None
-        self.schedule = None
+        self.schedule = Schedule()
         self.series_length = 3
 
     def __SignalHandler(self, signum, frame):
@@ -125,7 +125,6 @@ class League(object):
             conf.Display()
 
     def Initialize(self):
-        self.schedule = Schedule()
         for conf in self.conferences:
             conf.Initialize()
         self.regular_season_db.CreateTable()
@@ -234,6 +233,7 @@ class Conference(League):
         super(Conference, self).__init__(name)
         self.divisions = [ ]
         self.divisions_table_by_name = { }
+        
 
     def Add(self, name):
         print "Adding division %s ..." % name
@@ -253,7 +253,6 @@ class Conference(League):
         for div in self.divisions:
             div.Initialize()
             div.schedule.Display(div.name)
-        self.schedule = Schedule()
 
     def Play(self):
         self.schedule.Playoffs(self.playoff_teams, self.series_length)
@@ -300,7 +299,6 @@ class Division(Conference):
            print "\t - Team %s" % (div.name)
 
     def Initialize(self):
-        self.schedule = Schedule()
         self.schedule.RoundRobin(self.teams)
         self.schedule.SwapHomeAway()
 
