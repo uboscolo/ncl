@@ -85,25 +85,46 @@ class DistributionDB(object):
         self.conn.commit()
 
 
-class League(object):
+class Association(object):
 
     def __init__(self, name):
         self.name = name
-        signal.signal(signal.SIGPIPE, self.__SignalHandler)
-        signal.signal(signal.SIGINT, self.__SignalHandler)
+        self.teams = [ ]
+        self.champion = None
+        self.schedule = Schedule()
+
+    def Sort(self, teams):
+        sorted_teams = [ ]
+        for team in teams:
+            if len(sorted_teams) > 0:
+                found = 0
+                for pos in range(len(sorted_teams)):
+                    if team.points >= sorted_teams[pos].points:
+                        sorted_teams.insert(pos, team)
+                        found = 1
+                        break
+                if found == 0: 
+                    sorted_teams.append(team)
+            else:
+                sorted_teams.append(team)
+        return sorted_teams
+
+
+class League(Association):
+
+    def __init__(self, name):
+        super(League, self).__init__(name)
+        #signal.signal(signal.SIGPIPE, self.__SignalHandler)
+        #signal.signal(signal.SIGINT, self.__SignalHandler)
         self.regular_season_db = DistributionDB("regular_season.db")
         self.extra_time_db = DistributionDB("extra_time.db")
         self.conferences = [ ]
         self.conferences_table_by_name = { } 
-        self.playoff_teams = [ ]
-        self.champion = None
-        self.schedule = Schedule()
-        self.series_length = 3
 
-    def __SignalHandler(self, signum, frame):
-        print "Interrupt handler called: %s" % (signum)
-        self.Destroy
-        sys.exit(0)
+    #def __SignalHandler(self, signum, frame):
+    #    print "Interrupt handler called: %s" % (signum)
+    #    self.Destroy
+    #    sys.exit(0)
 
     def Add(self, name):
         print "Adding conference %s ..." % name
@@ -201,40 +222,23 @@ class League(object):
                 play_on = play_on and not conf.schedule.completed
         # Play Final
         for conf in self.conferences:
-            self.playoff_teams.append(conf.champion)
+            self.teams.append(conf.champion)
         self.schedule.Initialize()
-        self.schedule.Playoffs(self.playoff_teams, 1)
+        self.schedule.Playoffs(self.teams, 1)
         self.schedule.Play(0)
-        self.playoff_teams = self.schedule.Update(self.playoff_teams)
-        self.champion = self.playoff_teams[0]
+        self.teams = self.schedule.Update(self.teams)
+        self.champion = self.teams[0]
         print "League Winner: %s\n" % self.champion.name
 
-    def Sort(self, teams):
-        sorted_teams = [ ]
-        for team in teams:
-            if len(sorted_teams) > 0:
-                found = 0
-                for pos in range(len(sorted_teams)):
-                    if team.points >= sorted_teams[pos].points:
-                        sorted_teams.insert(pos, team)
-                        found = 1
-                        break
-                if found == 0: 
-                    sorted_teams.append(team)
-            else:
-                sorted_teams.append(team)
-        return sorted_teams
 
-
-
-class Conference(League):
+class Conference(Association):
 
     def __init__(self, name):
         super(Conference, self).__init__(name)
         self.divisions = [ ]
         self.divisions_table_by_name = { }
+        self.series_length = 3
         
-
     def Add(self, name):
         print "Adding division %s ..." % name
         new_div = Division(name)
@@ -255,14 +259,14 @@ class Conference(League):
             div.schedule.Display(div.name)
 
     def Play(self):
-        self.schedule.Playoffs(self.playoff_teams, self.series_length)
+        self.schedule.Playoffs(self.teams, self.series_length)
         self.schedule.Play(0)
         if self.schedule.completed:
-            self.playoff_teams = self.schedule.Update(self.playoff_teams)
-            if len(self.playoff_teams) > 1:
+            self.teams = self.schedule.Update(self.teams)
+            if len(self.teams) > 1:
                 self.schedule.Initialize()
             else:
-                self.champion = self.playoff_teams[0]
+                self.champion = self.teams[0]
                 print "Conference %s - Playoffs are over" % self.name
                 print "Winner: %s\n" % self.champion.name
 
@@ -277,16 +281,17 @@ class Conference(League):
     def SetupPlayoffs(self):
         # Build Conference Playoff team list
         for div in self.divisions:
-            self.playoff_teams += div.playoff_teams
-        self.playoff_teams = self.Sort(self.playoff_teams)
+            self.teams += div.teams[0:len(div.teams)/2]
+        self.teams = self.Sort(self.teams)
+        for team in self.teams:
+            print "Team %s made the playoffs" % team.name
+        print ""
 
 
-class Division(Conference):
+class Division(Association):
 
     def __init__(self, name):
         super(Division, self).__init__(name)
-        self.teams = [ ]
-        self.table = Table()
 
     def Add(self, name, strength):
         print "Adding team %s with strength: %d ..." % (name, strength)
@@ -294,9 +299,11 @@ class Division(Conference):
         self.teams.append(new_team) 
 
     def Display(self):
-        print "Division %s has %d teams:" % (self.name, len(self.teams))
-        for div in self.teams:
-           print "\t - Team %s" % (div.name)
+        print "Table\n"
+        print "--- {:15s} ---".format(self.name) 
+        for team in self.teams:
+            print "{:20s} {:2d}".format(team.name, team.points)
+        print ""
 
     def Initialize(self):
         self.schedule.RoundRobin(self.teams)
@@ -304,46 +311,8 @@ class Division(Conference):
 
     def Play(self):
         self.schedule.Play(90)
-        self.table.Sort(self.teams)
-        self.table.Display(self.name)
-        if self.schedule.completed:
-            # Build Playoffs
-            print "\n Division %s - Regular Season is over\n" % self.name
-            teams = self.table.sorted_teams
-            self.playoff_teams = teams[0:len(teams)/2]
-            for team in self.playoff_teams:
-                print "Team %s made the playoffs" % team.name
-            print ""
-
-
-class Table(object):
-
-    def __init__(self):
-        self.sorted_teams = [ ]
-
-    def Sort(self, teams):
-        # TODO 2 versions if this method implemented
-        sorted_teams = [ ]
-        for team in teams:
-            if len(sorted_teams) > 0:
-                found = 0
-                for pos in range(len(sorted_teams)):
-                    if team.points >= sorted_teams[pos].points:
-                        sorted_teams.insert(pos, team)
-                        found = 1
-                        break
-                if found == 0: 
-                    sorted_teams.append(team)
-            else:
-                sorted_teams.append(team)
-        self.sorted_teams = sorted_teams[:]
-
-    def Display(self, name):
-        print "Table\n"
-        print "--- {:15s} ---".format(name) 
-        for team in self.sorted_teams:
-            print "{:20s} {:2d}".format(team.name, team.points)
-        print ""
+        self.teams = self.Sort(self.teams)
+        self.Display()
 
 
 class Team(object):
@@ -443,6 +412,7 @@ class Schedule(object):
         day = 1
         while day <= len(teams) - 1:
             new_day = Day(day)
+            # swap home and away here
             self.days.append(new_day)
             match = 1
             while match <= len(teams) / 2:
