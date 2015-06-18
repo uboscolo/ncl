@@ -165,8 +165,8 @@ class League(Association):
                 conf.RegularSeason()
                 play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
+        self.distributions_by_name["regular_season_game"].Display()
         for conf in self.conferences:
-            conf.schedule.Initialize()
             conf.SetupPlayoffs()
         # Play Conference Playoffs
         print "\n Conference Playoffs start..."
@@ -179,7 +179,7 @@ class League(Association):
         # Play Final
         for conf in self.conferences:
             self.teams.append(conf.champion)
-        self.schedule.Initialize()
+        self.schedule.Reset()
         self.schedule.Playoffs(self.teams, 1)
         self.schedule.Play(0)
         self.teams = self.schedule.Update(self.teams)
@@ -211,7 +211,7 @@ class Conference(Association):
 
     def Initialize(self):
         for div in self.divisions:
-            div.Initialize()
+            div.RegularSeason()
             div.schedule.Display(div.name)
 
     def Play(self):
@@ -220,7 +220,7 @@ class Conference(Association):
         if self.schedule.completed:
             self.teams = self.schedule.Update(self.teams)
             if len(self.teams) > 1:
-                self.schedule.Initialize()
+                self.schedule.Reset()
             else:
                 self.champion = self.teams[0]
                 print "Conference %s - Playoffs are over" % self.name
@@ -235,6 +235,7 @@ class Conference(Association):
         self.schedule.completed = not play_on
 
     def SetupPlayoffs(self):
+        self.schedule.Reset()
         # Build Conference Playoff team list
         for div in self.divisions:
             self.teams += div.teams[0:len(div.teams)/2]
@@ -261,9 +262,8 @@ class Division(Association):
             print "{:20s} {:2d}".format(team.name, team.points)
         print ""
 
-    def Initialize(self):
+    def RegularSeason(self):
         self.schedule.RoundRobin(self.teams)
-        self.schedule.SwapHomeAway()
 
     def Play(self):
         self.schedule.Play(90)
@@ -297,7 +297,7 @@ class Schedule(object):
                 print "Day %s - Match: %s vs %s" % (day.number, home, away) 
         print ""
 
-    def Initialize(self):
+    def Reset(self):
         self.completed = False
         self.series_list = [ ]
         self.days = [ ]
@@ -344,33 +344,22 @@ class Schedule(object):
                 new_day.Add(match)
         self.current_day = self.days[0]
 
-    def SwapHomeAway(self):
-        curr_day = len(self.days) + 1
-        add_days = []
-        for day in self.days:
-            new_day = Day(curr_day)
-            curr_day += 1
-            add_days.append(new_day)
-            for match in day.matches:
-                team1 = match.away_team
-                team2 = match.home_team
-                new_match = Match(team1, team2)
-                new_day.Add(new_match)                
-        for day in add_days:
-            self.days.append(day)
-        self.current_day = self.days[0]
-
     def RoundRobin(self, teams):
         i = 0
+        second_half = [ ]
         rotating_table = { }
         for team in teams:
             rotating_table[i + 1] = teams[i]
             i += 1
         day = 1
         while day <= len(teams) - 1:
+            # first half of the season
             new_day = Day(day)
-            # swap home and away here
             self.days.append(new_day)
+            # second half
+            day2 = day + len(teams) - 1
+            associated_day = Day(day2)
+            second_half.append(associated_day)
             match = 1
             while match <= len(teams) / 2:
                 if match == 1:
@@ -381,6 +370,8 @@ class Schedule(object):
                     team2 = rotating_table[len(teams) - match + 2]
                 new_match = Match(team1, team2)
                 new_day.Add(new_match)                
+                associated_match = Match(team2, team1)
+                associated_day.Add(associated_match)
                 match += 1
             day += 1
             # rotate table
@@ -392,6 +383,8 @@ class Schedule(object):
                 elif entry == 2:
                     curr_val = rotating_table[entry]
                     rotating_table[entry] = rotating_table[len(teams)]
+        self.days += second_half 
+        self.current_day = self.days[0]
 
     def Update(self, teams):
         for s in self.series_list:
