@@ -306,19 +306,19 @@ class Schedule(object):
     def Play(self, minutes):
         print "Day: %d\n" % (self.current_day.number)
         for match in self.current_day.matches:
+            if match.series and match.series.is_over:
+                print "Series is over, Winner: %s\n" % match.series.winner.name
+                next
             if minutes > 0:
                 print "Starting %s-minute game ..." % (minutes)
                 match.Play(minutes)
                 match.Update()
                 print "Game over ...\n"
             else:
-                if not match.series.is_over:
-                    print "Starting game ..."
-                    match.PlayWinner()
-                    match.series.Update(match.winner)
-                    print "Game over ...\n"
-                else:
-                    print "No game, series is over, Winner: %s\n" % match.series.winner.name
+                print "Starting game ..."
+                match.PlayWinner()
+                match.series.Update(match.winner)
+            print "Game over ...\n"
         if self.current_day.number < len(self.days):
             self.current_day = self.days[self.current_day.number]
         else:
@@ -450,8 +450,6 @@ class Match(object):
             self.score.Generate("extra_time")
         else:
             self.score.Generate("regular_season_game")
-        # Determine the result: home, away, draw
-        #self.result.Add()
         home_team = self.home_team.name
         away_team = self.away_team.name
         self.score.SimulateScoring(minutes, home_team, away_team)
