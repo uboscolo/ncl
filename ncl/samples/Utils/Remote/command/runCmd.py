@@ -7,7 +7,8 @@ from myconnect import *
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hvp:", ["help", "verbose", "port="])
+        opts, args = getopt.getopt(sys.argv[1:], "hvp:", 
+            ["help", "verbose", "port="])
     except getopt.GetoptError as err:
         # print help information and exit:
         print str(err) # will print something like "option -a not recognized"
