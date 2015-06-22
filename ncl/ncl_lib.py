@@ -212,7 +212,6 @@ class Conference(Association):
     def Initialize(self):
         for div in self.divisions:
             div.RegularSeason()
-            div.schedule.Display(div.name)
 
     def Play(self):
         self.schedule.Playoffs(self.teams, self.series_length)
@@ -256,7 +255,7 @@ class Division(Association):
         self.teams.append(new_team) 
 
     def Display(self):
-        print "Table\n"
+        print "Division %s Table\n" % (self.name)
         print "--- {:15s} ---".format(self.name) 
         for team in self.teams:
             print "{:20s} {:2d}".format(team.name, team.points)
@@ -264,6 +263,7 @@ class Division(Association):
 
     def RegularSeason(self):
         self.schedule.RoundRobin(self.teams)
+        self.schedule.Display(self.name)
 
     def Play(self):
         self.schedule.Play(90)
