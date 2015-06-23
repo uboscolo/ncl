@@ -3,7 +3,7 @@
 import sys
 import getpass
 import getopt
-from myconnect import *
+from remote.connect.myconnect import *
 
 def main(argv):
     try:

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<host prefix="konan" range="1" domain="mitg-tew01.cisco.com">
+    <user name="luser"/>
+    <password name="luser"/>
+    <command name="virsh console konan1-ssi1"/>
+</host>
+

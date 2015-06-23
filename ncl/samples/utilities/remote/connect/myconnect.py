@@ -142,12 +142,12 @@ class Connect(object):
         print "Could not open connection"
         sys.exit(1)
 
-    def Run(self, cmd):
+    def Run(self, cmd_list):
         if not self.connection_id:
             print "Connection is not open %s" % self.connection_id
             sys.exit(1)
         self.display = True
-        for line in cmd.split("\n"):
+        for line in cmd_list:
             self.connection_id.sendline(line)
             self.__Expect()
 
