@@ -3,8 +3,54 @@ import math
 import re
 import sqlite3
 import os
-import signal
-import sys
+#import signal
+import xml.etree.ElementTree as ET
+
+
+class Parser(object):
+
+    def __init__(self, xml_file):
+        self.xml_file = xml_file
+
+    def ParseXml(self):
+        tree = ET.parse(self.xml_file)
+        root_tag = tree.getroot()
+        assert root_tag.tag == "league"
+        league_name = root_tag.attrib['name']
+        league = League(league_name)
+
+        for next_tag in root_tag:
+            if next_tag.tag == "conference":
+                conf_name = next_tag.attrib['name']
+                league.Add(conf_name)
+                for div_tag in next_tag:
+                    assert div_tag.tag == "division"
+                    div_name = div_tag.attrib['name']
+                    conf = league.conferences_table_by_name[conf_name]
+                    conf.Add(div_name)
+                    for team_tag in div_tag:
+                        assert team_tag.tag == "team"
+                        team_name = team_tag.attrib['name']
+                        team_strength = int(team_tag.attrib['strength'])
+                        curr_div = conf.divisions_table_by_name[div_name]
+                        curr_div.Add(team_name, team_strength)
+            elif next_tag.tag == "distribution":
+                dist_name = next_tag.attrib['name']
+                assert (dist_name == "regular_season_game" or 
+                        dist_name == "extra_time")
+                league.CreateDistribution(dist_name)
+                for score_tag in next_tag:
+                    assert score_tag.tag == "score"
+                    score = score_tag.attrib['value']
+                    iprob = float(score_tag.attrib['probability'])
+                    curr_dis = league.distributions_by_name[dist_name]
+                    curr_dis.AddScore(score, iprob)
+            else:
+                print "Error: unrecognized tag %s" % next_tag.tag
+                assert False
+
+        return league
+
 
 
 class DistributionDB(object):
