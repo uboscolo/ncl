@@ -12,16 +12,24 @@ def main(argv):
                   help="turn on verbosity",
                   action="store_true",
                   )
+    parser.add_option('--logfile',
+                  dest="logfile",
+                  default="/tmp/ncl_default.log",
+                  help="specify logfile",
+                  action="store",
+                  )
     opts, remainder = parser.parse_args()
     if len(remainder) > 1:
         parser.error("wrong number of arguments")
-
+    
     xml_file = remainder[0]
     if not os.path.exists(xml_file) or not os.path.isfile(xml_file):
         print "invalid file %s" % xml_file
         sys.exit(1)
 
     try:
+        logger = Logger('extensive', opts.logfile).logger
+        SetLogger(logger)
         p = Parser(xml_file)
         league = p.ParseXml()
         league.Display()

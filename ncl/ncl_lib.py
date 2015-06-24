@@ -5,7 +5,12 @@ import sqlite3
 import os
 #import signal
 import xml.etree.ElementTree as ET
+from ncl_log import *
 
+
+def SetLogger(obj):
+    global logger
+    logger = obj
 
 class Parser(object):
 
@@ -46,7 +51,7 @@ class Parser(object):
                     curr_dis = league.distributions_by_name[dist_name]
                     curr_dis.AddScore(score, iprob)
             else:
-                print "Error: unrecognized tag %s" % next_tag.tag
+                logger.critical("unrecognized tag %s" % next_tag.tag)
                 assert False
 
         return league
@@ -65,7 +70,7 @@ class DistributionDB(object):
         try:
             self.cursor.execute('''DROP TABLE if exists scores''')
         except sqlite3.OperationalError as err:
-            print "Error: %s" % str(err)
+            logger.error("Error: %s" % str(err))
         self.cursor.execute('''CREATE TABLE scores(score TEXT PRIMARY KEY,
             probability FLOAT, hit INT)''')
         self.conn.commit()
@@ -105,15 +110,15 @@ class DistributionDB(object):
             score = record[0]
             probability = record[1]
             actual = float(record[2])/total
-            print "Score %s actual probabilty %s" % (score, actual)
-        print ""
+            logger.debug("Score %s actual probabilty %s" % (score, actual))
+        logger.debug("")
         home_wins = float(home)/total
         away_wins = float(away)/total
         draws = float(draw)/total
-        print "Home wins have probabilty %f" % home_wins
-        print "Away wins have probabilty %f" % away_wins
-        print "Draws have probabilty %f" % draws
-        print ""
+        logger.debug("Home wins have probabilty %f" % home_wins)
+        logger.debug("Away wins have probabilty %f" % away_wins)
+        logger.debug("Draws have probabilty %f" % draws)
+        logger.debug("")
 
     def GetHit(self, sample):
         self.cursor.execute('''SELECT hit FROM scores 
@@ -168,12 +173,12 @@ class League(Association):
         self.conferences_table_by_name = { } 
 
     #def __SignalHandler(self, signum, frame):
-    #    print "Interrupt handler called: %s" % (signum)
+    #    logger.warning("Interrupt handler called: %s" % (signum))
     #    self.Destroy
     #    sys.exit(0)
 
     def Add(self, name):
-        print "Adding conference %s ..." % name
+        logger.debug("Adding conference %s ..." % name)
         new_conf = Conference(name)
         self.conferences.append(new_conf)
         self.conferences_table_by_name[name] = new_conf
@@ -190,11 +195,11 @@ class League(Association):
             db.Destroy()
         
     def Display(self):
-        print "\n"
-        print "League %s has %d conferences:" % (
-            self.name, len(self.conferences))
+        logger.debug("\n")
+        logger.debug("League %s has %d conferences:" % (
+            self.name, len(self.conferences)))
         for conf in self.conferences:
-            print "\t - Conference %s" % (conf.name)
+            logger.debug("\t - Conference %s" % (conf.name))
         for conf in self.conferences:
             conf.Display()
 
@@ -215,7 +220,7 @@ class League(Association):
         for conf in self.conferences:
             conf.SetupPlayoffs()
         # Play Conference Playoffs
-        print "\n Conference Playoffs start..."
+        logger.info("Conference Playoffs start...\n")
         # state machine?
         play_on = True
         while play_on:
@@ -230,7 +235,7 @@ class League(Association):
         self.schedule.Play(0)
         self.teams = self.schedule.Update(self.teams)
         self.champion = self.teams[0]
-        print "League Winner: %s\n" % self.champion.name
+        logger.info("League Winner: %s\n" % self.champion.name)
 
 
 class Conference(Association):
@@ -242,16 +247,16 @@ class Conference(Association):
         self.series_length = 3
         
     def Add(self, name):
-        print "Adding division %s ..." % name
+        logger.debug("Adding division %s ..." % name)
         new_div = Division(name)
         self.divisions.append(new_div) 
         self.divisions_table_by_name[name] = new_div
 
     def Display(self):
-        print "Conference %s has %d divisions:" % (
-            self.name, len(self.divisions))
+        logger.debug("Conference %s has %d divisions:" % (
+            self.name, len(self.divisions)))
         for div in self.divisions:
-            print "\t - Division %s" % (div.name)
+            logger.debug("\t - Division %s" % (div.name))
         for div in self.divisions:
             div.Display()
 
@@ -268,8 +273,8 @@ class Conference(Association):
                 self.schedule.Reset()
             else:
                 self.champion = self.teams[0]
-                print "Conference %s - Playoffs are over" % self.name
-                print "Winner: %s\n" % self.champion.name
+                logger.info("Conference %s - Playoffs are over" % self.name)
+                logger.info("Winner: %s\n" % self.champion.name)
 
     def RegularSeason(self):
         play_on = True
@@ -286,8 +291,8 @@ class Conference(Association):
             self.teams += div.teams[0:len(div.teams)/2]
         self.teams = self.Sort(self.teams)
         for team in self.teams:
-            print "Team %s made the playoffs" % team.name
-        print ""
+            logger.info( "Team %s made the playoffs" % team.name)
+        logger.info("")
 
 
 class Division(Association):
@@ -296,16 +301,16 @@ class Division(Association):
         super(Division, self).__init__(name)
 
     def Add(self, name, strength):
-        print "Adding team %s with strength: %d ..." % (name, strength)
+        logger.debug("Adding team %s with strength: %d ..." % (name, strength))
         new_team = Team(name, strength)
         self.teams.append(new_team) 
 
     def Display(self):
-        print "Division %s Table\n" % (self.name)
-        print "--- {:15s} ---".format(self.name) 
+        logger.info("Division %s Table\n" % (self.name))
+        logger.info("--- {:15s} ---".format(self.name))
         for team in self.teams:
-            print "{:20s} {:2d}".format(team.name, team.points)
-        print ""
+            logger.info("{:20s} {:2d}".format(team.name, team.points))
+        logger.info("")
 
     def RegularSeason(self):
         self.schedule.RoundRobin(self.teams)
@@ -335,13 +340,13 @@ class Schedule(object):
         self.series_list = [ ]
  
     def Display(self, name):
-        print "-------------- %s Schedule: --------------" % name
+        logger.debug("-------------- %s Schedule: --------------" % name)
         for day in self.days:
             for match in day.matches:
                 home = match.home_team.name
                 away = match.away_team.name
-                print "Day %s - Match: %s vs %s" % (day.number, home, away) 
-        print ""
+                logger.debug("Day %s - Match: %s vs %s" % (day.number, home, away) )
+        logger.debug("")
 
     def Reset(self):
         self.completed = False
@@ -350,21 +355,21 @@ class Schedule(object):
         self.current_day = None
 
     def Play(self, minutes):
-        print "Day: %d\n" % (self.current_day.number)
+        logger.info("Day: %d\n" % (self.current_day.number))
         for match in self.current_day.matches:
             if match.series and match.series.is_over:
-                print "Series is over, Winner: %s\n" % match.series.winner.name
+                logger.debug("Series is over, Winner: %s\n" % match.series.winner.name)
                 next
             if minutes > 0:
-                print "Starting %s-minute game ..." % (minutes)
+                logger.debug("Starting %s-minute game ..." % (minutes))
                 match.Play(minutes)
                 match.Update()
-                print "Game over ...\n"
             else:
-                print "Starting game ..."
+                logger.debug("Starting game ...")
                 match.PlayWinner()
                 match.series.Update(match.winner)
-            print "Game over ...\n"
+            logger.debug("Game over ...")
+            logger.info("")
         if self.current_day.number < len(self.days):
             self.current_day = self.days[self.current_day.number]
         else:
@@ -473,8 +478,8 @@ class Series(object):
             else:
                 self.winner = self.team2
                 self.loser = self.team1
-            print "Series is over, Winner: %s, Loser: %s" % (self.winner.name, 
-                self.loser.name)
+            logger.debug("Series is over, Winner: %s, Loser: %s" % 
+                (self.winner.name, self.loser.name))
         
 
 class Match(object):
@@ -490,7 +495,7 @@ class Match(object):
     def Play(self, minutes):
         strength1 = self.home_team.strength
         strength2 = self.away_team.strength
-        self.score.Display(self.home_team.name, self.away_team.name)
+        #self.score.Display(self.home_team.name, self.away_team.name)
         # Generate the score
         if minutes == 30:
             self.score.Generate("extra_time")
@@ -519,14 +524,14 @@ class Match(object):
     def PlayWinner(self):
         self.Play(90)
         if self.loser == None:
-            print "It's a tie, play extra time"
+            logger.info("It's a tie, play extra time")
             self.Play(30)
             if self.loser == None:
-                print "It's again a tie, penalty kicks"
+                logger.info("It's again a tie, penalty kicks")
                 self.PenaltyKicks()
 
     def PenaltyKicks(self):
-        print "Penalty kicks ..."
+        logger.debug("Penalty kicks ...")
         team1_total = 0
         team2_total = 0
         for i in range(1, 6):
@@ -570,19 +575,18 @@ class Score(object):
         db_name = name + ".db"
         db = DistributionDB(db_name)
         m = uniform(0, 1.0)
-        #print "Random number %s (Max=%s)" % (m, 1.0)
         self.score = db.GetScore(m)
         hit = db.GetHit(self.score) + 1
-        print "Number of hits for score %s: %s" % (self.score, hit)
+        logger.debug("Number of hits for score %s: %s" % (self.score, hit))
         db.Update(self.score, hit)
         db.Close()
-        #print "Score %s" % (self.score)
         res_obj = re.search(r'(\d)-(\d)', self.score)
         self.home += int(res_obj.group(1))
         self.away += int(res_obj.group(2))
 
     def Display(self, home_team, away_team):
-        print "%s %d : %s %d" % (home_team, self.home, away_team, self.away)
+        logger.info("%s %d : %s %d" % (home_team, self.home, 
+            away_team, self.away))
 
     def SimulateScoring(self, minutes, home_team, away_team):
         res_obj = re.search(r'(\d)-(\d)', self.score)
@@ -601,4 +605,5 @@ class Score(object):
                         minute = randint(0, minutes)
                     goal_list[minute] = t_list[s]
         for goal in sorted(goal_list.keys()):
-            print "Minute: %s, Goal!!! %s scored" % (goal, goal_list[goal])
+            logger.debug("Minute: %s, Goal!!! %s scored" % 
+                (goal, goal_list[goal]))
