@@ -6,7 +6,7 @@ def setup():
     try:
         if os.path.exists("regular_season_game.db"):
             os.remove("regular_season_game.db")
-        if os.path.exists("etxra_time.db"):
+        if os.path.exists("extra_time.db"):
             os.remove("extra_time.db")
         if os.path.exists("/tmp/test8;log"):
             os.remove("/tmp/test8.log")
@@ -19,7 +19,7 @@ def teardown():
     try:
         if os.path.exists("regular_season_game.db"):
             os.remove("regular_season_game.db")
-        if os.path.exists("etxra_time.db"):
+        if os.path.exists("extra_time.db"):
             os.remove("extra_time.db")
     except:
         raise
