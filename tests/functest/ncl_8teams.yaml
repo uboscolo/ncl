@@ -1,0 +1,71 @@
+---
+league: The New Champions League
+    - distribution: regular_season_game
+        score:
+            - {value: 0-0, probability: 0.085}
+            - {value: 1-0, probability: 0.125}
+            - {value: 0-1, probability: 0.065}
+            - {value: 1-1, probability: 0.120}
+            - {value: 2-0, probability: 0.090}
+            - {value: 0-2, probability: 0.050}
+            - {value: 2-1, probability: 0.093}
+            - {value: 1-2, probability: 0.053}
+            - {value: 3-0, probability: 0.045}
+            - {value: 0-3, probability: 0.015}
+            - {value: 2-2, probability: 0.045}
+            - {value: 4-0, probability: 0.025}
+            - {value: 0-4, probability: 0.015}
+            - {value: 3-1, probability: 0.045}
+            - {value: 1-3, probability: 0.025}
+            - {value: 3-2, probability: 0.020}
+            - {value: 2-3, probability: 0.015}
+            - {value: 4-1, probability: 0.015}
+            - {value: 1-4, probability: 0.010}
+            - {value: 5-0, probability: 0.005}
+            - {value: 0-5, probability: 0.003}
+            - {value: 3-3, probability: 0.007}
+            - {value: 4-2, probability: 0.007}
+            - {value: 2-4, probability: 0.002}
+            - {value: 5-1, probability: 0.005}
+            - {value: 1-5, probability: 0.002}
+            - {value: 6-0, probability: 0.002}
+            - {value: 0-6, probability: 0.001}
+            - {value: 4-3, probability: 0.003}
+            - {value: 3-4, probability: 0.002}
+            - {value: 5-2, probability: 0.001}
+            - {value: 2-5, probability: 0.001}
+            - {value: 6-1, probability: 0.001}
+            - {value: 1-6, probability: 0.001}
+            - {value: 7-0, probability: 0.001}
+    - distribution: extra_time
+        score:
+            - {value: 0-0, probability: 0.120}
+            - {value: 1-0, probability: 0.150}
+            - {value: 0-1, probability: 0.095}
+            - {value: 1-1, probability: 0.145}
+            - {value: 2-0, probability: 0.115}
+            - {value: 0-2, probability: 0.075}
+            - {value: 2-1, probability: 0.110}
+            - {value: 1-2, probability: 0.080}
+            - {value: 3-0, probability: 0.070}
+            - {value: 0-3, probability: 0.040}
+    - conference: Northern Europe
+        - division: Atlantic
+            team:
+                - {name: Chelsea, strength: 77}
+                - {name: Manchester Utd, strength: 68}
+        - division: Continental
+            team:
+                - {name: Bayern Munich, strength: 70}
+                - {name: Borussia Dortmund, strength: 20}
+    - conference: Southern Europe
+        - division: South-West
+            team:
+                - {name: Atletico Madrid, strength: 18}
+                - {name: Real Madrid, strength: 53}
+        - division: South-East
+            team:
+                - {name: Oympiacos, strength: 11}
+                - {name: AC Milan, strength: 55}
+  
+

@@ -30,7 +30,7 @@ def test_8():
     try:
         logger = Logger("extensive", "/tmp/test8.log").logger
         SetLogger(logger)
-        xml_file = open("tests/section1/ncl_8teams.xml", "r")
+        xml_file = open("tests/functest/ncl_8teams.xml", "r")
         p = Parser(xml_file)
         league = p.ParseXml()
         league.Display()
@@ -46,7 +46,7 @@ def test_64():
     try:
         logger = Logger("extensive", "/tmp/test64.log").logger
         SetLogger(logger)
-        xml_file = open("tests/section1/ncl_64teams.xml", "r")
+        xml_file = open("tests/functest/ncl_64teams.xml", "r")
         p = Parser(xml_file)
         league = p.ParseXml()
         league.Display()
