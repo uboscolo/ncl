@@ -8,9 +8,9 @@ def setup():
             os.remove("regular_season_game.db")
         if os.path.exists("extra_time.db"):
             os.remove("extra_time.db")
-        if os.path.exists("/tmp/test8;log"):
+        if os.path.exists("/tmp/test8.log"):
             os.remove("/tmp/test8.log")
-        if os.path.exists("/tmp/test64;log"):
+        if os.path.exists("/tmp/test64.log"):
             os.remove("/tmp/test64.log")
     except:
         raise
