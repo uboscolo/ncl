@@ -28,8 +28,7 @@ def teardown():
 def test_8():
     """Run Ncl with a 8-team league"""
     try:
-        logger = Logger("extensive", "/tmp/test8.log").logger
-        SetLogger(logger)
+        Logger("extensive", "/tmp/test8.log")
         xml_file = open("tests/functest/ncl_8teams.xml", "r")
         p = Parser(xml_file)
         league = p.ParseXml()
@@ -44,8 +43,7 @@ def test_8():
 def test_64():
     """Run Ncl with a 64-team league"""
     try:
-        logger = Logger("extensive", "/tmp/test64.log").logger
-        SetLogger(logger)
+        Logger("extensive", "/tmp/test64.log")
         xml_file = open("tests/functest/ncl_64teams.xml", "r")
         p = Parser(xml_file)
         league = p.ParseXml()

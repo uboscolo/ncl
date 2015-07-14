@@ -28,8 +28,7 @@ def main(argv):
         sys.exit(1)
 
     try:
-        logger = Logger('extensive', opts.logfile).logger
-        SetLogger(logger)
+        Logger('extensive', opts.logfile)
         p = Parser(xml_file)
         league = p.ParseXml()
         league.Display()

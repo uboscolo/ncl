@@ -1,6 +1,9 @@
 import logging
 import logging.config
 
+def GetLogger():
+    return logging.getLogger('extensive')
+
 class Logger(object):
 
     def __init__(self, name, rotatinglogfile):

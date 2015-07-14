@@ -7,10 +7,7 @@ import os
 import xml.etree.ElementTree as ET
 from ncl_log import *
 
-
-def SetLogger(obj):
-    global logger
-    logger = obj
+logger = GetLogger()
 
 class Parser(object):
 
