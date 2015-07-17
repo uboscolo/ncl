@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<league name="Major League Soccer">
+    <table name="Top 6">
+        <year name="2000">
+            <team name="Dynamo Kyiv" position="1"/>
+            <team name="Shakhtar Donetsk" position="2"/>
+            <team name="Dnipro Dnipropetrovsk" position="3"/>
+            <team name="Metalurh Mariupol" position="4"/>
+            <team name="Metalurh Donetsk" position="5"/>
+            <team name="CSKA Kyiv" position="6"/>
+        </year>
+    </table>
+</league>

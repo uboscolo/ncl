@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<league name="Serie A">
+<league name="Ligue 1">
     <table name="Top 6">
         <year name="2000-2001">
             <team name="FC Nantes" position="1"/>
@@ -112,6 +112,14 @@
             <team name="Saint-Etienne" position="4"/>
             <team name="Olympique Lyonnais" position="5"/>
             <team name="Olympique de Marseille" position="6"/>
+        </year>
+        <year name="2014-2014">
+            <team name="Paris Saint-Germain" position="1"/>
+            <team name="Olympique Lyonnais" position="2"/>
+            <team name="AS Monaco" position="3"/>
+            <team name="Olympique de Marseille" position="4"/>
+            <team name="Saint-Etienne" position="5"/>
+            <team name="Bordeaux" position="6"/>
         </year>
     </table>
 </league>

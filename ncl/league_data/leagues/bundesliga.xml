@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<league name="Serie A">
+<league name="Bundesliga">
     <table name="Top 6">
         <year name="2000-2001">
             <team name="Bayern Munich" position="1"/>
@@ -112,6 +112,14 @@
             <team name="Bayer Leverkusen" position="4"/>
             <team name="VfL Wolfsburg" position="5"/>
             <team name="Borussia Mönchengladbach" position="6"/>
-        </year>-->
+        </year>
+        <year name="2014-2015">
+            <team name="Bayern Munich" position="1"/>
+            <team name="VfL Wolfsburg" position="2"/>
+            <team name="Borussia Mönchengladbach" position="3"/>
+            <team name="Bayer Leverkusen" position="4"/>
+            <team name="FC Augsburg" position="5"/>
+            <team name="Schalke 04" position="6"/>
+        </year>
     </table>
 </league>

@@ -113,5 +113,13 @@
             <team name="Internazionale" position="5"/>
             <team name="Parma" position="6"/>
         </year>
+        <year name="2014-2015">
+            <team name="Juventus" position="1"/>
+            <team name="A.S. Roma" position="2"/>
+            <team name="Lazio" position="3"/>
+            <team name="Fiorentina" position="4"/>
+            <team name="Napoli" position="5"/>
+            <team name="Genoa" position="6"/>
+        </year>
     </table>
 </league>

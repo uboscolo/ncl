@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<league name="Serie A">
+<league name="Russian Premier League">
     <table name="Top 6">
         <year name="2000">
             <team name="Spartak Moscow" position="1"/>
@@ -111,6 +111,14 @@
             <team name="Lokomotiv Moscow" position="3"/>
             <team name="Dynamo Moscow" position="4"/>
             <team name="Krasnodar" position="5"/>
+            <team name="Spartak Moscow" position="6"/>
+        </year>
+        <year name="2014-2015">
+            <team name="Zenit St. Petersburg" position="1"/>
+            <team name="CSKA Moscow" position="2"/>
+            <team name="Krasnodar" position="3"/>
+            <team name="Dynamo Moscow" position="4"/>
+            <team name="Rubin Kazan" position="5"/>
             <team name="Spartak Moscow" position="6"/>
         </year>
     </table>
