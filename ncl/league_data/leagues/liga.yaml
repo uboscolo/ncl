@@ -90,17 +90,24 @@
         4: "Real Sociedad"
         5: "Valencia"
         6: "Malaga"
-    "2015-2014":
+    "2013-2014":
         1: "Atletico Madrid"
         2: "Barcelona"
         3: "Real Madrid"
         4: "Athletic Bilbao"
         5: "Sevilla"
         6: "Villareal"
-    "2013-2014":
+    "2014-2015":
         1: "Barcelona"
         2: "Real Madrid"
         3: "Atletico Madrid"
         4: "Valencia"
         5: "Sevilla"
         6: "Villareal"
+    "2015-2016":
+        1: "Barcelona"
+        2: "Real Madrid"
+        3: "Atletico Madrid"
+        4: "Villareal"
+        5: "Athletic Bilbao"
+        6: "Celta de Vigo"
