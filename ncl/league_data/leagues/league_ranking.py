@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--league_file', dest='league_file',
                         help='specify league file name',
-                        type=str, default=None)
+                        type=str, required=True)
 
     # do the parsing
     args = parser.parse_known_args()[0]
