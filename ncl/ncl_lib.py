@@ -1,92 +1,127 @@
-from random import *
-import math
+""" Description here
+"""
+
 import re
 import sqlite3
-import os
-#import signal
-import xml.etree.ElementTree as ET
-from ncl_log import *
+import logging
+import signal
+import sys
+import traceback
+import argparse
+import yaml
+from random import *
 
-logger = GetLogger()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
-class Parser(object):
+screen_handler = logging.StreamHandler()
+screen_handler.setLevel(logging.DEBUG)
 
-    def __init__(self, xml_file):
-        self.xml_file = xml_file
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+screen_handler.setFormatter(formatter)
 
-    def ParseXml(self):
-        tree = ET.parse(self.xml_file)
-        root_tag = tree.getroot()
-        assert root_tag.tag == "league"
-        league_name = root_tag.attrib['name']
-        league = League(league_name)
+logger.addHandler(screen_handler)
 
-        for next_tag in root_tag:
-            if next_tag.tag == "conference":
-                conf_name = next_tag.attrib['name']
-                league.Add(conf_name)
-                for div_tag in next_tag:
-                    assert div_tag.tag == "division"
-                    div_name = div_tag.attrib['name']
-                    conf = league.conferences_table_by_name[conf_name]
-                    conf.Add(div_name)
-                    for team_tag in div_tag:
-                        assert team_tag.tag == "team"
-                        team_name = team_tag.attrib['name']
-                        team_strength = int(team_tag.attrib['strength'])
-                        curr_div = conf.divisions_table_by_name[div_name]
-                        curr_div.Add(team_name, team_strength)
-            elif next_tag.tag == "distribution":
-                dist_name = next_tag.attrib['name']
-                assert (dist_name == "regular_season_game" or 
-                        dist_name == "extra_time")
-                league.CreateDistribution(dist_name)
-                for score_tag in next_tag:
-                    assert score_tag.tag == "score"
-                    score = score_tag.attrib['value']
-                    iprob = float(score_tag.attrib['probability'])
-                    curr_dis = league.distributions_by_name[dist_name]
-                    curr_dis.AddScore(score, iprob)
-            else:
-                logger.critical("unrecognized tag %s" % next_tag.tag)
-                assert False
 
-        return league
+def load_league(league_file):
+    """
 
+    :param league_file:
+    :return:
+    """
+
+    with open(league_file, "r") as stream:
+        league_dict = yaml.load(stream)
+        league_name = list(league_dict.keys())[0]
+        logger.info("League: {0}".format(league_name))
+        league_obj = League(league_name)
+        conf_dict = league_dict[league_name].get('conferences')
+        for conf_name in conf_dict.keys():
+            conf_obj = league_obj.add_conference(conf_name)
+            div_dict = conf_dict[conf_name].get('divisions')
+            for div_name in div_dict.keys():
+                div_obj = conf_obj.add_division(div_name)
+                team_dict = div_dict[div_name].get('teams')
+                for t_name in team_dict.keys():
+                    team_obj = div_obj.add_team(t_name)
+                    strength = team_dict[t_name].get('strength')
+                    # make it a property
+                    team_obj.strength = strength
+        db_dict = league_dict[league_name].get('databases')
+        for db_name in db_dict.keys():
+            db_file_name = re.sub(r' ', '_', db_name.lower())
+            db_file_name += ".db"
+            logger.info("DB name: {0}".format(db_file_name))
+            db_obj = league_obj.create_distribution_db(db_file_name)
+            prob_dict = db_dict[db_name].get('probabilities')
+            for score, prob in prob_dict.items():
+                db_obj.add_score(score, prob)
+
+        return league_obj
 
 
 class DistributionDB(object):
+    """
+    Description here
+    """
 
     def __init__(self, db_name):
-        #supply the special name :memory: to create a database in RAM
+        """
+
+        :param db_name:
+        """
+
+        # supply the special name :memory: to create a database in RAM
         self.conn = sqlite3.connect(db_name)
         self.cursor = self.conn.cursor()
         self.cumulative_total = 0
 
-    def CreateTable(self):
+    def create_table(self):
+        """
+
+        :return:
+        """
         try:
             self.cursor.execute('''DROP TABLE if exists scores''')
         except sqlite3.OperationalError as err:
-            logger.error("Error: %s" % str(err))
+            raise RuntimeError("Error: %s" % str(err))
         self.cursor.execute('''CREATE TABLE scores(score TEXT PRIMARY KEY,
             probability FLOAT, hit INT)''')
         self.conn.commit()
 
-    def AddScore(self, s, p):
-        self.cumulative_total += p
+    def add_score(self, score, prob):
+        """
+
+        :param score:
+        :param prob:
+        :return:
+        """
+        self.cumulative_total += prob
         self.cursor.execute('''INSERT INTO scores(score, probability, hit)
-            VALUES(?,?,?)''', (s, self.cumulative_total, 0))
+            VALUES(?,?,?)''', (score, self.cumulative_total, 0))
         self.conn.commit()
 
-    def Close(self):
+    def close(self):
+        """
+
+        :return:
+        """
         self.conn.close()
 
-    def Destroy(self):
+    def destroy(self):
+        """
+
+        :return:
+        """
         self.cursor.execute('''DROP TABLE if exists scores''')
         self.conn.commit()
         self.conn.close()
 
-    def Display(self):
+    def display(self):
+        """
+
+        :return:
+        """
         total = 0
         draw = 0
         home = 0
@@ -105,44 +140,81 @@ class DistributionDB(object):
                 away += actual
         for record in records:
             score = record[0]
-            probability = record[1]
-            actual = float(record[2])/total
-            logger.debug("Score %s actual probabilty %s" % (score, actual))
+            # probability = record[1]
+            if total:
+                actual = float(record[2])/total
+                logger.debug("Score {0} actual probability {1}".format(score, actual))
         logger.debug("")
-        home_wins = float(home)/total
-        away_wins = float(away)/total
-        draws = float(draw)/total
-        logger.debug("Home wins have probabilty %f" % home_wins)
-        logger.debug("Away wins have probabilty %f" % away_wins)
-        logger.debug("Draws have probabilty %f" % draws)
-        logger.debug("")
+        if total:
+            home_wins = float(home)/total
+            away_wins = float(away)/total
+            draws = float(draw)/total
+            logger.debug("Home wins probability {:f}".format(home_wins))
+            logger.debug("Away wins probability {:f}".format(away_wins))
+            logger.debug("Draws probability {:f}".format(draws))
+            logger.debug("")
 
-    def GetHit(self, sample):
-        self.cursor.execute('''SELECT hit FROM scores 
-            WHERE score = ?''', (sample,))
+    def get_hit(self, val):
+        """
+
+        :param val:
+        :return:
+        """""
+        self.cursor.execute('''SELECT hit FROM scores WHERE score = ?''', (val,))
         return self.cursor.fetchone()[0]
 
-    def GetScore(self, sample):
-        self.cursor.execute('''SELECT score FROM scores 
-            WHERE probability > ?''', (sample,))
+    def get_score(self, val):
+        """
+
+        :param val:
+        :return:
+        """
+        self.cursor.execute('''SELECT score FROM scores WHERE probability > ?''', (val,))
         return self.cursor.fetchone()[0]
 
-    def Update(self, tag, value):
-        self.cursor.execute('''UPDATE scores SET hit = ? WHERE score = ? ''',
-            (value, tag))
+    def update(self, tag, value):
+        """
+
+        :param tag:
+        :param value:
+        :return:
+        """
+        self.cursor.execute('''UPDATE scores SET hit = ? WHERE score = ? ''', (value, tag))
         self.conn.commit()
 
 
-class Association(object):
+class Association:
+    """
+    Description here
+    """
 
     def __init__(self, name):
+        """
+
+        :param name:
+        """
         self.name = name
-        self.teams = [ ]
+        self.teams = []
         self.champion = None
         self.schedule = Schedule()
+        signal.signal(signal.SIGPIPE, self._signal_handler)
+        signal.signal(signal.SIGINT, self._signal_handler)
 
-    def Sort(self, teams):
-        sorted_teams = [ ]
+    def destroy(self):
+        """
+
+        :return:
+        """
+        logger.info("stub for destroy")
+
+    @staticmethod
+    def _team_sort(teams):
+        """
+
+        :param teams:
+        :return:
+        """
+        sorted_teams = []
         for team in teams:
             if len(sorted_teams) > 0:
                 found = 0
@@ -157,173 +229,244 @@ class Association(object):
                 sorted_teams.append(team)
         return sorted_teams
 
+    def _signal_handler(self, signum, frame):
+        logger.warning("Interrupt handler called: {0}".format(signum))
+        traceback.print_stack(frame)
+        self.destroy()
+        sys.exit(0)
+
 
 class League(Association):
+    """
+    Description here
+    """
 
     def __init__(self, name):
-        super(League, self).__init__(name)
-        #signal.signal(signal.SIGPIPE, self.__SignalHandler)
-        #signal.signal(signal.SIGINT, self.__SignalHandler)
-        self.distributions = [ ]
-        self.distributions_by_name = { }
-        self.conferences = [ ]
-        self.conferences_table_by_name = { } 
+        """
 
-    #def __SignalHandler(self, signum, frame):
-    #    logger.warning("Interrupt handler called: %s" % (signum))
-    #    self.Destroy
-    #    sys.exit(0)
+        :param name:
+        """
+        super().__init__(name)
+        self.distributions = {}
+        self.conferences = {}
 
-    def Add(self, name):
-        logger.debug("Adding conference %s ..." % name)
+    def add_conference(self, name):
+        """
+
+        :param name:
+        :return:
+        """
+        logger.debug("Adding conference {0} ...".format(name))
         new_conf = Conference(name)
-        self.conferences.append(new_conf)
-        self.conferences_table_by_name[name] = new_conf
+        self.conferences[name] = new_conf
+        return new_conf
 
-    def CreateDistribution(self, name):
-        db_name = name + ".db"
-        new_db = DistributionDB(db_name)
-        self.distributions.append(new_db)
-        self.distributions_by_name[name] = new_db
-        new_db.CreateTable()
+    def create_distribution_db(self, name):
+        new_db = DistributionDB(name)
+        self.distributions[name] = new_db
+        new_db.create_table()
+        return new_db
 
-    def Destroy(self):
-        for db in self.distributions:
-            db.Destroy()
+    def destroy(self):
+        for db in self.distributions.values():
+            db.destroy()
         
-    def Display(self):
+    def display(self):
         logger.debug("\n")
-        logger.debug("League %s has %d conferences:" % (
-            self.name, len(self.conferences)))
-        for conf in self.conferences:
-            logger.debug("\t - Conference %s" % (conf.name))
-        for conf in self.conferences:
-            conf.Display()
+        logger.debug("League {0} has {1} conferences:".format(self.name, len(list(self.conferences.keys()))))
+        for conf_name, conf in self.conferences.items():
+            logger.debug("\t - Conference {0}".format(conf_name))
+        for conf in self.conferences.values():
+            conf.display()
 
-    def Initialize(self):
-        for conf in self.conferences:
-            conf.Initialize()
+    def initialize(self):
+        for conf in self.conferences.values():
+            conf.initialize()
         
-    def Play(self):
+    def play(self):
         # Play Regular Season
         play_on = True
         # state machine?
         while play_on:
-            for conf in self.conferences:
-                conf.RegularSeason()
+            for conf in self.conferences.values():
+                conf.regular_season()
                 play_on = play_on and not conf.schedule.completed
         # Display Regular Season Results and Setup Playoffs
-        self.distributions_by_name["regular_season_game"].Display()
-        for conf in self.conferences:
-            conf.SetupPlayoffs()
+        for distr_name, distr in self.distributions.items():
+            logger.info("Distribution: {0}".format(distr_name))
+            distr.display()
+        for conf in self.conferences.values():
+            conf.setup_playoffs()
         # Play Conference Playoffs
         logger.info("Conference Playoffs start...\n")
         # state machine?
         play_on = True
         while play_on:
-            for conf in self.conferences:
-                conf.Play()
+            for conf in self.conferences.values():
+                conf.play()
                 play_on = play_on and not conf.schedule.completed
         # Play Final
-        for conf in self.conferences:
+        for conf in self.conferences.values():
             self.teams.append(conf.champion)
-        self.schedule.Reset()
-        self.schedule.Playoffs(self.teams, 1)
-        self.schedule.Play(0)
-        self.teams = self.schedule.Update(self.teams)
+        self.schedule.reset()
+        self.schedule.playoffs(self.teams, 1)
+        self.schedule.play(0)
+        self.teams = self.schedule.update(self.teams)
         self.champion = self.teams[0]
-        logger.info("League Winner: %s\n" % self.champion.name)
+        logger.info("League Winner: {0}\n".format(self.champion.name))
 
 
 class Conference(Association):
+    """
+    Description here
+    """
 
     def __init__(self, name):
-        super(Conference, self).__init__(name)
-        self.divisions = [ ]
-        self.divisions_table_by_name = { }
+        """
+
+        :param name:
+        """
+        super().__init__(name)
+        self.divisions = {}
         self.series_length = 3
         
-    def Add(self, name):
-        logger.debug("Adding division %s ..." % name)
+    def add_division(self, name):
+        """
+
+        :param name:
+        :return:
+        """
+        logger.debug("Adding division {0} ...".format(name))
         new_div = Division(name)
-        self.divisions.append(new_div) 
-        self.divisions_table_by_name[name] = new_div
+        self.divisions[name] = new_div
+        return new_div
 
-    def Display(self):
-        logger.debug("Conference %s has %d divisions:" % (
-            self.name, len(self.divisions)))
-        for div in self.divisions:
-            logger.debug("\t - Division %s" % (div.name))
-        for div in self.divisions:
-            div.Display()
+    def display(self):
+        """
 
-    def Initialize(self):
-        for div in self.divisions:
-            div.RegularSeason()
+        :return:
+        """
+        logger.debug("Conference {0} has {1} divisions".format(self.name, len(list(self.divisions.keys()))))
+        for div_name in self.divisions.keys():
+            logger.debug("\t - Division {0}".format(div_name))
+        for div in self.divisions.values():
+            div.display()
 
-    def Play(self):
-        self.schedule.Playoffs(self.teams, self.series_length)
-        self.schedule.Play(0)
+    def initialize(self):
+        """
+
+        :return:
+        """
+        for div in self.divisions.values():
+            div.regular_season()
+
+    def play(self):
+        """
+
+        :return:
+        """
+        self.schedule.playoffs(self.teams, self.series_length)
+        self.schedule.play(0)
         if self.schedule.completed:
-            self.teams = self.schedule.Update(self.teams)
+            self.teams = self.schedule.update(self.teams)
             if len(self.teams) > 1:
-                self.schedule.Reset()
+                self.schedule.reset()
             else:
                 self.champion = self.teams[0]
-                logger.info("Conference %s - Playoffs are over" % self.name)
-                logger.info("Winner: %s\n" % self.champion.name)
+                logger.info("Conference {0} - Playoffs are over".format(self.name))
+                logger.info("Winner: {0}\n".format(self.champion.name))
 
-    def RegularSeason(self):
+    def regular_season(self):
+        """
+
+        :return:
+        """
         play_on = True
-        for div in self.divisions:
+        for div in self.divisions.values():
             # Regular Season
-            div.Play()
+            div.play()
             play_on = play_on and not div.schedule.completed
         self.schedule.completed = not play_on
 
-    def SetupPlayoffs(self):
-        self.schedule.Reset()
+    def setup_playoffs(self):
+        """
+
+        :return:
+        """
+        self.schedule.reset()
         # Build Conference Playoff team list
-        for div in self.divisions:
-            self.teams += div.teams[0:len(div.teams)/2]
-        self.teams = self.Sort(self.teams)
+        for div in self.divisions.values():
+            self.teams += div.teams[0:int(len(div.teams)/2)]
+        self.teams = self._team_sort(self.teams)
         for team in self.teams:
-            logger.info( "Team %s made the playoffs" % team.name)
+            logger.info("Team {0} made the playoffs".format(team.name))
         logger.info("")
 
 
 class Division(Association):
+    """
+    Description here
+    """
 
     def __init__(self, name):
-        super(Division, self).__init__(name)
+        """
 
-    def Add(self, name, strength):
-        logger.debug("Adding team %s with strength: %d ..." % (name, strength))
-        new_team = Team(name, strength)
-        self.teams.append(new_team) 
+        :param name:
+        """
+        super().__init__(name)
 
-    def Display(self):
-        logger.info("Division %s Table\n" % (self.name))
+    def add_team(self, name):
+        """
+
+        :param name:
+        :return:
+        """
+        logger.debug("Adding team {0} ...".format(name))
+        new_team = Team(name)
+        self.teams.append(new_team)
+        return new_team
+
+    def display(self):
+        """
+
+        :return:
+        """
+        logger.info("Division {0} Table\n".format(self.name))
         logger.info("--- {:15s} ---".format(self.name))
         for team in self.teams:
             logger.info("{:20s} {:2d}".format(team.name, team.points))
         logger.info("")
 
-    def RegularSeason(self):
-        self.schedule.RoundRobin(self.teams)
-        self.schedule.Display(self.name)
+    def regular_season(self):
+        """
 
-    def Play(self):
-        self.schedule.Play(90)
-        self.teams = self.Sort(self.teams)
-        self.Display()
+        :return:
+        """
+        self.schedule.round_robin(self.teams)
+        self.schedule.display(self.name)
+
+    def play(self):
+        """
+
+        :return:
+        """
+        self.schedule.play(90)
+        self.teams = self._team_sort(self.teams)
+        self.display()
 
 
 class Team(object):
+    """
+    Description here
+    """
 
-    def __init__(self, name, strength):
+    def __init__(self, name):
+        """
+
+        :param name:
+        """
         self.name = name
-        self.strength = strength
+        self.strength = 0
         self.points = 0
         self.series_wins = 0
 
@@ -331,40 +474,57 @@ class Team(object):
 class Schedule(object):
 
     def __init__(self):
-        self.days = [ ]
+        """
+
+        """
+        self.days = []
         self.current_day = None
         self.completed = False
-        self.series_list = [ ]
+        self.series_list = []
  
-    def Display(self, name):
-        logger.debug("-------------- %s Schedule: --------------" % name)
+    def display(self, name):
+        """
+
+        :param name:
+        :return:
+        """
+        logger.debug("-------------- {0} Schedule: --------------".format(name))
         for day in self.days:
             for match in day.matches:
                 home = match.home_team.name
                 away = match.away_team.name
-                logger.debug("Day %s - Match: %s vs %s" % (day.number, home, away) )
+                logger.debug("Day {0} - Match: {1} vs {2}".format(day.number, home, away))
         logger.debug("")
 
-    def Reset(self):
+    def reset(self):
+        """
+
+        :return:
+        """
         self.completed = False
-        self.series_list = [ ]
-        self.days = [ ]
+        self.series_list = []
+        self.days = []
         self.current_day = None
 
-    def Play(self, minutes):
-        logger.info("Day: %d\n" % (self.current_day.number))
+    def play(self, minutes):
+        """
+
+        :param minutes:
+        :return:
+        """
+        logger.info("Day: {0}\n".format(self.current_day.number))
         for match in self.current_day.matches:
             if match.series and match.series.is_over:
-                logger.debug("Series is over, Winner: %s\n" % match.series.winner.name)
-                next
+                logger.debug("Series is over, Winner: {0}\n".format(match.series.winner.name))
+                continue
             if minutes > 0:
-                logger.debug("Starting %s-minute game ..." % (minutes))
-                match.Play(minutes)
-                match.Update()
+                logger.debug("Starting {0}-minute game ...".format(minutes))
+                match.play(minutes)
+                match.update()
             else:
                 logger.debug("Starting game ...")
-                match.PlayWinner()
-                match.series.Update(match.winner)
+                match.play_winner()
+                match.series.update(match.winner)
             logger.debug("Game over ...")
             logger.info("")
         if self.current_day.number < len(self.days):
@@ -372,10 +532,16 @@ class Schedule(object):
         else:
             self.completed = True
 
-    def Playoffs(self, teams, series_length):
+    def playoffs(self, teams, series_length):
+        """
+
+        :param teams:
+        :param series_length:
+        :return:
+        """
         if len(self.series_list) > 0:
             return
-        for i in range(0, len(teams)/2):
+        for i in range(0, int(len(teams)/2)):
             team1 = teams[i]
             team2 = teams[len(teams) - 1 - i]
             new_series = Series(team1, team2, series_length)
@@ -389,16 +555,21 @@ class Schedule(object):
                 else:
                     match = Match(s.team1, s.team2)
                 match.series = s
-                new_day.Add(match)
+                new_day.add(match)
         self.current_day = self.days[0]
 
-    def RoundRobin(self, teams):
-        i = 0
-        second_half = [ ]
-        rotating_table = { }
-        for team in teams:
-            rotating_table[i + 1] = teams[i]
-            i += 1
+    def round_robin(self, teams):
+        """
+
+        :param teams:
+        :return:
+        """
+
+        second_half = []
+        rotating_table = {}
+        for team_idx in range(0, len(teams)):
+            rotating_table[team_idx + 1] = teams[team_idx]
+            team_idx += 1
         day = 1
         while day <= len(teams) - 1:
             # first half of the season
@@ -417,24 +588,27 @@ class Schedule(object):
                     team1 = rotating_table[match + 1]
                     team2 = rotating_table[len(teams) - match + 2]
                 new_match = Match(team1, team2)
-                new_day.Add(new_match)                
+                new_day.add(new_match)
                 associated_match = Match(team2, team1)
-                associated_day.Add(associated_match)
+                associated_day.add(associated_match)
                 match += 1
             day += 1
             # rotate table
+            curr_val = 0
             for entry in rotating_table.keys():
-                if entry > 2:
+                if entry == 2:
+                    curr_val = rotating_table[entry]
+                    rotating_table[entry] = rotating_table[len(teams)]
+                elif entry > 2:
                     stored_val = rotating_table[entry]
                     rotating_table[entry] = curr_val
                     curr_val = stored_val
-                elif entry == 2:
-                    curr_val = rotating_table[entry]
-                    rotating_table[entry] = rotating_table[len(teams)]
+                else:
+                    logger.debug("entry == {0}".format(entry))
         self.days += second_half 
         self.current_day = self.days[0]
 
-    def Update(self, teams):
+    def update(self, teams):
         for s in self.series_list:
             loser = teams.index(s.loser)
             teams.pop(loser)
@@ -442,18 +616,40 @@ class Schedule(object):
 
 
 class Day(object):
+    """
+    Description here
+    """
 
     def __init__(self, number):
+        """
+
+        :param number:
+        """
         self.number = number
         self.matches = []
 
-    def Add(self, match):
+    def add(self, match):
+        """
+
+        :param match:
+        :return:
+        """
         self.matches.append(match)
 
 
 class Series(object):
+    """
+    Description here
+    """
 
     def __init__(self, team1, team2, length):
+        """
+
+        :param team1:
+        :param team2:
+        :param length:
+        """
+
         self.team1 = team1
         self.team2 = team2
         self.played = 0
@@ -462,11 +658,16 @@ class Series(object):
         self.winner = None
         self.loser = None
 
-    def Update(self, winner):
+    def update(self, winner):
+        """
+
+        :param winner:
+        :return:
+        """
         self.played += 1
         winner.series_wins += 1
         wcount = abs(self.team1.series_wins - self.team2.series_wins)
-        threshold = (self.length + 1)/ 2
+        threshold = (self.length + 1) / 2
         if self.played == self.length or wcount == threshold:
             self.is_over = True
             if self.team1.series_wins > self.team2.series_wins:
@@ -475,13 +676,20 @@ class Series(object):
             else:
                 self.winner = self.team2
                 self.loser = self.team1
-            logger.debug("Series is over, Winner: %s, Loser: %s" % 
-                (self.winner.name, self.loser.name))
+            logger.debug("Series is over, Winner: {0}, Loser: {1}".format(self.winner.name, self.loser.name))
         
 
 class Match(object):
+    """
+    Description here
+    """
 
     def __init__(self, home_team, away_team):
+        """
+
+        :param home_team:
+        :param away_team:
+        """
         self.home_team = home_team
         self.away_team = away_team
         self.score = Score()
@@ -489,19 +697,19 @@ class Match(object):
         self.loser = None
         self.series = None
 
-    def Play(self, minutes):
-        strength1 = self.home_team.strength
-        strength2 = self.away_team.strength
-        #self.score.Display(self.home_team.name, self.away_team.name)
+    def play(self, minutes):
+        # strength1 = self.home_team.strength
+        # strength2 = self.away_team.strength
+        # self.score.Display(self.home_team.name, self.away_team.name)
         # Generate the score
         if minutes == 30:
-            self.score.Generate("extra_time")
+            self.score.generate("extra_time")
         else:
-            self.score.Generate("regular_season_game")
+            self.score.generate("regular_time")
         home_team = self.home_team.name
         away_team = self.away_team.name
-        self.score.SimulateScoring(minutes, home_team, away_team)
-        self.score.Display(home_team, away_team)
+        self.score.simulate_scoring(minutes, home_team, away_team)
+        self.score.display(home_team, away_team)
         if self.score.home > self.score.away:
             self.winner = self.home_team
             self.loser = self.away_team
@@ -509,25 +717,25 @@ class Match(object):
             self.winner = self.away_team
             self.loser = self.home_team
 
-    def Update(self):
+    def update(self):
         if self.score.home > self.score.away:
-            self.home_team.points +=3
+            self.home_team.points += 3
         elif self.score.home == self.score.away:
-            self.home_team.points +=1
-            self.away_team.points +=1
+            self.home_team.points += 1
+            self.away_team.points += 1
         else:
-            self.away_team.points +=3
+            self.away_team.points += 3
 
-    def PlayWinner(self):
-        self.Play(90)
-        if self.loser == None:
+    def play_winner(self):
+        self.play(90)
+        if self.loser is None:
             logger.info("It's a tie, play extra time")
-            self.Play(30)
-            if self.loser == None:
+            self.play(30)
+            if self.loser is None:
                 logger.info("It's again a tie, penalty kicks")
-                self.PenaltyKicks()
+                self.penalty_kicks()
 
-    def PenaltyKicks(self):
+    def penalty_kicks(self):
         logger.debug("Penalty kicks ...")
         team1_total = 0
         team2_total = 0
@@ -558,42 +766,48 @@ class Match(object):
         else:
             self.winner = self.away_team
             self.loser = self.home_team
-        self.score.Display(self.home_team.name, self.away_team.name)
+        self.score.display(self.home_team.name, self.away_team.name)
 
 
 class Score(object):
+    """
+    Description here
+    """
 
     def __init__(self):
+        """
+
+        """
         self.home = 0
         self.away = 0
         self.score = "0-0"
 
-    def Generate(self, name):
+    def generate(self, name):
+        """
+
+        :param name:
+        :return:
+        """
         db_name = name + ".db"
         db = DistributionDB(db_name)
         m = uniform(0, 1.0)
-        self.score = db.GetScore(m)
-        hit = db.GetHit(self.score) + 1
+        self.score = db.get_score(m)
+        hit = db.get_hit(self.score) + 1
         logger.debug("Number of hits for score %s: %s" % (self.score, hit))
-        db.Update(self.score, hit)
-        db.Close()
+        db.update(self.score, hit)
+        db.close()
         res_obj = re.search(r'(\d)-(\d)', self.score)
         self.home += int(res_obj.group(1))
         self.away += int(res_obj.group(2))
 
-    def Display(self, home_team, away_team):
-        logger.info("%s %d : %s %d" % (home_team, self.home, 
-            away_team, self.away))
+    def display(self, home_team, away_team):
+        logger.info("{0} {1}: {2} {3}".format(home_team, self.home, away_team, self.away))
 
-    def SimulateScoring(self, minutes, home_team, away_team):
+    def simulate_scoring(self, minutes, home_team, away_team):
         res_obj = re.search(r'(\d)-(\d)', self.score)
-        goal_list = { }
-        score = { }
-        t_list = { }
-        score["home"] = int(res_obj.group(1))
-        score["away"] = int(res_obj.group(2))
-        t_list["home"] = home_team
-        t_list["away"] = away_team
+        goal_list = {}
+        score = {"home": int(res_obj.group(1)), "away": int(res_obj.group(2))}
+        t_list = {"home": home_team, "away": away_team}
         for s in score.keys():
             if score[s] > 0:
                 for i in range(score[s]):
@@ -602,5 +816,20 @@ class Score(object):
                         minute = randint(0, minutes)
                     goal_list[minute] = t_list[s]
         for goal in sorted(goal_list.keys()):
-            logger.debug("Minute: %s, Goal!!! %s scored" % 
-                (goal, goal_list[goal]))
+            logger.debug("Minute: {0}, Goal!!! {1} scored".format(goal, goal_list[goal]))
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="standalone parser")
+
+    parser.add_argument('--league_file', dest='league_file',
+                        help='specify league file name',
+                        type=str, required=True)
+
+    # do the parsing
+    args = parser.parse_known_args()[0]
+
+    league = load_league(league_file=args.league_file)
+    league.display()
+    league.initialize()
+    league.play()
+    league.destroy()
