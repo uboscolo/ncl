@@ -86,7 +86,7 @@ class DistributionDB(object):
         except sqlite3.OperationalError as err:
             raise RuntimeError("Error: %s" % str(err))
         self.cursor.execute('''CREATE TABLE scores(score TEXT PRIMARY KEY,
-            probability FLOAT, hit INT)''')
+            probability FLOAT, cumulative FLOAT, hit INT)''')
         self.conn.commit()
 
     def add_score(self, score, prob):
@@ -97,8 +97,8 @@ class DistributionDB(object):
         :return:
         """
         self.cumulative_total += prob
-        self.cursor.execute('''INSERT INTO scores(score, probability, hit)
-            VALUES(?,?,?)''', (score, self.cumulative_total, 0))
+        self.cursor.execute('''INSERT INTO scores(score, probability, cumulative, hit)
+            VALUES(?,?,?,?)''', (score, prob, self.cumulative_total, 0))
         self.conn.commit()
 
     def close(self):
@@ -129,7 +129,7 @@ class DistributionDB(object):
         self.cursor.execute("SELECT * FROM scores")
         records = self.cursor.fetchall()
         for record in records:
-            actual = record[2]
+            actual = record[3]
             total += actual
             res_obj = re.search(r'(\d)-(\d)', record[0])
             if int(res_obj.group(1)) == int(res_obj.group(2)): 
@@ -140,10 +140,11 @@ class DistributionDB(object):
                 away += actual
         for record in records:
             score = record[0]
-            # probability = record[1]
+            probability = record[1]
             if total:
-                actual = float(record[2])/total
-                logger.debug("Score {0} actual probability {1}".format(score, actual))
+                actual = float(record[3])/total
+                logger.debug("Actual probability for score {0} = "
+                             "{1:.3f} (DB: {2:.3f})".format(score, actual, probability))
         logger.debug("")
         if total:
             home_wins = float(home)/total
@@ -169,7 +170,16 @@ class DistributionDB(object):
         :param val:
         :return:
         """
-        self.cursor.execute('''SELECT score FROM scores WHERE probability > ?''', (val,))
+        self.cursor.execute('''SELECT score FROM scores WHERE cumulative > ?''', (val,))
+        return self.cursor.fetchone()[0]
+
+    def get_prob(self, score):
+        """
+
+        :param val:
+        :return:
+        """
+        self.cursor.execute('''SELECT probability FROM scores WHERE score = ?''', (score,))
         return self.cursor.fetchone()[0]
 
     def update(self, tag, value):
@@ -528,6 +538,7 @@ class Schedule(object):
             logger.debug("Game over ...")
             logger.info("")
         if self.current_day.number < len(self.days):
+            logger.info("Day: {0} of {1}\n".format(self.current_day.number, len(self.days)))
             self.current_day = self.days[self.current_day.number]
         else:
             self.completed = True
@@ -604,7 +615,7 @@ class Schedule(object):
                     rotating_table[entry] = curr_val
                     curr_val = stored_val
                 else:
-                    logger.debug("entry == {0}".format(entry))
+                    logger.debug("Nothing to do".format(entry))
         self.days += second_half 
         self.current_day = self.days[0]
 
