@@ -24,9 +24,9 @@ logger.addHandler(screen_handler)
 
 
 def load_league(league_file):
-    """
+    """ Read league yaml file and creates conferences, divisions, teams and databases
 
-    :param league_file:
+    :param league_file: yaml file with all teams by conference and division
     :return:
     """
 
@@ -167,7 +167,7 @@ class DistributionDB(object):
     def get_score(self, val):
         """
 
-        :param val:
+        :param val: cumulative distribution
         :return:
         """
         self.cursor.execute('''SELECT score FROM scores WHERE cumulative > ?''', (val,))
@@ -176,7 +176,7 @@ class DistributionDB(object):
     def get_prob(self, score):
         """
 
-        :param val:
+        :param score: Score
         :return:
         """
         self.cursor.execute('''SELECT probability FROM scores WHERE score = ?''', (score,))
@@ -185,8 +185,8 @@ class DistributionDB(object):
     def update(self, tag, value):
         """
 
-        :param tag:
-        :param value:
+        :param tag: score
+        :param value: hit
         :return:
         """
         self.cursor.execute('''UPDATE scores SET hit = ? WHERE score = ? ''', (value, tag))
@@ -240,6 +240,11 @@ class Association:
         return sorted_teams
 
     def _signal_handler(self, signum, frame):
+        """
+
+        :param signum: signal number
+        :param frame: frame with the stack
+        """
         logger.warning("Interrupt handler called: {0}".format(signum))
         traceback.print_stack(frame)
         self.destroy()
@@ -272,16 +277,29 @@ class League(Association):
         return new_conf
 
     def create_distribution_db(self, name):
+        """
+
+        :param name:
+        :return:
+        """
         new_db = DistributionDB(name)
         self.distributions[name] = new_db
         new_db.create_table()
         return new_db
 
     def destroy(self):
+        """
+
+        :return:
+        """
         for db in self.distributions.values():
             db.destroy()
         
     def display(self):
+        """
+
+        :return:
+        """
         logger.debug("\n")
         logger.debug("League {0} has {1} conferences:".format(self.name, len(list(self.conferences.keys()))))
         for conf_name, conf in self.conferences.items():
@@ -290,10 +308,18 @@ class League(Association):
             conf.display()
 
     def initialize(self):
+        """
+
+        :return:
+        """
         for conf in self.conferences.values():
             conf.initialize()
         
     def play(self):
+        """
+
+        :return:
+        """
         # Play Regular Season
         play_on = True
         # state machine?
@@ -620,6 +646,11 @@ class Schedule(object):
         self.current_day = self.days[0]
 
     def update(self, teams):
+        """
+
+        :param teams:
+        :return:
+        """
         for s in self.series_list:
             loser = teams.index(s.loser)
             teams.pop(loser)
@@ -709,9 +740,13 @@ class Match(object):
         self.series = None
 
     def play(self, minutes):
-        # strength1 = self.home_team.strength
-        # strength2 = self.away_team.strength
-        # self.score.Display(self.home_team.name, self.away_team.name)
+        """
+
+        :param minutes:
+        :return:
+        """
+        strength1 = self.home_team.strength
+        strength2 = self.away_team.strength
         # Generate the score
         if minutes == 30:
             self.score.generate("extra_time")
@@ -719,6 +754,8 @@ class Match(object):
             self.score.generate("regular_time")
         home_team = self.home_team.name
         away_team = self.away_team.name
+        logger.info("Home Team {0} strength: {1}".format(home_team, strength1))
+        logger.info("Away Team {0} strength: {1}".format(away_team, strength2))
         self.score.simulate_scoring(minutes, home_team, away_team)
         self.score.display(home_team, away_team)
         if self.score.home > self.score.away:
@@ -729,6 +766,10 @@ class Match(object):
             self.loser = self.home_team
 
     def update(self):
+        """
+
+        :return:
+        """
         if self.score.home > self.score.away:
             self.home_team.points += 3
         elif self.score.home == self.score.away:
@@ -738,6 +779,10 @@ class Match(object):
             self.away_team.points += 3
 
     def play_winner(self):
+        """
+
+        :return:
+        """
         self.play(90)
         if self.loser is None:
             logger.info("It's a tie, play extra time")
@@ -747,6 +792,10 @@ class Match(object):
                 self.penalty_kicks()
 
     def penalty_kicks(self):
+        """
+
+        :return:
+        """
         logger.debug("Penalty kicks ...")
         team1_total = 0
         team2_total = 0
@@ -801,8 +850,8 @@ class Score(object):
         """
         db_name = name + ".db"
         db = DistributionDB(db_name)
-        m = uniform(0, 1.0)
-        self.score = db.get_score(m)
+        roll = uniform(0, 1.0)
+        self.score = db.get_score(roll)
         hit = db.get_hit(self.score) + 1
         logger.debug("Number of hits for score %s: %s" % (self.score, hit))
         db.update(self.score, hit)
@@ -812,9 +861,23 @@ class Score(object):
         self.away += int(res_obj.group(2))
 
     def display(self, home_team, away_team):
+        """
+
+        :param home_team:
+        :param away_team:
+        :return:
+        """
         logger.info("{0} {1}: {2} {3}".format(home_team, self.home, away_team, self.away))
 
     def simulate_scoring(self, minutes, home_team, away_team):
+        """
+
+        :param minutes:
+        :param home_team:
+        :param away_team:
+        :return:
+        """
+
         res_obj = re.search(r'(\d)-(\d)', self.score)
         goal_list = {}
         score = {"home": int(res_obj.group(1)), "away": int(res_obj.group(2))}
@@ -830,6 +893,7 @@ class Score(object):
             logger.debug("Minute: {0}, Goal!!! {1} scored".format(goal, goal_list[goal]))
 
 if __name__ == '__main__':
+
     parser = argparse.ArgumentParser(description="standalone parser")
 
     parser.add_argument('--league_file', dest='league_file',
