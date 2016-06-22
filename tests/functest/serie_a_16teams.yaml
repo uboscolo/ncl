@@ -1,5 +1,5 @@
-"The New Champions' League":
-    playoffs: True
+"The New Serie A League":
+    playoffs: False
     databases:
         "Regular Time":
             probabilities:
@@ -51,32 +51,40 @@
                 "3-0": 0.070
                 "0-3": 0.040
     conferences:
-        "Northern Europe":
+        "Serie A":
             divisions:
-                "Atlantic":
+                "Serie A":
                     teams:
-                        "Chelsea": 
-                            strength: 77
-                        "Manchester Utd":
-                            strength: 77
-                "Continental":
-                    teams:
-                        "Bayern Munich":
-                            strength: 70
-                        "Borussia Dortmund":
-                            strength: 20
-        "Southern Europe":
-            divisions:
-                "South-West":
-                    teams:
-                        "Atletico Madrid":
-                            strength: 18
-                        "Real Madrid": 
-                            strength: 53
-                    
-                "South-East":
-                    teams:
-                        "Oympiacos":
-                            strength: 11
-                        "AC Milan":
-                            strength: 55
+                        "Lazio":
+                            strength: 0.001
+                        "Sassuolo":
+                            strength: 0.001
+                        "Chievo":
+                            strength: 0.001
+                        "Empoli":
+                            strength: 0.001
+                        "Genoa":
+                            strength: 0.001
+                        "Torino":
+                            strength: 0.001
+                        "Atalanta":
+                            strength: 0.001
+                        "Bologna":
+                            strength: 0.001
+                        "Sampdoria":
+                            strength: 0.001
+                        "Palermo":
+                            strength: 0.001
+                        "Udinese":
+                            strength: 0.001
+                        "Carpi":
+                            strength: 0.001
+                        "Hellas Verona":
+                            strength: 0.001
+                        "Frosinone":
+                            strength: 0.001
+                        "Cagliari":
+                            strength: 0.001
+                        "Crotone":
+                            strength: 0.001
+

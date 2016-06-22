@@ -1,4 +1,5 @@
 "The New Champions' League":
+    playoffs: True
     databases:
         "Regular Time":
             probabilities:
@@ -118,7 +119,7 @@
                             strength: 0.3125
                         "BATE Borisov":
                             strength: 0.3125
-                        "Strum Graz":
+                        "Sturm Graz":
                             strength: 0.125
         "Southern Europe":
             divisions:
