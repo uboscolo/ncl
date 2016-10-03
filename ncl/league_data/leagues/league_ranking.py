@@ -47,10 +47,11 @@ class Table(object):
         self.years_by_name[name] = new_year
 
     def add_team(self, name, year, pos):
-        print("Adding team {0} ...".format(name))
         if name in self.teams_by_name.keys():
+            print("Adding team {0} ...".format(name))
             new_team = self.teams_by_name[name]
         else:
+            print("Adding new team {0} ...".format(name))
             new_team = Team(name)
             self.teams.append(new_team)
             self.teams_by_name[name] = new_team
