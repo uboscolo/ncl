@@ -1,0 +1,526 @@
+testbed:
+    name: 'q5_q6'
+    servers:
+        http:
+            server: 'labdns.mitg-bxb300.cisco.com'
+            path: '/localdisk/boot/'
+        tftp:
+            server: 'fiesta.mitg-bxb300.cisco.com'
+            path: '/'
+        bulkstats:
+            server: 'luto2.mitg-bxb300.cisco.com'
+            path: '/localdisk/bulkstats/evo1/'
+            username: 'root'
+            password: 'starent'
+            custom:
+                prompt: 'luto2:~#'
+devices:
+    evo1:
+        type: 'ASR5500'
+        custom:
+            username: 'staradmin'
+            password: 'starent'
+            prompt: '[local]evo1'
+            linux_prompt: 'card5-cpu0#'
+            system_hostname: 'evo1'
+        connections:
+            cli5:
+                description: 'MIO-5-cli-console'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7001
+            cli6:
+                description: 'MIO-6-cli-console'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7002
+            primary:
+                protocol: 'ssh'
+                ip: 'evo1.mitg-bxb300.cisco.com'
+            mio5:
+                description: 'MIO-5-cpu-console'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7003
+            mio6:
+                description: 'MIO-6-cpu-console'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7004
+            slot1_cpu0:
+                description: 'DPC-1-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7005
+                prompt: 'asr5500:card1-cpu0#'
+            slot1_cpu1:
+                description: 'DPC-1-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7006
+                prompt: 'asr5500:card1-cpu1#'
+            slot2_cpu0:
+                description: 'DPC-2-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7007
+                prompt: 'asr5500:card2-cpu0#'
+            slot2_cpu1:
+                description: 'DPC-2-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7008
+                prompt: 'asr5500:card2-cpu1#'
+            slot3_cpu0:
+                description: 'DPC-3-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7009
+                prompt: 'asr5500:card3-cpu0#'
+            slot3_cpu1:
+                description: 'DPC-3-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7010
+                prompt: 'asr5500:card3-cpu1#'
+            slot4_cpu0:
+                description: 'DPC-4-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7011
+                prompt: 'asr5500:card4-cpu0#'
+            slot4_cpu1:
+                description: 'DPC-4-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7012
+                prompt: 'asr5500:card4-cpu1#'
+            slot7_cpu0:
+                description: 'DPC-7-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7013
+                prompt: 'asr5500:card7-cpu0#'
+            slot7_cpu1:
+                description: 'DPC-7-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7014
+                prompt: 'asr5500:card7-cpu1#'
+            slot8_cpu0:
+                description: 'DPC-8-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7019
+                prompt: 'asr5500:card8-cpu0#'
+            slot8_cpu1:
+                description: 'DPC-8-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7020
+                prompt: 'asr5500:card8-cpu1#'
+            slot9_cpu0:
+                description: 'DPC-9-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7015
+                prompt: 'asr5500:card9-cpu0#'
+            slot9_cpu1:
+                description: 'DPC-9-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7016
+                prompt: 'asr5500:card9-cpu1#'
+            slot10_cpu0:
+                description: 'DPC-10-cpu-0'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7017
+                prompt: 'asr5500:card10-cpu0#'
+            slot10_cpu1:
+                description: 'DPC-10-cpu-1'
+                protocol: 'ssh'
+                ip: 'q5-ts.mitg-bxb300.cisco.com'
+                ts_port: 7018
+                prompt: 'asr5500:card10-cpu1#'
+    luto1:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto1:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto1.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto1-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1808V1U5'
+    luto2:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto2:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto2.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto2-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1808V25M#'
+    luto3:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto3:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto3.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto3-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1817V2NG#'
+    luto4:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto4:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto4.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto4-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1819V1BT#'
+    luto5:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto5:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto5.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto5-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1809V0GE#'
+    luto6:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto6:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto6.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto6-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1817V2Q0#'
+    luto7:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto7:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto7.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto7-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1821V17S#'
+    luto8:
+        type: 'starosdevice'
+        custom:
+            username: 'root'
+            password: 'starent'
+            prompt: 'luto8:~#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'luto8.mitg-bxb300.cisco.com'
+            cimc:
+                protocol: 'ssh'
+                ip: 'luto8-mgmt.mitg-bxb300.cisco.com'
+                username: 'admin'
+                password: 'password'
+                prompt: 'C220-FCH1808V237#'
+    #luto16:
+    #    type: 'starosdevice'
+    #    custom:
+    #        username: 'root'
+    #        password: 'starent'
+    #        prompt: 'luto16:~#'
+    #    connections:
+    #        primary:
+    #            protocol: 'ssh'
+    #            ip: 'luto16.mitg-bxb300.cisco.com'
+    #        cimc:
+    #            protocol: 'ssh'
+    #            ip: 'luto16-mgmt.mitg-bxb300.cisco.com'
+    #            username: 'admin'
+    #            password: 'password'
+    #            prompt: 'C220-FCH1912V282#'
+    #luto17:
+    #    type: 'starosdevice'
+    #    custom:
+    #        username: 'root'
+    #        password: 'starent'
+    #        prompt: 'luto17:~#'
+    #    connections:
+    #        primary:
+    #            protocol: 'ssh'
+    #            ip: 'luto17.mitg-bxb300.cisco.com'
+    #        cimc:
+    #            protocol: 'ssh'
+    #            ip: 'luto17-mgmt.mitg-bxb300.cisco.com'
+    #            username: 'admin'
+    #            password: 'password'
+    #            prompt: 'C220-FCH1910V1F9#'
+    #luto18:
+    #    type: 'starosdevice'
+    #    custom:
+    #        username: 'root'
+    #        password: 'starent'
+    #        prompt: 'luto18:~#'
+    #    connections:
+    #        primary:
+    #            protocol: 'ssh'
+    #            ip: 'luto18.mitg-bxb300.cisco.com'
+    #        cimc:
+    #            protocol: 'ssh'
+    #            ip: 'luto18-mgmt.mitg-bxb300.cisco.com'
+    #            username: 'admin'
+    #            password: 'password'
+    #            prompt: 'C220-FCH1912V2EG#'
+    #luto19:
+    #    type: 'starosdevice'
+    #    custom:
+    #        username: 'root'
+    #        password: 'starent'
+    #        prompt: 'luto19:~#'
+    #    connections:
+    #        primary:
+    #            protocol: 'ssh'
+    #            ip: 'luto19.mitg-bxb300.cisco.com'
+    #        cimc:
+    #            protocol: 'ssh'
+    #            ip: 'luto19-mgmt.mitg-bxb300.cisco.com'
+    #            username: 'admin'
+    #            password: 'password'
+    #            prompt: 'C220-FCH1912V27M#'
+    #luto20:
+    #    type: 'starosdevice'
+    #    custom:
+    #        username: 'root'
+    #        password: 'starent'
+    #        prompt: 'luto20:~#'
+    #    connections:
+    #        primary:
+    #            protocol: 'ssh'
+    #            ip: 'luto20.mitg-bxb300.cisco.com'
+    #        cimc:
+    #            protocol: 'ssh'
+    #            ip: 'luto20-mgmt.mitg-bxb300.cisco.com'
+    #            username: 'admin'
+    #            password: 'password'
+    #            prompt: 'C220-FCH1912V2EF#'
+    evo-sw1:
+        type: 'nexusdevice'
+        custom:
+            username: 'admin'
+            password: 'starent'
+            prompt: 'evo-sw1#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'evo-sw1.mitg-bxb300.cisco.com'
+    evo-sw2:
+        type: 'nexusdevice'
+        custom:
+            username: 'admin'
+            password: 'starent'
+            prompt: 'evo-sw2#'
+        connections:
+            primary:
+                protocol: 'ssh'
+                ip: 'evo-sw2.mitg-bxb300.cisco.com'
+
+topology:
+    evo1:
+        interfaces:
+            5/10:
+                link: evo1-evo-sw1-1
+                type: ethernet
+            5/11:
+                link: evo1-evo-sw1-2
+                type: ethernet
+            5/12:
+                link: evo1-evo-sw1-3
+                type: ethernet
+            5/13:
+                link: evo1-evo-sw1-4
+                type: ethernet
+            5/14:
+                link: evo1-evo-sw1-5
+                type: ethernet
+            5/15:
+                link: evo1-evo-sw1-6
+                type: ethernet
+            6/10:
+                link: evo1-evo-sw1-7
+                type: ethernet
+            6/11:
+                link: evo1-evo-sw1-8
+                type: ethernet
+            6/12:
+                link: evo1-evo-sw1-9
+                type: ethernet
+            6/13:
+                link: evo1-evo-sw1-10
+                type: ethernet
+            6/14:
+                link: evo1-evo-sw1-11
+                type: ethernet
+            6/15:
+                link: evo1-evo-sw1-12
+                type: ethernet
+            5/20:
+                link: evo1-evo-sw2-13
+                type: ethernet
+            5/21:
+                link: evo1-evo-sw2-14
+                type: ethernet
+            5/22:
+                link: evo1-evo-sw2-15
+                type: ethernet
+            5/23:
+                link: evo1-evo-sw2-16
+                type: ethernet
+            5/24:
+                link: evo1-evo-sw2-17
+                type: ethernet
+            5/25:
+                link: evo1-evo-sw2-18
+                type: ethernet
+            6/20:
+                link: evo1-evo-sw2-19
+                type: ethernet
+            6/21:
+                link: evo1-evo-sw2-20
+                type: ethernet
+            6/22:
+                link: evo1-evo-sw2-21
+                type: ethernet
+            6/23:
+                link: evo1-evo-sw2-22
+                type: ethernet
+            6/24:
+                link: evo1-evo-sw2-23
+                type: ethernet
+            6/25:
+                link: evo1-evo-sw2-24
+                type: ethernet
+    evo-sw1:
+        interfaces:
+            Ethernet1/1:
+                link: evo1-evo-sw1-1
+                type: ethernet
+            Ethernet1/2:
+                link: evo1-evo-sw1-2
+                type: ethernet
+            Ethernet1/3:
+                link: evo1-evo-sw1-3
+                type: ethernet
+            Ethernet1/4:
+                link: evo1-evo-sw1-4
+                type: ethernet
+            Ethernet1/5:
+                link: evo1-evo-sw1-5
+                type: ethernet
+            Ethernet1/6:
+                link: evo1-evo-sw1-6
+                type: ethernet
+            Ethernet1/11:
+                link: evo1-evo-sw1-7
+                type: ethernet
+            Ethernet1/12:
+                link: evo1-evo-sw1-8
+                type: ethernet
+            Ethernet1/13:
+                link: evo1-evo-sw1-9
+                type: ethernet
+            Ethernet1/14:
+                link: evo1-evo-sw1-10
+                type: ethernet
+            Ethernet1/15:
+                link: evo1-evo-sw1-11
+                type: ethernet
+            Ethernet1/16:
+                link: evo1-evo-sw1-12
+                type: ethernet
+    evo-sw2:
+        interfaces:
+            Ethernet1/1:
+                link: evo1-evo-sw2-13
+                type: ethernet
+            Ethernet1/2:
+                link: evo1-evo-sw2-14
+                type: ethernet
+            Ethernet1/3:
+                link: evo1-evo-sw2-15
+                type: ethernet
+            Ethernet1/4:
+                link: evo1-evo-sw2-16
+                type: ethernet
+            Ethernet1/5:
+                link: evo1-evo-sw2-17
+                type: ethernet
+            Ethernet1/6:
+                link: evo1-evo-sw2-18
+                type: ethernet
+            Ethernet1/11:
+                link: evo1-evo-sw2-19
+                type: ethernet
+            Ethernet1/12:
+                link: evo1-evo-sw2-20
+                type: ethernet
+            Ethernet1/13:
+                link: evo1-evo-sw2-21
+                type: ethernet
+            Ethernet1/14:
+                link: evo1-evo-sw2-22
+                type: ethernet
+            Ethernet1/15:
+                link: evo1-evo-sw2-23
+                type: ethernet
+            Ethernet1/16:
+                link: evo1-evo-sw2-24
+                type: ethernet
+
