@@ -23,6 +23,7 @@
                         "Belarus": "Вышэйшая ліга"
                         "Hungary": "Nemzeti Bajnokság I"
                         "Kazakhstan": "Kazakhstan Premier League"
+                        "Poland": "Ekstraklasa"
         "Europe South":
             divisions:
                 "South-West":
@@ -1622,4 +1623,102 @@
                     position: "Group-Stage"
                 "Lyon":
                     country: "France"
+                    position: "Group-Stage"
+        "2016-2017":
+            teams:
+                "Real Madrid":
+                    country: "Spain"
+                    position: "Runner-up"
+                "Juventus":
+                    country: "Italy"
+                    position: "Runner-up"
+                "Atletico Madrid":
+                    country: "Spain"
+                    position: "Semi-Final"
+                "Monaco":
+                    country: "France"
+                    position: "Semi-Final"
+                "Leicester City":
+                    country: "England"
+                    position: "Quarter-Final"
+                "Borussia Dortmund":
+                    country: "Germany"
+                    position: "Quarter-Final"
+                "Barcelona":
+                    country: "Spain"
+                    position: "Quarter-Final"
+                "Bayern Munich":
+                    country: "Germany"
+                    position: "Quarter-Final"
+                "Benfica":
+                    country: "Portugal"
+                    position: "Round-16"
+                "Manchester City":
+                    country: "England"
+                    position: "Round-16"
+                "Porto":
+                    country: "Portugal"
+                    position: "Round-16"
+                "Napoli":
+                    country: "Italy"
+                    position: "Round-16"
+                "Arsenal":
+                    country: "England"
+                    position: "Round-16"
+                "Paris Saint-Germain":
+                    country: "France"
+                    position: "Round-16"
+                "Bayer Leverkusen":
+                    country: "Germany"
+                    position: "Round-16"
+                "Sevilla":
+                    country: "Spain"
+                    position: "Round-16"
+                "Ludogorets Razgrad":
+                    country: "Bulgaria"
+                    position: "Group-Stage"
+                "Basel":
+                    country: "Switzerland"
+                    position: "Group-Stage"
+                "Beşiktaş":
+                    country: "Turkey"
+                    position: "Group-Stage"
+                "Dynamo Kyiv":
+                    country: "Ukraine"
+                    position: "Group-Stage"
+                "Borussia Mönchengladbach":
+                    country: "Germany"
+                    position: "Group-Stage"
+                "Celtic Glasgow":
+                    country: "Scotland"
+                    position: "Group-Stage"
+                "Rostov":
+                    country: "Russia"
+                    position: "Group-Stage"
+                "PSV Eindhoven":
+                    country: "Netherlands"
+                    position: "Group-Stage"
+                "Tottenham Hotspur":
+                    country: "England"
+                    position: "Group-Stage"
+                "CSKA Moscow":
+                    country: "Russia"
+                    position: "Group-Stage"
+                "Legia Warsaw":
+                    country: "Poland"
+                    position: "Group-Stage"
+                "Sporting":
+                    country: "Portugal"
+                    position: "Group-Stage"
+                "Copenhagen":
+                    country: "Denmark"
+                    position: "Group-Stage"
+                "Club Brugge":
+                    country: "Belgium"
+                    position: "Group-Stage"
+                "Lyon":
+                    country: "France"
+                    position: "Group-Stage"
+                "Dinamo Zagreb":
+                    country: "Croatia"
                     position: "Group-Stage"
