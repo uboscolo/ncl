@@ -109,5 +109,12 @@
         2: "Olympique Lyonnais"
         3: "AS Monaco"
         4: "Nice"
-        6: "Lille OSC"
+        5: "Lille OSC"
         6: "Saint-Etienne"
+    "2016-2017":
+        1: "AS Monaco"
+        2: "Paris Saint-Germain"
+        3: "Nice"
+        4: "Olympique Lyonnais"
+        5: "Olympique de Marseille"
+        6: "Bordeaux"
