@@ -42,6 +42,7 @@
                         "Bulgaria": "А Група"
                         "Croatia": "Prva HNL"
                         "Slovenia": "PrvaLiga"
+                        "Cyprus": "Cypriot First Division"
     positions:
         "Winner":
             points: 20
@@ -1010,7 +1011,7 @@
                     country: "Spain"
                     position: "Group-Stage"
                 "APOEL":
-                    country: "Greece"
+                    country: "Cyprus"
                     position: "Group-Stage"
                 "Liverpool":
                     country: "England"
@@ -1152,7 +1153,7 @@
                     country: "France"
                     position: "Quarter-Final"
                 "APOEL":
-                    country: "Greece"
+                    country: "Cyprus"
                     position: "Quarter-Final"
                 "Benfica":
                     country: "Portugal"
@@ -1512,7 +1513,7 @@
                     country: "Netherlands"
                     position: "Group-Stage"
                 "APOEL":
-                    country: "Greece"
+                    country: "Cyprus"
                     position: "Group-Stage"
                 "Sporting":
                     country: "Portugal"
