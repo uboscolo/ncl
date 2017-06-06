@@ -64,8 +64,9 @@ def load_league(league_file):
                 country.points += team.points
                 all_teams.append(team)
             total_points += country.points
-        for team in sorted(all_teams, key=lambda idx: idx.points, reverse=True):
-            print("Team: {0}, Points: {1}, Strength: {2:.4f}".format(team.name, team.points, team.points/total_points*100))
+        sorted_all_teams = sorted(all_teams, key=lambda idx: idx.points, reverse=True)
+        for team in sorted_all_teams:
+            print("Team: {0}, Points: {1}, Position: {2}, Strength: {3:.4f}".format(team.name, team.points, sorted_all_teams.index(team) + 1, team.points/total_points*100))
         for country in sorted(new_league.countries.values(), key=lambda idx: idx.points, reverse=True):
             print("Country: {0}, Points: {1}".format(country.name, country.points))
             for team in sorted(country.teams.values(), key=lambda idx: idx.points, reverse=True):
