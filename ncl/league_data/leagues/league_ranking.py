@@ -59,8 +59,19 @@ class Table(object):
         new_team.update(year, pos)
 
     def display_results(self):
+        points_map = {1: 10, 2: 6, 3: 4, 4: 3, 5: 2, 6: 1}
+        idx = 0
+        acc_points = 0
+        max_agg_points = 0
+        years = len(list(self.years))
+        max_points = years * points_map.get(1)
         for team in sorted(self.teams, key=lambda idx: idx.points, reverse=True):
-            print("{0:<24}: {1}".format(team.name, team.points))
+            idx += 1
+            acc_points += team.points
+            max_agg_points += years * points_map.get(idx, 0)
+            print("{0:<24}: {1}({2:3.2f}%, {3:3.2f}%)".format(team.name, team.points, 
+                                                              team.points/max_points*100,
+                                                              acc_points/max_agg_points*100))
 
 
 class Year(object):

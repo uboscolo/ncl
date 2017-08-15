@@ -77,7 +77,7 @@
                     country: "England"
                     position: "Quarter-Final"
                 "PSV Eindhoven":
-                    country: "England"
+                    country: "Netherlands"
                     position: "Quarter-Final"
                 "Celta Vigo":
                     country: "Spain"
@@ -361,7 +361,7 @@
                 "Newcastle United":
                     country: "England"
                     position: "Semi-Final"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Semi-Final"
                 "Celtic Glasgow":
@@ -468,7 +468,7 @@
                 "Auxerre":
                     country: "France"
                     position: "Quarter-Final"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Quarter-Final"
                 "Austria Wien":
@@ -801,7 +801,7 @@
                 "Atlético Madrid":
                     country: "Spain"
                     position: "Group-Stage"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Group-Stage"
                 "Galatasaray":
@@ -1018,7 +1018,7 @@
                 "PSV Eindhoven":
                     country: "Netherlands"
                     position: "Group-Stage"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Group-Stage"
                 "Red Bull Salzburg":
@@ -1047,7 +1047,7 @@
                 "Benfica":
                     country: "Portugal"
                     position: "Semi-Final"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Semi-Final"
                 "Spartak Moscow":
@@ -1469,7 +1469,7 @@
                 "Internazionale":
                     country: "Italy"
                     position: "Round-16"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Round-16"
                 "Dynamo Moscow":
@@ -1537,7 +1537,7 @@
                 "Shakhtar Donetsk":
                     country: "Ukraine"
                     position: "Semi-Final"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Semi-Final"
                 "Borussia Dortmund":
@@ -1698,7 +1698,7 @@
                 "AZ":
                     country: "Netherlands"
                     position: "Group-Stage"
-                "Villarreal":
+                "Villareal":
                     country: "Spain"
                     position: "Group-Stage"
                 "Zenit Saint Petersburg":
