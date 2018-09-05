@@ -1,0 +1,35 @@
+Team: Real Madrid, Points: 164, Position: 1, Strength: 9.1111 - UEFA (August 2018: 1)
+Team: Barcelona, Points: 145, Position: 2, Strength: 8.0558 - UEFA (August 2018: 4)
+Team: Bayern Munich, Points: 131, Position: 3, Strength: 7.2778 - UEFA (August 2018: 3)
+Team: Manchester United, Points: 95, Position: 4, Strength: 5.2778 - UEFA (August 2018: 12)
+Team: Chelsea, Points: 91, Position: 5, Strength: 5.0556 - UEFA (August 2018: 13)
+Team: Milan, Points: 84, Position: 6, Strength: 4.6667 - UEFA (August 2018: 53)
+Team: Juventus, Points: 75, Position: 7, Strength: 4.1667 - UEFA (August 2018: 5)
+Team: Liverpool, Points: 73, Position: 8, Strength: 4.0556 - UEFA (August 2018: 22)
+Team: Arsenal, Points: 62, Position: 9, Strength: 3.4444 - UEFA (August 2018: 9)
+Team: Internazionale, Points: 49, Position: 10, Strength: 2.7222 - UEFA (August 2018: 83)
+Team: Atletico Madrid, Points: 48, Position: 11, Strength: 2.6667 - UEFA (August 2018: 2)
+Team: Porto, Points: 48, Position: 12, Strength: 2.6667 - UEFA (August 2018: 11)
+Team: Lyon, Points: 36, Position: 13, Strength: 2.0000 - UEFA (August 2018: 25)
+Team: Valencia, Points: 32, Position: 14, Strength: 1.7778 - UEFA (August 2018: 41)
+Team: Monaco, Points: 32, Position: 15, Strength: 1.7778 - UEFA (August 2018: 27)
+Team: Borussia Dortmund, Points: 31, Position: 16, Strength: 1.7222 - UEFA (August 2018: 10)
+
+Team: Bayer Leverkusen, Points: 30, Position: 17, Strength: 1.6667
+Team: PSV Eindhoven, Points: 23, Position: 18, Strength: 1.2778
+Team: Paris Saint-Germain, Points: 23, Position: 19, Strength: 1.2778
+Team: Benfica, Points: 21, Position: 20, Strength: 1.1667
+Team: Manchester City, Points: 20, Position: 21, Strength: 1.1111
+Team: Schalke 04, Points: 20, Position: 22, Strength: 1.1111
+Team: Roma, Points: 20, Position: 23, Strength: 1.1111
+Team: Deportivo La Coruña, Points: 19, Position: 24, Strength: 1.0556
+Team: Shakhtar Donetsk, Points: 18, Position: 25, Strength: 1.0000
+Team: Olympiacos, Points: 18, Position: 26, Strength: 1.0000
+Team: Galatasaray, Points: 17, Position: 27, Strength: 0.9444
+Team: CSKA Moscow, Points: 14, Position: 28, Strength: 0.7778
+Team: Ajax, Points: 13, Position: 29, Strength: 0.7222
+Team: Dynamo Kyiv, Points: 13, Position: 30, Strength: 0.7222
+Team: Villareal, Points: 13, Position: 31, Strength: 0.7222
+Team: Celtic Glasgow, Points: 12, Position: 32, Strength: 0.6667
+
+

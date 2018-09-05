@@ -23,6 +23,7 @@
                         "Belarus": "Вышэйшая ліга"
                         "Hungary": "Nemzeti Bajnokság I"
                         "Poland": "Ekstraklasa"
+                        "Kazakhstan": "Kazakhstan Premier League"
         "Europe South":
             divisions:
                 "South-West":
@@ -1425,8 +1426,8 @@
                 "Ajax":
                     country: "Netherlands"
                     position: "Group-Stage"
-                "AZ":
-                    country: "Netherlands"
+                "Slovan Liberec":
+                    country: "Czech Republic"
                     position: "Group-Stage"
         "2014-2015":
             teams:
@@ -1628,7 +1629,7 @@
             teams:
                 "Manchester United":
                     country: "England"
-                    position: "Runner-up"
+                    position: "Winner"
                 "Ajax":
                     country: "Netherlands"
                     position: "Runner-up"
@@ -1722,3 +1723,102 @@
                 "PAOK":
                     country: "Greece"
                     position: "Group-Stage"
+        "2017-2018":
+            teams:
+                "Atletico Madrid":
+                    country: "Spain"
+                    position: "Winner"
+                "Marseille":
+                    country: "France"
+                    position: "Runner-up"
+                "Red Bull Salzburg":
+                    country: "Austria"
+                    position: "Semi-Final"
+                "Arsenal":
+                    country: "England"
+                    position: "Semi-Final"
+                "Sporting":
+                    country: "Portugal"
+                    position: "Quarter-Final"
+                "RB Leipzig":
+                    country: "Germany"
+                    position: "Quarter-Final"
+                "Lazio":
+                    country: "Italy"
+                    position: "Quarter-Final"
+                "CSKA Moscow":
+                    country: "Russia"
+                    position: "Quarter-Final"
+                "Athletic Bilbao":
+                    country: "Spain"
+                    position: "Round-16"
+                "Zenit Saint Petersburg":
+                    country: "Russia"
+                    position: "Round-16"
+                "Dynamo Kyiv":
+                    country: "Ukraine"
+                    position: "Round-16"
+                "Borussia Dortmund":
+                    country: "Germany"
+                    position: "Round-16"
+                "Milan":
+                    country: "Italy"
+                    position: "Round-16"
+                "Lyon":
+                    country: "France"
+                    position: "Round-16"
+                "Lokomotiv Moscow":
+                    country: "Russia"
+                    position: "Round-16"
+                "Viktoria Plzeň":
+                    country: "Czech Republic"
+                    position: "Round-16"
+                "Napoli":
+                    country: "Italy"
+                    position: "Group-Stage"
+                "Celtic":
+                    country: "Scotland"
+                    position: "Group-Stage"
+                "Braga":
+                    country: "Portugal"
+                    position: "Group-Stage"
+                "Spartak Moscow":
+                    country: "Russia"
+                    position: "Group-Stage"
+                "Steaua București":
+                    country: "Romania"
+                    position: "Group-Stage"
+                "AEK Athens":
+                    country: "Greece"
+                    position: "Group-Stage"
+                "Atalanta":
+                    country: "Italy"
+                    position: "Group-Stage"
+                "Real Sociedad":
+                    country: "Spain"
+                    position: "Group-Stage"
+                "Ludogorets Razgrad":
+                    country: "Bulgaria"
+                    position: "Group-Stage"
+                "Östersund":
+                    country: "Sweden"
+                    position: "Group-Stage"
+                "Red Star Belgrade":
+                    country: "Serbia"
+                    position: "Group-Stage"
+                "Villarreal":
+                    country: "Spain"
+                    position: "Group-Stage"
+                "Copenhagen":
+                    country: "Denmark"
+                    position: "Group-Stage"
+                "Nice":
+                    country: "France"
+                    position: "Group-Stage"
+                "Astana":
+                    country: "Kazakhstan"
+                    position: "Group-Stage"
+                "Partizan":
+                    country: "Serbia"
+                    position: "Group-Stage"
+ 

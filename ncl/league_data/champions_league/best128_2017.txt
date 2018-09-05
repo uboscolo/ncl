@@ -1,0 +1,144 @@
+Team: Real Madrid, Points: 144, Position: 1, Strength: 8.4706 - UEFA (August 2017: 1) 
+Team: Barcelona, Points: 141, Position: 2, Strength: 8.2941 - UEFA (August 2017: 3) 
+Team: Bayern Munich, Points: 123, Position: 3, Strength: 7.2353 - UEFA (August 2017: 2) 
+Team: Manchester United, Points: 93, Position: 4, Strength: 5.4706 - UEFA (August 2017: 15) 
+Team: Chelsea, Points: 89, Position: 5, Strength: 5.2353 - UEFA (August 2017: 10) 
+Team: Milan, Points: 84, Position: 6, Strength: 4.9412 - UEFA (August 2017: 41) 
+Team: Juventus, Points: 71, Position: 7, Strength: 4.1765 - UEFA (August 2017: 5) 
+Team: Arsenal, Points: 62, Position: 8, Strength: 3.6471 - UEFA (August 2017: 11) 
+Team: Liverpool, Points: 57, Position: 9, Strength: 3.3529 - UEFA (August 2017: 34) 
+Team: Internazionale, Points: 49, Position: 10, Strength: 2.8824 - UEFA (August 2017: 45) 
+Team: Atletico Madrid, Points: 47, Position: 11, Strength: 2.7647 - UEFA (August 2017: 4) 
+Team: Porto, Points: 46, Position: 12, Strength: 2.7059 - UEFA (August 2017: 13) 
+Team: Lyon, Points: 36, Position: 13, Strength: 2.1176 - UEFA (August 2017: 23) 
+Team: Valencia, Points: 32, Position: 14, Strength: 1.8824 - UEFA (August 2017: 21) 
+Team: Monaco, Points: 31, Position: 15, Strength: 1.8235 - UEFA (August 2017: 29) 
+Team: Bayer Leverkusen, Points: 30, Position: 16, Strength: 1.7647 - UEFA (August 2017: 16) 
+
+Team: Borussia Dortmund, Points: 30, Position: 17, Strength: 1.7647 - UEFA (August 2017: 7) 
+Team: PSV Eindhoven, Points: 23, Position: 18, Strength: 1.3529 - UEFA (August 2017: 42) 
+Team: Paris Saint-Germain, Points: 21, Position: 19, Strength: 1.2353 - UEFA (August 2017: 6) 
+Team: Schalke 04, Points: 20, Position: 20, Strength: 1.1765 - UEFA (August 2017: 14) 
+Team: Benfica, Points: 20, Position: 21, Strength: 1.1765 - UEFA (August 2017: 9) 
+Team: Roma, Points: 20, Position: 22, Strength: 1.1765 - UEFA (August 2017: 37) 
+Team: Deportivo La Coruña, Points: 19, Position: 23, Strength: 1.1176 - UEFA (August 2017: 16) 
+Team: Galatasaray, Points: 17, Position: 24, Strength: 1.0000 - UEFA (August 2017: 16) 
+Team: Olympiacos, Points: 17, Position: 25, Strength: 1.0000 - UEFA (August 2017: 16) 
+Team: Manchester City, Points: 16, Position: 26, Strength: 0.9412 - UEFA (August 2017: 16) 
+Team: Shakhtar Donetsk, Points: 16, Position: 27, Strength: 0.9412 - UEFA (August 2017: 16) 
+Team: Ajax, Points: 13, Position: 28, Strength: 0.7647 - UEFA (August 2017: 16) 
+Team: CSKA Moscow, Points: 13, Position: 29, Strength: 0.7647 - UEFA (August 2017: 16) 
+Team: Dynamo Kyiv, Points: 13, Position: 30, Strength: 0.7647 - UEFA (August 2017: 16) 
+Team: Villareal, Points: 13, Position: 31, Strength: 0.7647 - UEFA (August 2017: 16) 
+Team: Celtic Glasgow, Points: 12, Position: 32, Strength: 0.7059 - UEFA (August 2017: 16) 
+
+Team: Panathinaikos, Points: 12, Position: 33, Strength: 0.7059
+Team: Marseille, Points: 11, Position: 34, Strength: 0.6471
+Team: Anderlecht, Points: 10, Position: 35, Strength: 0.5882
+Team: Basel, Points: 10, Position: 36, Strength: 0.5882
+Team: Zenit Saint Petersburg, Points: 9, Position: 37, Strength: 0.5294
+Team: Leeds United, Points: 8, Position: 38, Strength: 0.4706
+Team: Werder Bremen, Points: 8, Position: 39, Strength: 0.4706
+Team: Fenerbahçe, Points: 8, Position: 40, Strength: 0.4706
+Team: Glasgow Rangers, Points: 7, Position: 41, Strength: 0.4118
+Team: Spartak Moscow, Points: 7, Position: 42, Strength: 0.4118
+Team: Sparta Prague, Points: 7, Position: 43, Strength: 0.4118
+Team: Sevilla, Points: 7, Position: 44, Strength: 0.4118
+Team: Sporting, Points: 7, Position: 45, Strength: 0.4118
+Team: Rosenborg, Points: 6, Position: 46, Strength: 0.3529
+Team: Lille, Points: 6, Position: 47, Strength: 0.3529
+Team: Bordeaux, Points: 6, Position: 48, Strength: 0.3529
+
+Team: APOEL, Points: 6, Position: 49, Strength: 0.3529
+Team: Tottenham Hotspur, Points: 5, Position: 50, Strength: 0.2941
+Team: Copenhagen, Points: 5, Position: 51, Strength: 0.2941
+Team: VfB Stuttgart, Points: 5, Position: 52, Strength: 0.2941
+Team: Wolfsburg, Points: 5, Position: 53, Strength: 0.2941
+Team: Lokomotiv Moscow, Points: 5, Position: 54, Strength: 0.2941
+Team: BATE Borisov, Points: 5, Position: 55, Strength: 0.2941
+Team: Lazio, Points: 5, Position: 56, Strength: 0.2941
+Team: Napoli, Points: 5, Position: 57, Strength: 0.2941
+Team: Leicester City, Points: 4, Position: 58, Strength: 0.2353
+Team: Club Brugge, Points: 4, Position: 59, Strength: 0.2353
+Team: Malaga, Points: 4, Position: 60, Strength: 0.2353
+Team: Beşiktaş, Points: 4, Position: 61, Strength: 0.2353
+Team: Steaua Bucureşti, Points: 4, Position: 62, Strength: 0.2353
+Team: Dinamo Zagreb, Points: 4, Position: 63, Strength: 0.2353
+Team: Real Sociedad, Points: 3, Position: 64, Strength: 0.1765
+
+
+# based on europa league position 65-80
+
+Team: Braga, Points: 26, Position: 14, Strength: 1.5152
+Team: Feyenoord, Points: 24, Position: 17, Strength: 1.3986
+Team: Athletic Bilbao, Points: 24, Position: 19, Strength: 1.3986
+Team: Fiorentina, Points: 22, Position: 22, Strength: 1.2821
+Team: Hamburg, Points: 21, Position: 23, Strength: 1.2238
+Team: Dnipro Dnipropetrovsk, Points: 20, Position: 29, Strength: 1.1655
+Team: AZ, Points: 19, Position: 30, Strength: 1.1072
+Team: Newcastle United, Points: 18, Position: 32, Strength: 1.0490
+Team: Middlesbrough, Points: 18, Position: 33, Strength: 1.0490
+Team: Espanyol, Points: 18, Position: 34, Strength: 1.0490
+Team: Fulham, Points: 17, Position: 36, Strength: 0.9907
+Team: Alavés, Points: 16, Position: 39, Strength: 0.9324
+Team: Celta Vigo, Points: 15, Position: 42, Strength: 0.8741
+Team: Parma, Points: 14, Position: 46, Strength: 0.8159
+Team: Rubin Kazan, Points: 9, Position: 59, Strength: 0.5245
+Team: Twente, Points: 8, Position: 63, Strength: 0.4662
+
+# based on europa league position 81-96
+
+Team: 1. FC Kaiserslautern, Points: 8, Position: 64, Strength: 0.4662
+Team: Metalist Kharkiv, Points: 8, Position: 66, Strength: 0.4662
+Team: Osasuna, Points: 8, Position: 67, Strength: 0.4662
+Team: Auxerre, Points: 8, Position: 68, Strength: 0.4662
+Team: Boavista, Points: 8, Position: 69, Strength: 0.4662
+Team: AEK Athens, Points: 8, Position: 70, Strength: 0.4662
+Team: Udinese, Points: 8, Position: 71, Strength: 0.4662
+Team: Standard Liège, Points: 7, Position: 72, Strength: 0.4079
+Team: PAOK, Points: 7, Position: 75, Strength: 0.4079
+Team: Genk, Points: 6, Position: 76, Strength: 0.3497
+Team: Hertha BSC, Points: 6, Position: 77, Strength: 0.3497
+Team: Slavia Prague, Points: 6, Position: 78, Strength: 0.3497
+Team: Hapoel Tel Aviv, Points: 6, Position: 80, Strength: 0.3497
+Team: Everton, Points: 5, Position: 81, Strength: 0.2914
+Team: Hannover 96, Points: 5, Position: 83, Strength: 0.2914
+Team: Red Bull Salzburg, Points: 5, Position: 84, Strength: 0.2914
+
+# based on europa league position 97-112
+
+Team: Viktoria Plzeň, Points: 5, Position: 86, Strength: 0.2914
+Team: Real Betis, Points: 5, Position: 87, Strength: 0.2914
+Team: Levski Sofia, Points: 5, Position: 88, Strength: 0.2914
+Team: Slovan Liberec, Points: 5, Position: 89, Strength: 0.2914
+Team: Rayo Vallecano, Points: 4, Position: 90, Strength: 0.2331
+Team: Borussia Mönchengladbach, Points: 4, Position: 92, Strength: 0.2331
+Team: Austria Wien, Points: 4, Position: 93, Strength: 0.2331
+Team: Anzhi Makhachkala, Points: 4, Position: 94, Strength: 0.2331
+Team: Getafe, Points: 4, Position: 96, Strength: 0.2331
+Team: Lens, Points: 4, Position: 97, Strength: 0.2331
+Team: Saint-Étienne, Points: 4, Position: 98, Strength: 0.2331
+Team: Rapid Bucureşti, Points: 4, Position: 99, Strength: 0.2331
+Team: Bolton Wanderers, Points: 3, Position: 101, Strength: 0.1748
+Team: AaB, Points: 3, Position: 102, Strength: 0.1748
+Team: Krasnodar, Points: 3, Position: 103, Strength: 0.1748
+Team: Wisła Kraków, Points: 3, Position: 104, Strength: 0.1748
+
+# based on europa league position 113-128
+
+Team: Legia Warsaw, Points: 3, Position: 105, Strength: 0.1748
+Team: Mallorca, Points: 3, Position: 106, Strength: 0.1748
+Team: Trabzonspor, Points: 3, Position: 107, Strength: 0.1748
+Team: Maccabi Haifa, Points: 3, Position: 108, Strength: 0.1748
+Team: Ludogorets Razgrad, Points: 3, Position: 109, Strength: 0.1748
+Team: Gent, Points: 2, Position: 110, Strength: 0.1166
+Team: Roda JC, Points: 2, Position: 111, Strength: 0.1166
+Team: Heerenveen, Points: 2, Position: 112, Strength: 0.1166
+Team: Brøndby, Points: 2, Position: 113, Strength: 0.1166
+Team: Dynamo Moscow, Points: 2, Position: 114, Strength: 0.1166
+Team: Rostov, Points: 2, Position: 115, Strength: 0.1166
+Team: Servette, Points: 2, Position: 116, Strength: 0.1166
+Team: Young Boys, Points: 2, Position: 117, Strength: 0.1166
+Team: Lech Poznań, Points: 2, Position: 119, Strength: 0.1166
+Team: Zaragoza, Points: 2, Position: 120, Strength: 0.1166
+Team: Levante, Points: 2, Position: 121, Strength: 0.1166

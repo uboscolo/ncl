@@ -3,7 +3,7 @@
         1: "Dynamo Kyiv"
         2: "Shakhtar Donetsk"
         3: "Dnipro Dnipropetrovsk"
-        4: "Metalurh Mariupol"
+        4: "Mariupol"
         5: "Metalurh Donetsk"
         6: "CSKA Kyiv"
     "2001-2002":
@@ -32,13 +32,13 @@
         2: "Dynamo Kyiv"
         3: "Metalurh Donetsk"
         4: "Dnipro Dnipropetrovsk"
-        5: "Illichivets Mariupol"
+        5: "Mariupol"
         6: "Chornomorets Odessa"
     "2005-2006":
         1: "Shakhtar Donetsk"
         2: "Dynamo Kyiv"
         3: "Chornomorets Odessa"
-        4: "Illychivets Mariupol"
+        4: "Mariupol"
         5: "Metalist Kharkiv"
         6: "Dnipro Dnipropetrovsk"
     "2006-2007":
@@ -118,3 +118,10 @@
         4: "Olimpik Donetsk"
         5: "FC Oleksandriya"
         6: "Chornomorets Odessa"
+    "2017-2018":
+        1: "Shakhtar Donetsk"
+        2: "Dynamo Kyiv"
+        3: "Vorskla Poltava"
+        4: "Zorya Luhansk"
+        5: "Veres Rivne"
+        6: "Mariupol"

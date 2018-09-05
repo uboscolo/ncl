@@ -111,10 +111,17 @@
         4: "İstanbul Başakşehir"
         5: "Osmanlıspor"
         6: "Galatasaray"
-    "2015-2016":
+    "2016-2017":
         1: "Beşiktaş"
         2: "İstanbul Başakşehir"
         3: "Fenerbahçe"
         4: "Galatasaray"
         5: "Antalyaspor"
         6: "Trabzonspor"
+    "2017-2018":
+        1: "Galatasaray"
+        2: "Fenerbahçe"
+        3: "İstanbul Başakşehir"
+        4: "Beşiktaş"
+        5: "Trabzonspor"
+        6: "Göztepe"
