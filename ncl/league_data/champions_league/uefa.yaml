@@ -1,0 +1,347 @@
+"Uefa":
+    conferences:
+        "Europe North":
+            divisions:
+                "Atlantic":
+                    countries:
+                        "Belgium": 
+                            league:
+                                "Jupiler Pro League"
+                            teams:
+                                - "Anderlecht"
+                                - "Club Brugge"
+                                - "Genk"
+                                - "Gent"
+                                - "Standard Liège"
+                                - "Zulte Waregem"
+                        "Denmark": 
+                            league:
+                                "Superliga"
+                            teams:
+                                - "AaB"
+                                - "Aalborg BK"
+                                - "Brøndby"
+                                - "Copenhagen"
+                                - "Esbjerg"
+                                - "Midtjylland"
+                                - "Nordsjælland"
+                        "England": 
+                            league:
+                                "English Premier League"
+                            teams:
+                                - "Arsenal"
+                                - "Aston Villa"
+                                - "Blackburn Rovers"
+                                - "Bolton Wanderers"
+                                - "Chelsea"
+                                - "Everton"
+                                - "Fulham"
+                                - "Ipswich Town"
+                                - "Leicester City"
+                                - "Liverpool"
+                                - "Leeds United"
+                                - "Manchester City"
+                                - "Manchester United"
+                                - "Middlesbrough"
+                                - "Newcastle United"
+                                - "Swansea City"
+                                - "Stoke City"
+                                - "Tottenham Hotspur"
+                        "Netherlands":
+                            league:
+                                "Eredivisie"
+                            teams:
+                                - "Ajax"
+                                - "AZ"
+                                - "Feyenoord"
+                                - "Heerenveen"
+                                - "NEC"
+                                - "PSV Eindhoven"
+                                - "Roda JC"
+                                - "Twente"
+                                - "Vitesse"
+                        "Norway":
+                            league:
+                                "Tippeligaen"
+                            teams:
+                                - "Brann"
+                                - "Molde"
+                                - "Rosenborg"
+                                - "Vålerenga"
+                        "Scotland":
+                            league:
+                                "Scottish Football League"
+                            teams:
+                                - "Aberdeen"
+                                - "Celtic Glasgow"
+                                - "Glasgow Rangers"
+                        "Sweden":
+                            league:
+                                "Allsvenskan"
+                            teams:
+                                - "Helsingborg"
+                                - "Malmö FF"
+                                - "Östersund"
+                "Continental":
+                    countries:
+                        "Austria":
+                            league:
+                                "Österreichische Fußball-Bundesliga"
+                            teams:
+                                - "Austria Wien"
+                                - "Grazer AK"
+                                - "Rapid Wien"
+                                - "Red Bull Salzburg"
+                                - "Sturm Graz"
+                        "Azerbaijan":
+                            league:
+                                "Azerbaijan Premier League"
+                            teams:
+                                - "Qarabağ"
+                        "Belarus":
+                            league:
+                                "Вышэйшая ліга"
+                            teams:
+                                - "BATE Borisov"
+                        "Czech Republic":
+                            league:
+                                "Czech Liga"
+                            teams:
+                                - "Slavia Prague"
+                                - "Slovan Liberec"
+                                - "Sparta Prague"
+                                - "Teplice"
+                                - "Viktoria Plzeň"
+                        "Germany":
+                            league:
+                                "Bundesliga"
+                            teams:
+                                - "1860 Munich"
+                                - "Alemannia Aachen"
+                                - "Augsburg"
+                                - "Bayer Leverkusen"
+                                - "Bayern Munich"
+                                - "Borussia Dortmund"
+                                - "Borussia Mönchengladbach"
+                                - "Eintracht Frankfurt"
+                                - "Freiburg"
+                                - "Hamburg"
+                                - "Hannover 96"
+                                - "Hertha BSC"
+                                - "Hoffenheim"
+                                - "Kaiserslautern"
+                                - "Nürnberg"
+                                - "RB Leipzig"
+                                - "Schalke 04"
+                                - "VfB Stuttgart"
+                                - "Werder Bremen"
+                                - "Wolfsburg"
+                        "Hungary":
+                            league:
+                                "Nemzeti Bajnokság I"
+                            teams:
+                                - "Debrecen"
+                        "Kazakhstan":
+                            league:
+                                "Kazakhstan Premier League"
+                            teams:
+                                - "Astana"
+                        "Poland":
+                            league:
+                                "Ekstraklasa"
+                            teams:
+                                - "Groclin"
+                                - "Lech Poznań"
+                                - "Legia Warsaw"
+                                - "Wisła Kraków"
+                        "Russia":
+                            league:
+                                "Russian Premier League"
+                            teams:
+                                - "Anzhi Makhachkala"
+                                - "CSKA Moscow"
+                                - "Dynamo Moscow"
+                                - "Krasnodar"
+                                - "Lokomotiv Moscow"
+                                - "Rostov"
+                                - "Rubin Kazan"
+                                - "Spartak Moscow"
+                                - "Zenit Saint Petersburg"
+                        "Ukraine":
+                            league:
+                                "Ukranian Premier League"
+                            teams:
+                                - "Chornomorets Odesa"
+                                - "Dnipro Dnipropetrovsk"
+                                - "Dynamo Kyiv"
+                                - "Metalist Kharkiv"
+                                - "Shakhtar Donetsk"
+                        "Slovakia":
+                            league:
+                                "Slovak Super Liga"
+                            teams:
+                                - "Artmedia Bratislava"
+                                - "Žilina"
+                        "Switzerland":
+                            league:
+                                "Swiss Super League"
+                            teams:
+                                - "Basel"
+                                - "Grasshopper"
+                                - "Lausanne"
+                                - "Servette"
+                                - "Sion"
+                                - "Thun"
+                                - "Young Boys"
+                                - "Zürich"
+        "Europe South":
+            divisions:
+                "South-West":
+                    countries:
+                        "France":
+                            league: 
+                                "Ligue 1"
+                            teams:
+                                - "AS Monaco"
+                                - "Auxerre"
+                                - "Bordeaux"
+                                - "Guingamp"
+                                - "Lens"
+                                - "Lille"
+                                - "Lyon"
+                                - "Marseille"
+                                - "Montpellier"
+                                - "Nancy"
+                                - "Nantes Atlantique"
+                                - "Nice"
+                                - "Paris Saint-Germain"
+                                - "Rennes"
+                                - "Saint-Étienne"
+                                - "Sochaux"
+                                - "Strasbourg"
+                        "Portugal":
+                            league: 
+                                "Primeira Liga"
+                            teams:
+                                - "Alavés"
+                                - "Benfica"
+                                - "Boavista"
+                                - "Braga"
+                                - "Sporting"
+                                - "Porto"
+                        "Spain":
+                            league: 
+                                "La liga"
+                            teams:
+                                - "Athletic Bilbao"
+                                - "Atlético Madrid"
+                                - "Barcelona"
+                                - "Celta Vigo"
+                                - "Deportivo La Coruña"
+                                - "Espanyol"
+                                - "Getafe"
+                                - "Levante"
+                                - "Malaga"
+                                - "Mallorca"
+                                - "Osasuna"
+                                - "Rayo Vallecano"
+                                - "Real Betis"
+                                - "Real Madrid"
+                                - "Real Sociedad"
+                                - "Sevilla"
+                                - "Valencia"
+                                - "Villareal"
+                                - "Zaragoza"
+                "South-East":
+                    countries:
+                        "Bulgaria":
+                            league: 
+                                "А Група"
+                            teams:
+                                - "Litex Lovech"
+                                - "Levski Sofia"
+                                - "Ludogorets Razgrad"
+                        "Croatia":
+                            league: 
+                                "Prva HNL"
+                            teams:
+                                - "Dinamo Zagreb"
+                                - "Osijek"
+                        "Cyprus":
+                            league: 
+                                "Cypriot First Division"
+                            teams:
+                                - "APOEL"
+                        "Greece":
+                            league: 
+                                "Ελληνική Σούπερ Λιγκ"
+                            teams:
+                                - "Anortosis"
+                                - "Aris"
+                                - "AEK Athens"
+                                - "Olympiacos"
+                                - "PAOK"
+                                - "Panathinaikos"
+                        "Israel":
+                            league: 
+                                "Israeli Premier League"
+                            teams:
+                                - "Hapoel Be'er Sheva"
+                                - "Hapoel Tel Aviv"
+                                - "Maccabi Haifa"
+                                - "Maccabi Tel Aviv"
+                        "Italy":
+                            league: 
+                                "Serie A"
+                            teams:
+                                - "AC Milan"
+                                - "Atalanta"
+                                - "Fiorentina"
+                                - "Internazionale"
+                                - "Juventus"
+                                - "Lazio"
+                                - "Livorno"
+                                - "Napoli"
+                                - "Palermo"
+                                - "Parma"
+                                - "Perugia"
+                                - "Roma"
+                                - "Sampdoria"
+                                - "Torino"
+                                - "Udinese"
+                        "Romania":
+                            league: 
+                                "Liga I"
+                            teams:
+                                - "Astra Giurgiu"
+                                - "Dinamo București"
+                                - "CFR Cluj"
+                                - "Oțelul Galați"
+                                - "Rapid București"
+                                - "Steaua București"
+                                - "Unirea Urziceni"
+                        "Serbia":
+                            league: 
+                                "Serbian SuperLiga"
+                            teams:
+                                - "Partizan"
+                                - "Red Star Belgrade"
+                        "Slovenia":
+                            league: 
+                                "PrvaLiga"
+                            teams:
+                                - "Maribor"
+                                - "Slovan Liberec"
+                        "Turkey":
+                            league: 
+                                "Süper Lig"
+                            teams:
+                                - "Beşiktaş"
+                                - "Bursaspor"
+                                - "Denizlispor"
+                                - "Fenerbahçe"
+                                - "Galatasaray"
+                                - "Gaziantepspor"
+                                - "Gençlerbirliği"
+                                - "Osmanlıspor"
+                                - "Trabzonspor"

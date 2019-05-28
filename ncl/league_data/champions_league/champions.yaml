@@ -1,1824 +1,756 @@
 "Champions League":
-    conferences:
-        "Europe North":
-            divisions:
-                "Atlantic":
-                    countries:
-                        "England": "English Premier League"
-                        "Belgium": "Jupiler Pro League"
-                        "Netherlands": "Eredivisie"
-                        "Norway": "Tippeligaen"
-                        "Sweden": "Allsvenskan"
-                        "Scotland": "Scottish Football League"
-                        "Denmark": "Superliga"
-                "Continental":
-                    countries:
-                        "Germany": "Bundesliga"
-                        "Austria": "Österreichische Fußball-Bundesliga"
-                        "Russia": "Russian Premier League"
-                        "Ukraine": "Ukranian Premier League"
-                        "Czech Republic": "Czech Liga"
-                        "Switzerland": "Swiss Super League"
-                        "Slovakia": "Slovak Super Liga"
-                        "Belarus": "Вышэйшая ліга"
-                        "Hungary": "Nemzeti Bajnokság I"
-                        "Kazakhstan": "Kazakhstan Premier League"
-                        "Azerbaijan": "Azerbaijan Premier League"
-                        "Poland": "Ekstraklasa"
-        "Europe South":
-            divisions:
-                "South-West":
-                    countries:
-                        "Spain": "La liga"
-                        "France": "Ligue 1"
-                        "Portugal": "Primeira Liga"
-                "South-East":
-                    countries:
-                        "Turkey": "Süper Lig"
-                        "Greece": "Ελληνική Σούπερ Λιγκ"
-                        "Italy": "Serie A"
-                        "Israel": "Israeli Premier League"
-                        "Serbia": "Serbian SuperLiga"
-                        "Romania": "Liga I"
-                        "Bulgaria": "А Група"
-                        "Croatia": "Prva HNL"
-                        "Slovenia": "PrvaLiga"
-                        "Cyprus": "Cypriot First Division"
-    positions:
-        "Winner":
+    points:
+        "winner":
             points: 20
-        "Runner-up":
+        "final":
             points: 16
-        "Semi-Final":
+        "semi-final":
             points: 8
-        "Quarter-Final":
+        "quarter-final":
             points: 4
-        "Round-16":
+        "round-16":
             points: 2
-        "Group-Stage":
+        "group-stage":
             points: 1
     years:
         "2000-2001":
-            teams:
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Winner"
-                "Valencia":
-                    country: "Spain"
-                    position: "Runner-up"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Leeds United":
-                    country: "England"
-                    position: "Semi-Final"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Quarter-Final"
-                "Manchester United":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Arsenal":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Deportivo La Coruña":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Sturm Graz":
-                    country: "Austria"
-                    position: "Round-16"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Round-16"
-                "Milan":
-                    country: "Italy"
-                    position: "Round-16"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Round-16"
-                "Lyon":
-                    country: "France"
-                    position: "Round-16"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Round-16"
-                "Lazio":
-                    country: "Italy"
-                    position: "Round-16"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Round-16"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Sparta Prague":
-                    country: "Czech Republic"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Heerenveen":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Glasgow Rangers":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Monaco":
-                    country: "France"
-                    position: "Group-Stage"
-                "Hamburg":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Juventus":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Rosenborg":
-                    country: "Norway"
-                    position: "Group-Stage"
-                "Helsingborg":
-                    country: "Sweden"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Beşiktaş":
-                    country: "Turkey"
-                    position: "Group-Stage"
+            winner:
+                - "Bayern Munich"
+            final:
+                - "Valencia"
+            semi-final:
+                - "Real Madrid"
+                - "Leeds United"
+            quarter-final:
+                - "Galatasaray"
+                - "Manchester United"
+                - "Arsenal"
+                - "Deportivo La Coruña"
+            round-16:
+                - "Sturm Graz"
+                - "Panathinaikos"
+                - "AC Milan"
+                - "Paris Saint-Germain"
+                - "Lyon"
+                - "Spartak Moscow"
+                - "Lazio"
+                - "Anderlecht"
+            group-stage:
+                - "Bayer Leverkusen"
+                - "Sporting"
+                - "Shakhtar Donetsk"
+                - "Sparta Prague"
+                - "Olympiacos"
+                - "Heerenveen"
+                - "Glasgow Rangers"
+                - "AS Monaco"
+                - "Hamburg"
+                - "Juventus"
+                - "Rosenborg"
+                - "Helsingborg"
+                - "PSV Eindhoven"
+                - "Dynamo Kyiv"
+                - "Barcelona"
+                - "Beşiktaş"
         "2001-2002":
-            teams:
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Winner"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Runner-up"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Manchester United":
-                    country: "England"
-                    position: "Semi-Final"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Quarter-Final"
-                "Liverpool":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Deportivo La Coruña":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Boavista":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Nantes":
-                    country: "France"
-                    position: "Round-16"
-                "Roma":
-                    country: "Italy"
-                    position: "Round-16"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Round-16"
-                "Sparta Prague":
-                    country: "Czech Republic"
-                    position: "Round-16"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Juventus":
-                    country: "Italy"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Lokomotiv Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Mallorca":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Lazio":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Rosenborg":
-                    country: "Norway"
-                    position: "Group-Stage"
-                "Lyon":
-                    country: "France"
-                    position: "Group-Stage"
-                "Fenerbahçe":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Lille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Feyenoord":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
+            winner:
+                - "Real Madrid"
+            final:
+                - "Bayer Leverkusen"
+            semi-final:
+                - "Barcelona"
+                - "Manchester United"
+            quarter-final:
+                - "Panathinaikos"
+                - "Liverpool"
+                - "Bayern Munich"
+                - "Deportivo La Coruña"
+            round-16:
+                - "Boavista"
+                - "Nantes Atlantique"
+                - "Roma"
+                - "Galatasaray"
+                - "Sparta Prague"
+                - "Porto"
+                - "Juventus"
+                - "Arsenal"
+            group-stage:
+                - "Lokomotiv Moscow"
+                - "Anderlecht"
+                - "Dynamo Kyiv"
+                - "Borussia Dortmund"
+                - "Mallorca"
+                - "Schalke 04"
+                - "PSV Eindhoven"
+                - "Lazio"
+                - "Celtic Glasgow"
+                - "Rosenborg"
+                - "Lyon"
+                - "Fenerbahçe"
+                - "Lille"
+                - "Olympiacos"
+                - "Feyenoord"
+                - "Spartak Moscow"
         "2002-2003":
-            teams:
-                "Milan":
-                    country: "Italy"
-                    position: "Winner"
-                "Juventus":
-                    country: "Italy"
-                    position: "Runner-up"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Semi-Final"
-                "Manchester United":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Quarter-Final"
-                "Valencia":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Newcastle United":
-                    country: "England"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Roma":
-                    country: "Italy"
-                    position: "Round-16"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Round-16"
-                "Lokomotiv Moscow":
-                    country: "Russia"
-                    position: "Round-16"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Round-16"
-                "Deportivo La Coruña":
-                    country: "Spain"
-                    position: "Round-16"
-                "Auxerre":
-                    country: "France"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Liverpool":
-                    country: "England"
-                    position: "Group-Stage"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "AEK Athens":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Genk":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Lyon":
-                    country: "France"
-                    position: "Group-Stage"
-                "Rosenborg":
-                    country: "Norway"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Feyenoord":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Maccabi Haifa":
-                    country: "Israel"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Lens":
-                    country: "France"
-                    position: "Group-Stage"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Club Brugge":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Group-Stage"
+            winner:
+                - "AC Milan"
+            final:
+                - "Juventus"
+            semi-final:
+                - "Real Madrid"
+                - "Internazionale"
+            quarter-final:
+                - "Manchester United"
+                - "Ajax"
+                - "Valencia"
+                - "Barcelona"
+            round-16:
+                - "Bayer Leverkusen"
+                - "Newcastle United"
+                - "Arsenal"
+                - "Roma"
+                - "Borussia Dortmund"
+                - "Lokomotiv Moscow"
+                - "Basel"
+                - "Deportivo La Coruña"
+            group-stage:
+                - "Auxerre"
+                - "PSV Eindhoven"
+                - "Liverpool"
+                - "Spartak Moscow"
+                - "AEK Athens"
+                - "Genk"
+                - "Lyon"
+                - "Rosenborg"
+                - "Dynamo Kyiv"
+                - "Feyenoord"
+                - "Maccabi Haifa"
+                - "Olympiacos"
+                - "Lens"
+                - "Bayern Munich"
+                - "Club Brugge"
+                - "Galatasaray"
         "2003-2004":
-            teams:
-                "Porto":
-                    country: "Portugal"
-                    position: "Winner"
-                "Monaco":
-                    country: "France"
-                    position: "Runner-up"
-                "Chelsea":
-                    country: "England"
-                    position: "Semi-Final"
-                "Deportivo La Coruña":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Arsenal":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Milan":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Lyon":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Round-16"
-                "Celta Vigo":
-                    country: "Spain"
-                    position: "Round-16"
-                "Juventus":
-                    country: "Italy"
-                    position: "Round-16"
-                "Lokomotiv Moscow":
-                    country: "Russia"
-                    position: "Round-16"
-                "Manchester United":
-                    country: "England"
-                    position: "Round-16"
-                "Real Sociedad":
-                    country: "Spain"
-                    position: "Round-16"
-                "Sparta Prague":
-                    country: "Czech Republic"
-                    position: "Round-16"
-                "VfB Stuttgart":
-                    country: "Germany"
-                    position: "Round-16"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "AEK Athens":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Glasgow Rangers":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Marseille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Partizan":
-                    country: "Serbia"
-                    position: "Group-Stage"
-                "Beşiktaş":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Lazio":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Club Brugge":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
+            winner:
+                - "Porto"
+            final:
+                - "AS Monaco"
+            semi-final:
+                - "Chelsea"
+                - "Deportivo La Coruña"
+            quarter-final:
+                - "Arsenal"
+                - "AC Milan"
+                - "Lyon"
+                - "Real Madrid"
+            round-16:
+                - "Bayern Munich"
+                - "Celta Vigo"
+                - "Juventus"
+                - "Lokomotiv Moscow"
+                - "Manchester United"
+                - "Real Sociedad"
+                - "Sparta Prague"
+                - "VfB Stuttgart"
+            group-stage:
+                - "Celtic Glasgow"
+                - "Anderlecht"
+                - "Internazionale"
+                - "Dynamo Kyiv"
+                - "PSV Eindhoven"
+                - "AEK Athens"
+                - "Galatasaray"
+                - "Olympiacos"
+                - "Panathinaikos"
+                - "Glasgow Rangers"
+                - "Marseille"
+                - "Partizan"
+                - "Beşiktaş"
+                - "Lazio"
+                - "Club Brugge"
+                - "Ajax"
         "2004-2005":
-            teams:
-                "Liverpool":
-                    country: "England"
-                    position: "Winner"
-                "Milan":
-                    country: "Italy"
-                    position: "Runner-up"
-                "Chelsea":
-                    country: "England"
-                    position: "Semi-Final"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Semi-Final"
-                "Juventus":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Lyon":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Monaco":
-                    country: "France"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Round-16"
-                "Manchester United":
-                    country: "England"
-                    position: "Round-16"
-                "Werder Bremen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Deportivo La Coruña":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Roma":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Maccabi Tel Aviv":
-                    country: "Israel"
-                    position: "Group-Stage"
-                "Fenerbahçe":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Sparta Prague":
-                    country: "Czech Republic"
-                    position: "Group-Stage"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Rosenborg":
-                    country: "Norway"
-                    position: "Group-Stage"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Valencia":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Group-Stage"
+            winner:
+                - "Liverpool"
+            final:
+                - "AC Milan"
+            semi-final:
+                - "Chelsea"
+                - "PSV Eindhoven"
+            quarter-final:
+                - "Juventus"
+                - "Lyon"
+                - "Bayern Munich"
+                - "Internazionale"
+            round-16:
+                - "Real Madrid"
+                - "Bayer Leverkusen"
+                - "AS Monaco"
+                - "Arsenal"
+                - "Barcelona"
+                - "Manchester United"
+                - "Werder Bremen"
+                - "Porto"
+            group-stage:
+                - "Olympiacos"
+                - "Deportivo La Coruña"
+                - "Dynamo Kyiv"
+                - "Roma"
+                - "Ajax"
+                - "Maccabi Tel Aviv"
+                - "Fenerbahçe"
+                - "Sparta Prague"
+                - "Panathinaikos"
+                - "Rosenborg"
+                - "Shakhtar Donetsk"
+                - "Celtic Glasgow"
+                - "Valencia"
+                - "Anderlecht"
+                - "CSKA Moscow"
+                - "Paris Saint-Germain"
         "2005-2006":
-            teams:
-                "Barcelona":
-                    country: "Spain"
-                    position: "Winner"
-                "Arsenal":
-                    country: "England"
-                    position: "Runner-up"
-                "Villareal":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Milan":
-                    country: "Italy"
-                    position: "Semi-Final"
-                "Juventus":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Lyon":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Quarter-Final"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Werder Bremen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Round-16"
-                "Glasgow Rangers":
-                    country: "Scotland"
-                    position: "Round-16"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Round-16"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Round-16"
-                "Liverpool":
-                    country: "England"
-                    position: "Round-16"
-                "Chelsea":
-                    country: "England"
-                    position: "Round-16"
-                "Club Brugge":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Rapid Wein":
-                    country: "Austria"
-                    position: "Group-Stage"
-                "Thun":
-                    country: "Switzerland"
-                    position: "Group-Stage"
-                "Sparta Prague":
-                    country: "Czech Republic"
-                    position: "Group-Stage"
-                "Udinese":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Lille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Manchester United":
-                    country: "England"
-                    position: "Group-Stage"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Fenerbahçe":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Rosenborg":
-                    country: "Norway"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Real Betis":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Artmedia":
-                    country: "Slovakia"
-                    position: "Group-Stage"
-                "Porto":
-                    country: "Portugal"
-                    position: "Group-Stage"
+            winner:
+                - "Barcelona"
+            final:
+                - "Arsenal"
+            semi-final:
+                - "Villareal"
+                - "AC Milan"
+            quarter-final:
+                - "Juventus"
+                - "Internazionale"
+                - "Lyon"
+                - "Benfica"
+            round-16:
+                - "Real Madrid"
+                - "Werder Bremen"
+                - "Ajax"
+                - "Glasgow Rangers"
+                - "PSV Eindhoven"
+                - "Bayern Munich"
+                - "Liverpool"
+                - "Chelsea"
+            group-stage:
+                - "Club Brugge"
+                - "Rapid Wien"
+                - "Thun"
+                - "Sparta Prague"
+                - "Udinese"
+                - "Panathinaikos"
+                - "Lille"
+                - "Manchester United"
+                - "Schalke 04"
+                - "Fenerbahçe"
+                - "Rosenborg"
+                - "Olympiacos"
+                - "Real Betis"
+                - "Anderlecht"
+                - "Artmedia Bratislava"
+                - "Porto"
         "2006-2007":
-            teams:
-                "Milan":
-                    country: "Italy"
-                    position: "Winner"
-                "Liverpool":
-                    country: "England"
-                    position: "Runner-up"
-                "Chelsea":
-                    country: "England"
-                    position: "Semi-Final"
-                "Manchester United":
-                    country: "England"
-                    position: "Semi-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Quarter-Final"
-                "Roma":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Valencia":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Lille":
-                    country: "France"
-                    position: "Round-16"
-                "Lyon":
-                    country: "France"
-                    position: "Round-16"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Round-16"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Round-16"
-                "Werder Bremen":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Levski Sofia":
-                    country: "Bulgaria"
-                    position: "Group-Stage"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Bordeaux":
-                    country: "France"
-                    position: "Group-Stage"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Steaua Bucureşti":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Copenhagen":
-                    country: "Denmark"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Hamburg":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "AEK Athens":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
+            winner:
+                - "AC Milan"
+            final:
+                - "Liverpool"
+            semi-final:
+                - "Chelsea"
+                - "Manchester United"
+            quarter-final:
+                - "Bayern Munich"
+                - "PSV Eindhoven"
+                - "Roma"
+                - "Valencia"
+            round-16:
+                - "Porto"
+                - "Celtic Glasgow"
+                - "Arsenal"
+                - "Lille"
+                - "Lyon"
+                - "Barcelona"
+                - "Real Madrid"
+                - "Internazionale"
+            group-stage:
+                - "Werder Bremen"
+                - "Levski Sofia"
+                - "Spartak Moscow"
+                - "Sporting"
+                - "Bordeaux"
+                - "Galatasaray"
+                - "Shakhtar Donetsk"
+                - "Olympiacos"
+                - "Steaua București"
+                - "Dynamo Kyiv"
+                - "Benfica"
+                - "Copenhagen"
+                - "CSKA Moscow"
+                - "Hamburg"
+                - "AEK Athens"
+                - "Anderlecht"
         "2007-2008":
-            teams:
-                "Manchester United":
-                    country: "England"
-                    position: "Winner"
-                "Chelsea":
-                    country: "England"
-                    position: "Runner-up"
-                "Liverpool":
-                    country: "England"
-                    position: "Semi-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Arsenal":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Roma":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Fenerbahçe":
-                    country: "Turkey"
-                    position: "Quarter-Final"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Round-16"
-                "Lyon":
-                    country: "France"
-                    position: "Round-16"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Round-16"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Milan":
-                    country: "Italy"
-                    position: "Round-16"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Round-16"
-                "Sevilla":
-                    country: "Spain"
-                    position: "Round-16"
-                "Marseille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Beşiktaş":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Rosenborg":
-                    country: "Norway"
-                    position: "Group-Stage"
-                "Valencia":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Werder Bremen":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Lazio":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Glasgow Rangers":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "VfB Stuttgart":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Slavia Prague":
-                    country: "Czech Republic"
-                    position: "Group-Stage"
-                "Steaua Bucureşti":
-                    country: "Romania"
-                    position: "Group-Stage"
+            winner:
+                - "Manchester United"
+            final:
+                - "Chelsea"
+            semi-final:
+                - "Liverpool"
+                - "Barcelona"
+            quarter-final:
+                - "Arsenal"
+                - "Roma"
+                - "Schalke 04"
+                - "Fenerbahçe"
+            round-16:
+                - "Celtic Glasgow"
+                - "Lyon"
+                - "Porto"
+                - "Internazionale"
+                - "Real Madrid"
+                - "AC Milan"
+                - "Olympiacos"
+                - "Sevilla"
+            group-stage:
+                - "Marseille"
+                - "Beşiktaş"
+                - "Rosenborg"
+                - "Valencia"
+                - "Werder Bremen"
+                - "Lazio"
+                - "Benfica"
+                - "Shakhtar Donetsk"
+                - "Glasgow Rangers"
+                - "VfB Stuttgart"
+                - "Sporting"
+                - "Dynamo Kyiv"
+                - "PSV Eindhoven"
+                - "CSKA Moscow"
+                - "Slavia Prague"
+                - "Steaua București"
         "2008-2009":
-            teams:
-                "Barcelona":
-                    country: "Spain"
-                    position: "Winner"
-                "Manchester United":
-                    country: "England"
-                    position: "Runner-up"
-                "Arsenal":
-                    country: "England"
-                    position: "Semi-Final"
-                "Chelsea":
-                    country: "England"
-                    position: "Semi-Final"
-                "Villareal":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Porto":
-                    country: "Portugal"
-                    position: "Quarter-Final"
-                "Liverpool":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Juventus":
-                    country: "Italy"
-                    position: "Round-16"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Round-16"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Lyon":
-                    country: "France"
-                    position: "Round-16"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Roma":
-                    country: "Italy"
-                    position: "Round-16"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Round-16"
-                "Bordeaux":
-                    country: "France"
-                    position: "Group-Stage"
-                "CFR Cluj":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Werder Bremen":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Anortosis":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Group-Stage"
-                "Marseille":
-                    country: "France"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Aalborg BK":
-                    country: "Denmark"
-                    position: "Group-Stage"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Fiorentina":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Steaua Bucureşti":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Fenerbahçe":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Zenit Saint Petersburg":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "BATE Borisov":
-                    country: "Belarus"
-                    position: "Group-Stage"
+            winner:
+                - "Barcelona"
+            final:
+                - "Manchester United"
+            semi-final:
+                - "Arsenal"
+                - "Chelsea"
+            quarter-final:
+                - "Villareal"
+                - "Porto"
+                - "Liverpool"
+                - "Bayern Munich"
+            round-16:
+                - "Juventus"
+                - "Panathinaikos"
+                - "Sporting"
+                - "Atlético Madrid"
+                - "Lyon"
+                - "Real Madrid"
+                - "Roma"
+                - "Internazionale"
+            group-stage:
+                - "Bordeaux"
+                - "CFR Cluj"
+                - "Werder Bremen"
+                - "Anortosis"
+                - "Shakhtar Donetsk"
+                - "Basel"
+                - "Marseille"
+                - "PSV Eindhoven"
+                - "Aalborg BK"
+                - "Celtic Glasgow"
+                - "Fiorentina"
+                - "Steaua București"
+                - "Dynamo Kyiv"
+                - "Fenerbahçe"
+                - "Zenit Saint Petersburg"
+                - "BATE Borisov"
         "2009-2010":
-            teams:
-                "Internazionale":
-                    country: "Italy"
-                    position: "Winner"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Runner-up"
-                "Lyon":
-                    country: "France"
-                    position: "Semi-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Bordeaux":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Manchester United":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Arsenal":
-                    country: "England"
-                    position: "Quarter-Final"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Quarter-Final"
-                "VfB Stuttgart":
-                    country: "Germany"
-                    position: "Round-16"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Round-16"
-                "Chelsea":
-                    country: "England"
-                    position: "Round-16"
-                "Fiorentina":
-                    country: "Italy"
-                    position: "Round-16"
-                "Sevilla":
-                    country: "Spain"
-                    position: "Round-16"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Round-16"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Milan":
-                    country: "Italy"
-                    position: "Round-16"
-                "Juventus":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Maccabi Haifa":
-                    country: "Israel"
-                    position: "Group-Stage"
-                "Wolfsburg":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Beşiktaş":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Marseille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Zurich":
-                    country: "Switzerland"
-                    position: "Group-Stage"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "APOEL":
-                    country: "Cyprus"
-                    position: "Group-Stage"
-                "Liverpool":
-                    country: "England"
-                    position: "Group-Stage"
-                "Debrecen":
-                    country: "Hungary"
-                    position: "Group-Stage"
-                "Rubin Kazan":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Unirea Urziceni":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Glasgow Rangers":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Standard Liège":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "AZ":
-                    country: "Netherlands"
-                    position: "Group-Stage"
+            winner:
+                - "Internazionale"
+            final:
+                - "Bayern Munich"
+            semi-final:
+                - "Lyon"
+                - "Barcelona"
+            quarter-final:
+                - "Bordeaux"
+                - "Manchester United"
+                - "Arsenal"
+                - "CSKA Moscow"
+            round-16:
+                - "VfB Stuttgart"
+                - "Olympiacos"
+                - "Chelsea"
+                - "Fiorentina"
+                - "Sevilla"
+                - "Real Madrid"
+                - "Porto"
+                - "AC Milan"
+            group-stage:
+                - "Juventus"
+                - "Maccabi Haifa"
+                - "Wolfsburg"
+                - "Beşiktaş"
+                - "Marseille"
+                - "Zürich"
+                - "Atlético Madrid"
+                - "APOEL"
+                - "Liverpool"
+                - "Debrecen"
+                - "Rubin Kazan"
+                - "Dynamo Kyiv"
+                - "Unirea Urziceni"
+                - "Glasgow Rangers"
+                - "Standard Liège"
+                - "AZ"
         "2010-2011":
-            teams:
-                "Barcelona":
-                    country: "Spain"
-                    position: "Winner"
-                "Manchester United":
-                    country: "England"
-                    position: "Runner-up"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Semi-Final"
-                "Tottenham Hotspur":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Quarter-Final"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Chelsea":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Lyon":
-                    country: "France"
-                    position: "Round-16"
-                "Milan":
-                    country: "Italy"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Roma":
-                    country: "Italy"
-                    position: "Round-16"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Round-16"
-                "Valencia":
-                    country: "Spain"
-                    position: "Round-16"
-                "Copenhagen":
-                    country: "Denmark"
-                    position: "Round-16"
-                "Marseille":
-                    country: "France"
-                    position: "Round-16"
-                "Twente":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Werder Bremen":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Hapoel Tel Aviv":
-                    country: "Israel"
-                    position: "Group-Stage"
-                "Glasgow Rangers":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Bursaspor":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Rubin Kazan":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Panathinaikos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Group-Stage"
-                "CFR Cluj":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Žilina":
-                    country: "Slovakia"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Auxerre":
-                    country: "France"
-                    position: "Group-Stage"
-                "Braga":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Partizan":
-                    country: "Serbia"
-                    position: "Group-Stage"
+            winner:
+                - "Barcelona"
+            final:
+                - "Manchester United"
+            semi-final:
+                - "Real Madrid"
+                - "Schalke 04"
+            quarter-final:
+                - "Tottenham Hotspur"
+                - "Shakhtar Donetsk"
+                - "Internazionale"
+                - "Chelsea"
+            round-16:
+                - "Lyon"
+                - "AC Milan"
+                - "Arsenal"
+                - "Roma"
+                - "Bayern Munich"
+                - "Valencia"
+                - "Copenhagen"
+                - "Marseille"
+            group-stage:
+                - "Twente"
+                - "Werder Bremen"
+                - "Benfica"
+                - "Hapoel Tel Aviv"
+                - "Glasgow Rangers"
+                - "Bursaspor"
+                - "Rubin Kazan"
+                - "Panathinaikos"
+                - "Basel"
+                - "CFR Cluj"
+                - "Spartak Moscow"
+                - "Žilina"
+                - "Ajax"
+                - "Auxerre"
+                - "Braga"
+                - "Partizan"
         "2011-2012":
-            teams:
-                "Chelsea":
-                    country: "England"
-                    position: "Winner"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Runner-up"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Marseille":
-                    country: "France"
-                    position: "Quarter-Final"
-                "APOEL":
-                    country: "Cyprus"
-                    position: "Quarter-Final"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Quarter-Final"
-                "Milan":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Internazionale":
-                    country: "Italy"
-                    position: "Round-16"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Round-16"
-                "Lyon":
-                    country: "France"
-                    position: "Round-16"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Round-16"
-                "Zenit Saint Petersburg":
-                    country: "Russia"
-                    position: "Round-16"
-                "Napoli":
-                    country: "Italy"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Manchester City":
-                    country: "England"
-                    position: "Group-Stage"
-                "Villareal":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Trabzonspor":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Lille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Manchester United":
-                    country: "England"
-                    position: "Group-Stage"
-                "Oțelul Galați":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Dinamo Zagreb":
-                    country: "Croatia"
-                    position: "Group-Stage"
-                "Valencia":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Genk":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Porto":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Viktoria Plzeň":
-                    country: "Czech Republic"
-                    position: "Group-Stage"
-                "BATE Borisov":
-                    country: "Belarus"
-                    position: "Group-Stage"
+            winner:
+                - "Chelsea"
+            final:
+                - "Bayern Munich"
+            semi-final:
+                - "Real Madrid"
+                - "Barcelona"
+            quarter-final:
+                - "Marseille"
+                - "APOEL"
+                - "Benfica"
+                - "AC Milan"
+            round-16:
+                - "Internazionale"
+                - "Basel"
+                - "Lyon"
+                - "CSKA Moscow"
+                - "Zenit Saint Petersburg"
+                - "Napoli"
+                - "Arsenal"
+                - "Bayer Leverkusen"
+            group-stage:
+                - "Manchester City"
+                - "Villareal"
+                - "Trabzonspor"
+                - "Lille"
+                - "Manchester United"
+                - "Oțelul Galați"
+                - "Ajax"
+                - "Dinamo Zagreb"
+                - "Valencia"
+                - "Genk"
+                - "Olympiacos"
+                - "Borussia Dortmund"
+                - "Porto"
+                - "Shakhtar Donetsk"
+                - "Viktoria Plzeň"
+                - "BATE Borisov"
         "2012-2013":
-            teams:
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Winner"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Runner-up"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Malaga":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Quarter-Final"
-                "Juventus":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Round-16"
-                "Manchester United":
-                    country: "England"
-                    position: "Round-16"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Round-16"
-                "Valencia":
-                    country: "Spain"
-                    position: "Round-16"
-                "Milan":
-                    country: "Italy"
-                    position: "Round-16"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Dinamo Zagreb":
-                    country: "Croatia"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Montpellier":
-                    country: "France"
-                    position: "Group-Stage"
-                "Zenit Saint Petersburg":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Manchester City":
-                    country: "England"
-                    position: "Group-Stage"
-                "Chelsea":
-                    country: "England"
-                    position: "Group-Stage"
-                "Nordsjælland":
-                    country: "Denmark"
-                    position: "Group-Stage"
-                "BATE Borisov":
-                    country: "Belarus"
-                    position: "Group-Stage"
-                "Lille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "CFR Cluj":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Braga":
-                    country: "Portugal"
-                    position: "Group-Stage"
+            winner:
+                - "Bayern Munich"
+            final:
+                - "Borussia Dortmund"
+            semi-final:
+                - "Barcelona"
+                - "Real Madrid"
+            quarter-final:
+                - "Malaga"
+                - "Galatasaray"
+                - "Juventus"
+                - "Paris Saint-Germain"
+            round-16:
+                - "Porto"
+                - "Shakhtar Donetsk"
+                - "Manchester United"
+                - "Schalke 04"
+                - "Arsenal"
+                - "Celtic Glasgow"
+                - "Valencia"
+                - "AC Milan"
+            group-stage:
+                - "Dynamo Kyiv"
+                - "Dinamo Zagreb"
+                - "Olympiacos"
+                - "Montpellier"
+                - "Zenit Saint Petersburg"
+                - "Anderlecht"
+                - "Ajax"
+                - "Manchester City"
+                - "Chelsea"
+                - "Nordsjælland"
+                - "BATE Borisov"
+                - "Lille"
+                - "Benfica"
+                - "Spartak Moscow"
+                - "CFR Cluj"
+                - "Braga"
         "2013-2014":
-            teams:
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Winner"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Runner-up"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Semi-Final"
-                "Chelsea":
-                    country: "England"
-                    position: "Semi-Final"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Manchester United":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Round-16"
-                "Zenit Saint Petersburg":
-                    country: "Russia"
-                    position: "Round-16"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Manchester City":
-                    country: "England"
-                    position: "Round-16"
-                "Milan":
-                    country: "Italy"
-                    position: "Round-16"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Round-16"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Real Sociedad":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Juventus":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Copenhagen":
-                    country: "Denmark"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Viktoria Plzeň":
-                    country: "Czech Republic"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Group-Stage"
-                "Steaua Bucureşti":
-                    country: "Romania"
-                    position: "Group-Stage"
-                "Napoli":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Marseille":
-                    country: "France"
-                    position: "Group-Stage"
-                "Porto":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Austria Wein":
-                    country: "Austria"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Group-Stage"
+            winner:
+                - "Real Madrid"
+            final:
+                - "Atlético Madrid"
+            semi-final:
+                - "Bayern Munich"
+                - "Chelsea"
+            quarter-final:
+                - "Borussia Dortmund"
+                - "Manchester United"
+                - "Barcelona"
+                - "Paris Saint-Germain"
+            round-16:
+                - "Schalke 04"
+                - "Zenit Saint Petersburg"
+                - "Olympiacos"
+                - "Arsenal"
+                - "Manchester City"
+                - "AC Milan"
+                - "Bayer Leverkusen"
+                - "Galatasaray"
+            group-stage:
+                - "Shakhtar Donetsk"
+                - "Real Sociedad"
+                - "Juventus"
+                - "Copenhagen"
+                - "Benfica"
+                - "Anderlecht"
+                - "Viktoria Plzeň"
+                - "CSKA Moscow"
+                - "Basel"
+                - "Steaua București"
+                - "Napoli"
+                - "Marseille"
+                - "Porto"
+                - "Austria Wien"
+                - "Ajax"
+                - "Celtic Glasgow"
         "2014-2015":
-            teams:
-                "Barcelona":
-                    country: "Spain"
-                    position: "Winner"
-                "Juventus":
-                    country: "Italy"
-                    position: "Runner-up"
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Semi-Final"
-                "Monaco":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Porto":
-                    country: "Portugal"
-                    position: "Quarter-Final"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Schalke 04":
-                    country: "Germany"
-                    position: "Round-16"
-                "Chelsea":
-                    country: "England"
-                    position: "Round-16"
-                "Manchester City":
-                    country: "England"
-                    position: "Round-16"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Round-16"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Round-16"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Malmö FF":
-                    country: "Sweden"
-                    position: "Group-Stage"
-                "Liverpool":
-                    country: "England"
-                    position: "Group-Stage"
-                "Ludogorets Razgrad":
-                    country: "Bulgaria"
-                    position: "Group-Stage"
-                "Zenit Saint Petersburg":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Roma":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Ajax":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "APOEL":
-                    country: "Cyprus"
-                    position: "Group-Stage"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Maribor":
-                    country: "Slovenia"
-                    position: "Group-Stage"
-                "Athletic Bilbao":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "BATE Borisov":
-                    country: "Belarus"
-                    position: "Group-Stage"
+            winner:
+                - "Barcelona"
+            final:
+                - "Juventus"
+            semi-final:
+                - "Real Madrid"
+                - "Bayern Munich"
+            quarter-final:
+                - "AS Monaco"
+                - "Atlético Madrid"
+                - "Paris Saint-Germain"
+                - "Porto"
+            round-16:
+                - "Borussia Dortmund"
+                - "Arsenal"
+                - "Bayer Leverkusen"
+                - "Schalke 04"
+                - "Chelsea"
+                - "Manchester City"
+                - "Basel"
+                - "Shakhtar Donetsk"
+            group-stage:
+                - "Olympiacos"
+                - "Malmö FF"
+                - "Liverpool"
+                - "Ludogorets Razgrad"
+                - "Zenit Saint Petersburg"
+                - "Benfica"
+                - "Anderlecht"
+                - "Galatasaray"
+                - "Roma"
+                - "CSKA Moscow"
+                - "Ajax"
+                - "APOEL"
+                - "Sporting"
+                - "Maribor"
+                - "Athletic Bilbao"
+                - "BATE Borisov"
         "2015-2016":
-            teams:
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Winner"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Runner-up"
-                "Manchester City":
-                    country: "England"
-                    position: "Semi-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Semi-Final"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Quarter-Final"
-                "Wolfsburg":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Quarter-Final"
-                "Chelsea":
-                    country: "England"
-                    position: "Round-16"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Round-16"
-                "Gent":
-                    country: "Belgium"
-                    position: "Round-16"
-                "Roma":
-                    country: "Italy"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Round-16"
-                "Juventus":
-                    country: "Italy"
-                    position: "Round-16"
-                "Zenit Saint Petersburg":
-                    country: "Russia"
-                    position: "Round-16"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Malmö FF":
-                    country: "Sweden"
-                    position: "Group-Stage"
-                "Manchester United":
-                    country: "England"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Galatasaray":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Astana":
-                    country: "Kazakhstan"
-                    position: "Group-Stage"
-                "Sevilla":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Borussia Mönchengladbach":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "BATE Borisov":
-                    country: "Belarus"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Dinamo Zagreb":
-                    country: "Croatia"
-                    position: "Group-Stage"
-                "Porto":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Maccabi Tel Aviv":
-                    country: "Israel"
-                    position: "Group-Stage"
-                "Valencia":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Lyon":
-                    country: "France"
-                    position: "Group-Stage"
+            winner:
+                - "Real Madrid"
+            final:
+                - "Atlético Madrid"
+            semi-final:
+                - "Manchester City"
+                - "Bayern Munich"
+            quarter-final:
+                - "Paris Saint-Germain"
+                - "Wolfsburg"
+                - "Barcelona"
+                - "Benfica"
+            round-16:
+                - "Chelsea"
+                - "Dynamo Kyiv"
+                - "Gent"
+                - "Roma"
+                - "Arsenal"
+                - "PSV Eindhoven"
+                - "Juventus"
+                - "Zenit Saint Petersburg"
+            group-stage:
+                - "Shakhtar Donetsk"
+                - "Malmö FF"
+                - "Manchester United"
+                - "CSKA Moscow"
+                - "Galatasaray"
+                - "Astana"
+                - "Sevilla"
+                - "Borussia Mönchengladbach"
+                - "Bayer Leverkusen"
+                - "BATE Borisov"
+                - "Olympiacos"
+                - "Dinamo Zagreb"
+                - "Porto"
+                - "Maccabi Tel Aviv"
+                - "Valencia"
+                - "Lyon"
         "2016-2017":
-            teams:
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Winner"
-                "Juventus":
-                    country: "Italy"
-                    position: "Runner-up"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Semi-Final"
-                "Monaco":
-                    country: "France"
-                    position: "Semi-Final"
-                "Leicester City":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Quarter-Final"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Manchester City":
-                    country: "England"
-                    position: "Round-16"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Napoli":
-                    country: "Italy"
-                    position: "Round-16"
-                "Arsenal":
-                    country: "England"
-                    position: "Round-16"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Round-16"
-                "Bayer Leverkusen":
-                    country: "Germany"
-                    position: "Round-16"
-                "Sevilla":
-                    country: "Spain"
-                    position: "Round-16"
-                "Ludogorets Razgrad":
-                    country: "Bulgaria"
-                    position: "Group-Stage"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Group-Stage"
-                "Beşiktaş":
-                    country: "Turkey"
-                    position: "Group-Stage"
-                "Dynamo Kyiv":
-                    country: "Ukraine"
-                    position: "Group-Stage"
-                "Borussia Mönchengladbach":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Celtic Glasgow":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Rostov":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "PSV Eindhoven":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "Tottenham Hotspur":
-                    country: "England"
-                    position: "Group-Stage"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Legia Warsaw":
-                    country: "Poland"
-                    position: "Group-Stage"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Copenhagen":
-                    country: "Denmark"
-                    position: "Group-Stage"
-                "Club Brugge":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Lyon":
-                    country: "France"
-                    position: "Group-Stage"
-                "Dinamo Zagreb":
-                    country: "Croatia"
-                    position: "Group-Stage"
+            winner:
+                - "Real Madrid"
+            final:
+                - "Juventus"
+            semi-final:
+                - "Atlético Madrid"
+                - "AS Monaco"
+            quarter-final:
+                - "Leicester City"
+                - "Borussia Dortmund"
+                - "Barcelona"
+                - "Bayern Munich"
+            round-16:
+                - "Benfica"
+                - "Manchester City"
+                - "Porto"
+                - "Napoli"
+                - "Arsenal"
+                - "Paris Saint-Germain"
+                - "Bayer Leverkusen"
+                - "Sevilla"
+            group-stage:
+                - "Ludogorets Razgrad"
+                - "Basel"
+                - "Beşiktaş"
+                - "Dynamo Kyiv"
+                - "Borussia Mönchengladbach"
+                - "Celtic Glasgow"
+                - "Rostov"
+                - "PSV Eindhoven"
+                - "Tottenham Hotspur"
+                - "CSKA Moscow"
+                - "Legia Warsaw"
+                - "Sporting"
+                - "Copenhagen"
+                - "Club Brugge"
+                - "Lyon"
+                - "Dinamo Zagreb"
         "2017-2018":
-            teams:
-                "Real Madrid":
-                    country: "Spain"
-                    position: "Winner"
-                "Liverpool":
-                    country: "England"
-                    position: "Runner-up"
-                "Bayern Munich":
-                    country: "Germany"
-                    position: "Semi-Final"
-                "Roma":
-                    country: "France"
-                    position: "Semi-Final"
-                "Manchester City":
-                    country: "England"
-                    position: "Quarter-Final"
-                "Juventus":
-                    country: "Italy"
-                    position: "Quarter-Final"
-                "Barcelona":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Sevilla":
-                    country: "Spain"
-                    position: "Quarter-Final"
-                "Basel":
-                    country: "Switzerland"
-                    position: "Round-16"
-                "Manchester United":
-                    country: "England"
-                    position: "Round-16"
-                "Porto":
-                    country: "Portugal"
-                    position: "Round-16"
-                "Beşiktaş":
-                    country: "Turkey"
-                    position: "Round-16"
-                "Tottenham Hotspur":
-                    country: "England"
-                    position: "Round-16"
-                "Paris Saint-Germain":
-                    country: "France"
-                    position: "Round-16"
-                "Chelsea":
-                    country: "England"
-                    position: "Round-16"
-                "Shakhtar Donetsk":
-                    country: "Ukraine"
-                    position: "Round-16"
-                "CSKA Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Benfica":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Celtic":
-                    country: "Scotland"
-                    position: "Group-Stage"
-                "Anderlecht":
-                    country: "Belgium"
-                    position: "Group-Stage"
-                "Atletico Madrid":
-                    country: "Spain"
-                    position: "Group-Stage"
-                "Qarabağ":
-                    country: "Azerbaijan"
-                    position: "Group-Stage"
-                "Sporting":
-                    country: "Portugal"
-                    position: "Group-Stage"
-                "Olympiacos":
-                    country: "Greece"
-                    position: "Group-Stage"
-                "Spartak Moscow":
-                    country: "Russia"
-                    position: "Group-Stage"
-                "Maribor":
-                    country: "Slovenia"
-                    position: "Group-Stage"
-                "Napoli":
-                    country: "Italy"
-                    position: "Group-Stage"
-                "Feyenoord":
-                    country: "Netherlands"
-                    position: "Group-Stage"
-                "RB Leipzig":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "Monaco":
-                    country: "France"
-                    position: "Group-Stage"
-                "Borussia Dortmund":
-                    country: "Germany"
-                    position: "Group-Stage"
-                "APOEL":
-                    country: "Cyprus"
-                    position: "Group-Stage"
+            winner:
+                - "Real Madrid"
+            final:
+                - "Liverpool"
+            semi-final:
+                - "Bayern Munich"
+                - "Roma"
+            quarter-final:
+                - "Manchester City"
+                - "Juventus"
+                - "Barcelona"
+                - "Sevilla"
+            round-16:
+                - "Basel"
+                - "Manchester United"
+                - "Porto"
+                - "Beşiktaş"
+                - "Tottenham Hotspur"
+                - "Paris Saint-Germain"
+                - "Chelsea"
+                - "Shakhtar Donetsk"
+            group-stage:
+                - "CSKA Moscow"
+                - "Benfica"
+                - "Celtic Glasgow"
+                - "Anderlecht"
+                - "Atlético Madrid"
+                - "Qarabağ"
+                - "Sporting"
+                - "Olympiacos"
+                - "Spartak Moscow"
+                - "Maribor"
+                - "Napoli"
+                - "Feyenoord"
+                - "RB Leipzig"
+                - "AS Monaco"
+                - "Borussia Dortmund"
+                - "APOEL"
+        "2018-2019":
+            winner:
+                - "Liverpool"
+            final:
+                - "Tottenham Hotspur"
+            semi-final:
+                - "Barcelona"
+                - "Ajax"
+            quarter-final:
+                - "Juventus"
+                - "Manchester City"
+                - "Porto"
+                - "Manchester United"
+            round-16:
+                - "Bayern Munich"
+                - "Schalke 04"
+                - "Lyon"
+                - "Paris Saint-Germain"
+                - "Roma"
+                - "Atlético Madrid"
+                - "Real Madrid"
+                - "Borussia Dortmund"
+            group-stage:
+                - "Club Brugge"
+                - "AS Monaco"
+                - "Internazionale"
+                - "PSV Eindhoven"
+                - "Napoli"
+                - "Red Star Belgrade"
+                - "Galatasaray"
+                - "Lokomotiv Moscow"
+                - "Benfica"
+                - "AEK Athens"
+                - "Shakhtar Donetsk"
+                - "Hoffenheim"
+                - "Viktoria Plzeň"
+                - "CSKA Moscow"
+                - "Valencia"
+                - "Young Boys"

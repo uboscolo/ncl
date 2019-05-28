@@ -118,10 +118,17 @@
         4: "Olimpik Donetsk"
         5: "FC Oleksandriya"
         6: "Chornomorets Odessa"
-    "2017-2018":
+    "2018-2019":
         1: "Shakhtar Donetsk"
         2: "Dynamo Kyiv"
         3: "Vorskla Poltava"
         4: "Zorya Luhansk"
-        5: "Veres Rivne"
-        6: "Mariupol"
+        5: "Mariupol"
+        6: "Veres"
+    "2018-2019":
+        1: "Shakhtar Donetsk"
+        2: "Dynamo Kyiv"
+        3: "FC Oleksandriya"
+        4: "Zorya Luhansk"
+        5: "Mariupol"
+        6: "Karpaty Lviv"
